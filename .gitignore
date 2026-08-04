@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.ipynb_checkpoints/
+
+# Environments
+.env
+.venv
+env/
+venv/
+
+# Large model/data files -- never commit these
+checkpoints/*.pt
+checkpoints/*.pth
+checkpoints/**/*.pt
+checkpoints/**/*.pth
+data/demonstrations/*.pkl
+data/demonstrations/*.npz
+results/**/*.npz
+
+# Logs
+logs/
+wandb/
+runs/
+
+# OS
+.DS_Store
+*.swp
