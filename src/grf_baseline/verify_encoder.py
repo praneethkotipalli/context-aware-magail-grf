@@ -1,8 +1,8 @@
 import sys
 import os
 
-PROJECT_ROOT = "/home/praneeth/dissertation/context-aware-magail-grf"
-GRF_MARL_ROOT = "/home/praneeth/dissertation/GRF_MARL"
+PROJECT_ROOT = "/home/u5749464/dissertation/context-aware-magail-grf"
+GRF_MARL_ROOT = "/home/u5749464/dissertation/GRF_MARL"
 
 sys.path.insert(0, os.path.join(PROJECT_ROOT, "src", "grf_baseline"))
 sys.path.insert(0, os.path.join(GRF_MARL_ROOT, "light_malib", "model", "gr_football", "enhanced_LightActionMask_5"))
