@@ -61,3 +61,33 @@ Verification performed: Full re-verification chain: environment creation, GRF im
 Related debugging log entry: Entry 6 (pandas/numpy ABI mismatch); additional undocumented path and packaging issues encountered during this process, several resolved via targeted pip/setuptools version pinning.
 
 What this demonstrates: Reproducibility across compute environments was treated as something to actively verify rather than assume, directly relevant to the dissertation's eventual multi-machine ablation study (Discussion: parallel execution across multiple identical lab machines) and demonstrating awareness that "identical hardware" does not guarantee "identical software state" without explicit verification.
+
+## Entry 6  — Context injection verification suite
+
+**What was built/decided:** A staged verification notebook confirming, in order: 
+(1) context extraction formula (T_norm, delta_score) against raw GRF observations, 
+(2) shape correctness for the 194-dim context-extended input at both single-sample 
+and batched scale, (3) bit-for-bit equivalence between the frozen reference policy 
+called directly on 192-dim input versus called via the build-then-strip pathway 
+used during fine-tuning, (4) discriminator skeleton shape correctness, and 
+(5) a counterfactual context-swap test confirming context dimensions structurally 
+influence discriminator output even prior to any training.
+
+**Why this approach:** Each structural assumption underlying the context-aware 
+MAGAIL architecture was tested in isolation, on synthetic or minimal real data, 
+before being combined into the full training pipeline -- following the same 
+verify-before-trust discipline established during baseline development (see 
+Debugging Log entries 1-6), applied proactively here rather than reactively 
+after a failure.
+
+**Verification performed:** All five checks passed on first or second attempt 
+(one import-path correction needed for the pi* loading test, consistent with the 
+`light_malib` import pattern already identified in Debugging Log Entry — 
+checkpoint loading requires the full GRF_MARL_ROOT on sys.path, not just the 
+encoder submodule path).
+
+**What this demonstrates:** The context-injection mechanism -- the core novel 
+component of this dissertation -- was verified structurally sound before any 
+real training data or learned discriminator weights existed, reducing the risk 
+that a later training failure would be confounded by an undetected architectural 
+bug in the context pathway itself.
