@@ -1,0 +1,45 @@
+{
+  "episode_id": 36,
+  "context_label": "mid_neutral",
+  "n_steps": 3001,
+  "sap": 18.53,
+  "mecha": 0.0891,
+  "possession_fraction": 0.36,
+  "region_counts": {
+    "early_neutral": 900,
+    "mid_neutral": 600,
+    "late_winning": 0,
+    "late_losing": 0,
+    "other": 1501
+  },
+  "action_counts": {
+    "IDLE": 817,
+    "LEFT": 178,
+    "TOP_LEFT": 248,
+    "TOP": 143,
+    "TOP_RIGHT": 189,
+    "RIGHT": 859,
+    "BOTTOM_RIGHT": 263,
+    "BOTTOM": 135,
+    "BOTTOM_LEFT": 81,
+    "LONG_PASS": 5,
+    "HIGH_PASS": 5,
+    "SHORT_PASS": 12,
+    "SHOT": 3,
+    "SPRINT": 17,
+    "RELEASE_DIRECTION": 24,
+    "RELEASE_SPRINT": 16,
+    "SLIDING": 6,
+    "DRIBBLE": 0,
+    "RELEASE_DRIBBLE": 0
+  },
+  "sprint_on_off": [
+    17,
+    16
+  ],
+  "dribble_on_off": [
+    0,
+    0
+  ],
+  "flags": []
+}
