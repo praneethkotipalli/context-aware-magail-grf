@@ -1,0 +1,11 @@
+{
+  "max_speed": 0.01888685681593202,
+  "max_ball_z": 12.225313054277263,
+  "max_ball_z_vel": 2.3752787590026854,
+  "max_speed_observed_raw": 0.015739047346610018,
+  "max_ball_z_observed_raw": 10.187760878564387,
+  "max_ball_z_observed_true_max": 16.617996215820312,
+  "max_ball_z_vel_observed_raw": 1.9793989658355713,
+  "n_episodes_used": 52,
+  "ball_z_method": "99.9th percentile (robust to single extreme legitimate events)"
+}
