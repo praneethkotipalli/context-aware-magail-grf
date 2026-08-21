@@ -17,14 +17,15 @@ import sys
 import numpy as np
 import torch
 
-PROJECT_ROOT = "/home/u5749464/dissertation/context-aware-magail-grf"
-GRF_MARL_ROOT = "/home/u5749464/dissertation/GRF_MARL"
+PROJECT_ROOT = "/home/urstr/dissertation/context-aware-magail-grf"
+GRF_MARL_ROOT = "/home/urstr/dissertation/GRF_MARL"
 
 sys.path.insert(0, GRF_MARL_ROOT)
 sys.path.insert(0, os.path.join(PROJECT_ROOT, "src", "grf_baseline"))
 sys.path.insert(0, os.path.join(
     GRF_MARL_ROOT, "light_malib", "model", "gr_football", "enhanced_LightActionMask_5"
 ))
+
 
 import gfootball.env as football_env
 from minimal_state import MinimalState
