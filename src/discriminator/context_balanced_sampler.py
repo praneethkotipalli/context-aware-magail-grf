@@ -55,7 +55,7 @@ class BalancedContextSampler:
         self.cell_counts = np.array([len(idx) for idx in self.cell_indices])
         self.draws_per_cell = np.zeros(N_CELLS, dtype=np.int64)  # cumulative, for reuse reporting
 
-    def sample(self, per_cell_counts, rng):
+    def sample(self, per_cell_counts, rng, on_empty='raise'):
         idx_parts = []
         for c in range(N_CELLS):
             n_needed = int(per_cell_counts[c])
@@ -63,6 +63,8 @@ class BalancedContextSampler:
                 continue
             available = self.cell_indices[c]
             if len(available) == 0:
+                if on_empty == 'skip':
+                    continue  
                 raise ValueError(
                     f"[{self.name}] cell {c} ({CELL_NAMES[c]}) is empty -- cannot draw "
                     f"{n_needed}. Agent rollouts may not yet cover this context; "
@@ -71,6 +73,8 @@ class BalancedContextSampler:
             replace = n_needed > len(available)
             idx_parts.append(rng.choice(available, size=n_needed, replace=replace))
             self.draws_per_cell[c] += n_needed
+        if not idx_parts:
+            return self.features[:0], self.bins[:0]  # empty batch, valid but degenerate
         idx = np.concatenate(idx_parts)
         return self.features[idx], self.bins[idx]
 
@@ -95,10 +99,21 @@ class BalancedContextSampler:
         print(f"  worst: {CELL_NAMES[worst]} at {reuse[worst]:.2f}x reuse")
 
 
-def balanced_batch(expert_sampler, agent_sampler, batch_size, target_props, rng):
-    """Draws expert and agent sub-batches with IDENTICAL cell distributions.
-    target_props must be the single shared target (see sqrt_scaled_target)."""
+def balanced_batch(expert_sampler, agent_sampler, batch_size, target_props, rng, on_empty='raise'):
+    """on_empty threaded through to both sides -- if a cell is empty on
+    EITHER side, it must be skipped on BOTH, or the marginal-matching
+    guarantee (the actual leakage protection) breaks for that batch."""
     counts = target_counts_for_batch(target_props, batch_size)
-    expert_feat, expert_bins = expert_sampler.sample(counts, rng)
-    agent_feat, agent_bins = agent_sampler.sample(counts, rng)
+    expert_feat, expert_bins = expert_sampler.sample(counts, rng, on_empty=on_empty)
+    agent_feat, agent_bins = agent_sampler.sample(counts, rng, on_empty=on_empty)
+
+    if on_empty == 'skip':
+        # cell may be empty on ONE side only -- realign so both sides
+        # keep exactly the same cells represented, or marginals stop matching
+        common_cells = set(expert_bins.tolist()) & set(agent_bins.tolist())
+        e_mask = np.isin(expert_bins, list(common_cells))
+        a_mask = np.isin(agent_bins, list(common_cells))
+        expert_feat, expert_bins = expert_feat[e_mask], expert_bins[e_mask]
+        agent_feat, agent_bins = agent_feat[a_mask], agent_bins[a_mask]
+
     return (expert_feat, expert_bins), (agent_feat, agent_bins)

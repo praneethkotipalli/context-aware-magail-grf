@@ -81,3 +81,109 @@ Resolution: Force-reinstalled both packages together at the exact version pair a
 What this demonstrates (for Implementation chapter): Cross-machine environment replication is not guaranteed to be identical even when following the same nominal setup steps, particularly when incidental dependency resolution occurs; this was caught by testing rather than assumed, and resolved by pinning to a previously-validated known-good version pair rather than trial-and-error version guessing.
 
 Marking criteria link: Criterion 4 (reproducibility as a risk category, explicit mitigation); Criterion 5 (systematic root-cause diagnosis).
+
+
+# Debugging Log — New Entries, This Session
+
+Numbered independently starting at #1 — renumber to continue from the
+project's actual running count (last known reference: entries up to at
+least #20 exist in the main log, region-label inversion). These are NOT
+final numbers.
+
+---
+
+### Entry #1 — Blackwell path regression via git pull
+**Symptom:** `ModuleNotFoundError: No module named 'enhanced_LightActionMask_5'`
+on Blackwell, running `record_baseline_rollout.py`.
+**Root cause:** `PROJECT_ROOT`/`GRF_MARL_ROOT` were hardcoded, edited to the
+laptop's `/home/urstr/...` path for a laptop run days earlier, committed and
+pushed. A later `git pull` on Blackwell overwrote Blackwell's own correct
+`/home/u5749464/...` path with the laptop's. `GRF_MARL_ROOT` pointed at a
+nonexistent directory, so the `sys.path.insert` added a dead path — the
+"module not found" was a downstream symptom, not the real fault.
+**Fix:** Replaced hardcoded paths with
+`os.path.expanduser("~/dissertation/...")`, resolves correctly per-machine
+via `$HOME`, no more manual edits or collision risk on future pulls.
+**Verification:** Re-ran cleanly on Blackwell after the fix.
+
+### Entry #2 — Wrong conda env, missing numpy
+**Symptom:** `ModuleNotFoundError: No module named 'numpy'` running
+`build_expert_dataset.py`.
+**Root cause:** Shell was in `dissertation-train`, not `dissertation-grf` —
+all discriminator pipeline work in this session assumed the latter.
+**Fix:** `conda activate dissertation-grf`.
+**Verification:** Ran cleanly after switching.
+
+### Entry #3 — Wrong working directory for a cross-referenced script
+**Symptom:** `agent_cell_histogram.py: No such file or directory`, run from
+`src/grf_baseline/`.
+**Root cause:** Script lives in `src/discriminator/` and imports
+`build_expert_dataset.classify_bin` — needs to run from that directory.
+**Fix:** `cd` to `src/discriminator/` before running.
+**Verification:** Ran cleanly.
+
+### Entry #4 — Missing guard for the all-cells-empty case
+**Symptom:** `ValueError: need at least one array to concatenate` in
+`context_balanced_sampler.py`'s `sample()`, under `on_empty='skip'`, when
+the ONLY requested cell in a batch was empty (so `idx_parts` ended up
+completely empty — not just one empty cell among several).
+**Root cause:** The `on_empty='skip'` implementation as specified included
+a guard (`if not idx_parts: return empty arrays`) placed before the final
+`np.concatenate(idx_parts)` — but the first applied edit omitted it, so
+`np.concatenate` was called on an empty list directly.
+**Fix:** Added the guard immediately before the concatenate line.
+**Verification:** `test_on_empty_handling.py` check 2 (all-cells-empty
+batch) passed after the fix; re-ran full test suite, all green.
+
+### Entry #5 — Counterfactual gate FAILED, first architecture (concat)
+**Symptom:** Real gate run against the trained (concat) Phase B checkpoint:
+mean|shift| ≈ 0.003–0.004 both directions, 0% of examples exceeding the
+locked 0.1 threshold. Structurally consistent (nonzero, correctly signed),
+just far too small — ruled out a wiring bug immediately.
+**Root cause (diagnosed via `diagnose_context_sensitivity.py`, see
+Implementation Log #13):** Dilution, not suppression, not a generalization
+gap. 135 non-context dims already gave ~96% train+held-out separability —
+gradient descent had no incentive to develop sensitivity to 2 additively-
+concatenated context dims when the rest of the input already solved the
+classification task. Confirmed via: (a) first-layer weight norm for context
+mid-pack, not starved; (b) input-gradient for context only ~2x below
+average, not order-of-magnitude, inconsistent with R1 actively suppressing
+it specifically; (c) gate FAILED even on TRAIN data — the model never
+learned this relationship at all, so there was nothing to fail to
+generalize.
+**Fix:** Rewrote `discriminator_model.py` to use FiLM conditioning
+(Section 3.3.1's own pre-registered alternative for this exact failure
+mode) instead of input-layer concatenation — context now modulates hidden
+activations directly (γ, β per layer) rather than competing as 2 more
+input dims among 135.
+**Verification:** Re-ran both pre-training phases from scratch (FiLM,
+fresh init — old checkpoints architecturally incompatible), re-ran the
+real gate.
+
+### Entry #6 — Counterfactual gate STILL FAILED, second architecture (FiLM)
+**Symptom:** Real gate run against the trained FiLM Phase B checkpoint:
+late_win→early_loss mean|shift| 0.0073 (was 0.0037, ~2x); early_loss→late_win
+mean|shift| 0.0523 (was 0.0043, ~12x); 2.8% of examples in the second
+direction now exceed 0.1 (was 0%/0%). Genuine, substantial movement — FiLM
+demonstrably gave the network capacity to use context — but still short of
+the 0.1 mean threshold in both directions.
+**Root cause (partial, not fully resolved):** FiLM addressed *capacity*,
+not *incentive*. Two contributing factors identified, not yet disentangled:
+(1) real correlational signal already available elsewhere — the action
+block's sprint-frequency statistics correlate with true context in human
+data (per the project's own locked SAP-by-outcome findings), giving the
+network an easier path to partial separability that happens to be
+context-correlated without literally reading the context dims; (2) a
+larger, genuinely context-*independent* shortcut — the frozen baseline's
+near-constant ~93.5% SAP vs. demonstrators' lower SAP in essentially every
+region, which alone plausibly explains most of the ~96% separability
+regardless of context reasoning. Confirmed: no literal feature duplication
+(steps_left/score fields feed ONLY the context slot, verified by re-reading
+`compute_raw_features` line by line — nothing else touches them).
+**Status: UNRESOLVED, deferred.** Two remedies identified, neither
+attempted yet: (a) extend training steps, check if the 2x→12x trend
+continues; (b) add an auxiliary context-prediction loss head to create
+direct representational pressure. Checkpoint from this run is usable for
+throughput/pilot purposes only — explicitly NOT validated as a real,
+gate-passing discriminator. Do not use it in any ablation condition without
+resolving this first.

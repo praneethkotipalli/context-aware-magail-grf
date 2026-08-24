@@ -29,11 +29,15 @@ def run():
     paths = sorted(glob.glob(os.path.join(EPISODES_DIR, "*.npz")))
     print(f"Building expert feature cache from {len(paths)} episodes...")
 
-    all_features, all_bins = [], []
+    all_features, all_bins, all_episode_ids = [], [], []
+    episode_outcomes = []   # one entry per episode index, same order as `paths`
+    episode_filenames = []  # for traceability -- map episode index back to its file
 
-    for p in paths:
+    for ep_idx, p in enumerate(paths):
         d = dict(np.load(p, allow_pickle=True))
         n = len(d['steps_left'])
+        episode_filenames.append(os.path.basename(p))
+
         for t in range(n):
             step = {
                 'left_team': d['left_team'][t], 'left_team_direction': d['left_team_direction'][t],
@@ -48,12 +52,36 @@ def run():
             delta_score = int(d['score_left'][t]) - int(d['score_right'][t])
             all_features.append(norm)
             all_bins.append(classify_bin(t_norm, delta_score))
+            all_episode_ids.append(ep_idx)
+
+        # outcome = final score of the episode, its OWN last recorded step --
+        # not the live per-step delta_score used for binning above
+        final_delta = int(d['score_left'][-1]) - int(d['score_right'][-1])
+        if final_delta > 0:
+            episode_outcomes.append('win')
+        elif final_delta < 0:
+            episode_outcomes.append('loss')
+        else:
+            episode_outcomes.append('draw')
 
     features = np.stack(all_features).astype(np.float32)
     bins = np.array(all_bins, dtype=np.int64)
+    episode_ids = np.array(all_episode_ids, dtype=np.int64)
+    episode_outcomes = np.array(episode_outcomes, dtype='<U4')  # 'win'/'loss'/'draw'
+    episode_filenames = np.array(episode_filenames, dtype='<U64')
 
-    np.savez_compressed(CACHE_PATH, features=features, bins=bins)
+    np.savez_compressed(
+        CACHE_PATH,
+        features=features, bins=bins,
+        episode_ids=episode_ids,                  # (156052,) -- which episode each STEP came from
+        episode_outcomes=episode_outcomes,         # (52,) -- one outcome per EPISODE, indexed by episode_id
+        episode_filenames=episode_filenames,       # (52,) -- for traceability back to raw files
+    )
     print(f"Cached {features.shape[0]} steps, {features.shape[1]} dims -> {CACHE_PATH}")
+    print(f"{len(paths)} episodes: "
+          f"{(episode_outcomes == 'win').sum()} win, "
+          f"{(episode_outcomes == 'draw').sum()} draw, "
+          f"{(episode_outcomes == 'loss').sum()} loss")
 
     print("\nCell distribution (0-8 = early/mid/late x win/loss/draw):")
     for b in range(9):
@@ -62,7 +90,6 @@ def run():
         sz_name = ['win', 'loss', 'draw'][sz]
         count = (bins == b).sum()
         print(f"  cell {b} ({tz_name}/{sz_name}): {count} steps")
-
 
 if __name__ == '__main__':
     run()

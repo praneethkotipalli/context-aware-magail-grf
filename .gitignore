@@ -28,3 +28,4 @@ runs/
 # OS
 .DS_Store
 *.swp
+src/discriminator/*_features_cache.npz

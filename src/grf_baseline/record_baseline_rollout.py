@@ -17,8 +17,18 @@ import sys
 import numpy as np
 import torch
 
-PROJECT_ROOT = "/home/urstr/dissertation/context-aware-magail-grf"
-GRF_MARL_ROOT = "/home/urstr/dissertation/GRF_MARL"
+#PROJECT_ROOT = "/home/urstr/dissertation/context-aware-magail-grf"
+#GRF_MARL_ROOT = "/home/urstr/dissertation/GRF_MARL"
+
+
+PROJECT_ROOT = os.environ.get(
+    "MAGAIL_PROJECT_ROOT",
+    os.path.expanduser("~/dissertation/context-aware-magail-grf"),
+)
+GRF_MARL_ROOT = os.environ.get(
+    "MAGAIL_GRF_MARL_ROOT",
+    os.path.expanduser("~/dissertation/GRF_MARL"),
+)
 
 sys.path.insert(0, GRF_MARL_ROOT)
 sys.path.insert(0, os.path.join(PROJECT_ROOT, "src", "grf_baseline"))
@@ -32,7 +42,7 @@ from minimal_state import MinimalState
 from enhanced_LightActionMask_5 import FeatureEncoder
 
 POLICY_NAME = "PassingMain_v2"
-N_EPISODES = 5
+N_EPISODES = 105
 OUT_DIR = os.path.join(PROJECT_ROOT, "data", "baseline_rollouts_for_verification")
 
 

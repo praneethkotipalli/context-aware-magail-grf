@@ -91,3 +91,455 @@ component of this dissertation -- was verified structurally sound before any
 real training data or learned discriminator weights existed, reducing the risk 
 that a later training failure would be confounded by an undetected architectural 
 bug in the context pathway itself.
+
+
+# Implementation Log — Discriminator Build, This Session
+
+Covers everything built from `discriminator_loss.py` through the FiLM-rebuilt,
+gate-failed checkpoint. Starting state: discriminator model + context-balanced
+sampler already existed and were verified (prior session). Ending state:
+discriminator architecturally complete, both pre-training phases run twice
+(original + FiLM), counterfactual gate still FAILING — checkpoint exists for
+throughput/pilot purposes only, NOT validated for real training.
+
+---
+
+## 1. `discriminator_loss.py`
+BCEWithLogitsLoss + one-sided label smoothing (expert=0.9, agent=0.1) +
+zero-centred R1 gradient penalty (expert-only, pre-sigmoid logit, `(η/2)·E[‖∇_x D‖²]`).
+Single forward pass on the expert batch feeds both the BCE-expert term and R1.
+`DEFAULT_ETA = 1.0`, explicitly provisional, not imported from AMP.
+**Verified:** `test_discriminator_loss.py`, 6/6 checks, including R1 matching a
+hand-computed value exactly (0.6850) via `ConstantGradModel`.
+
+## 2. `discriminator_trainer.py`
+Wraps loss into `step()`/`health()`. `step()` returns loss, bce_expert/agent,
+gp_value, acc (+ per-side), acc_per_region, ess. `health()`: >90% saturating,
+<55% confused, else healthy (rolling window).
+- First draft assumed a separate `expert_weights` arg for ESS — wrong.
+- Corrected after seeing real `context_balanced_sampler.py`: numpy→torch
+  bridging added (sampler is pure numpy); ESS derived from
+  `expert_sampler.cell_counts` + the sampler's own `sqrt_scaled_target()`
+  (reused, not reimplemented); `acc_per_region` keyed by real `CELL_NAMES`.
+**Verified:** `test_discriminator_trainer.py`, 5 groups — numpy bridging,
+ESS exact-match on a provable single-cell case, ESS vs. independent
+recomputation on mixed cells, CELL_NAMES keying, health() thresholds.
+
+## 3. Agent-side pipeline closure (§5.4 from prior handoff)
+- Fixed hardcoded Blackwell username in `record_baseline_rollout.py`
+  (later regressed — see Debugging Log #1).
+- Confirmed `actor.pt` (374501 bytes) is a real checkpoint, not an LFS stub.
+- Ran on the laptop (not Blackwell) — pure inference, no GRF-render dependency.
+- Built `check_active_player_mapping.py` — confirmed `raw_obs[i]['active']`
+  returns `[1,2,3,4]` for `i=[0,1,2,3]`, i.e. `raw_obs[i] ↔ left_team[i+1]`
+  exactly, across all 4 agents (original script only checked agent 0).
+- Re-ran `batch_verify_features.py` (as `batch_verify_features_baseline.py`)
+  against agent data — clean, 0 NaN/Inf, 0 out-of-range, 15,000 steps.
+
+## 4. Counterfactual swap-test gate (Section 3.3.3)
+Three files:
+- **`context_swap.py`** — swaps only the context slot (dims 135–136),
+  applies the same `clip(-3,3)/3` scaling as `feature_normalization.py`.
+- **`context_shift_scoring.py`** — `select_by_true_context()` +
+  `score_context_shift()`, locked `LATE_WINNING`/`EARLY_LOSING` constants
+  matching the (corrected) T_norm-decreasing convention.
+- **`counterfactual_gate.py`** — bidirectional (late_win→early_loss AND
+  early_loss→late_win), each direction gated independently on mean|shift|>0.1
+  (locked threshold), fraction-exceeding-0.1 reported+flagged but not gating
+  (explicit user decision).
+**Verified:** each piece individually, then `counterfactual_gate.py` across
+5 synthetic scenarios (clean pass, clean fail, one-direction-blind, the
+mean-passes/median-zero consistency-warning case, empty-population
+ValueError). Smoke-tested against the real 156,052-step cache with an
+untrained stub — correctly meaningless/near-zero, confirmed plumbing only.
+
+## 5. Corpus finalization checks
+- Confirmed `build_expert_dataset.py`'s `classify_bin()` already used the
+  correct (post-bug-fix) T_norm-decreasing direction — no rebuild needed.
+- Discovered `rebuild_all_from_raw.py` was never actually needed for the
+  9-cell `bins` array specifically (it recomputes fresh from raw fields each
+  run) — only relevant for the separate 4-category `context_region` text
+  field in audit JSONs, which the discriminator pipeline never reads.
+- **Found:** written dissertation Section 3.1/3.2.2 still states the
+  *original* (pre-bug-fix) T_norm-increasing direction — opposite of every
+  piece of code in this project. Flagged for the corrections pass, not yet
+  fixed in the chapter text.
+- Re-confirmed `feature_derivation.py` uses the identical `steps_left/3001.0`
+  denominator as `build_expert_dataset.py` — no drift between bin label and
+  embedded feature context value.
+- Re-ran `build_expert_dataset.py` against the final 52-episode corpus —
+  identical 156,052-step cache, identical cell distribution to before
+  (confirms nothing needed rebuilding, corpus was already correctly cached).
+
+## 6. Episode-level held-out split (decision + build)
+Decision made explicitly (not step-level): steps within an episode are
+correlated, not independent — same principle as the project's own
+episode-cluster CSI bootstrap. Step-level splitting would let the model
+"generalize" to a near-duplicate of a training example.
+- `build_expert_dataset.py` extended: now also saves `episode_ids` (per-step),
+  `episode_outcomes` (per-episode, derived from final score), `episode_filenames`.
+  Re-run confirmed outcome counts match exactly: 14W/13D/25L.
+- **`held_out_split.py`** — `make_episode_split()` (stratified by outcome,
+  per-group rounding), `split_features_by_episode()`.
+**Verified:** `test_held_out_split.py` — 41/11 episode split, 3W/3D/5L held-out
+(proportional to 14/13/25), all 9 context cells still present in the 11
+held-out episodes despite being whole matches, no train/held-out overlap.
+
+## 7. Random-policy rollout (Phase A data source)
+- `check_action_space.py` — confirmed `env.action_space` is
+  `MultiDiscrete([19,19,19,19])`, `sample()` returns a directly-usable
+  4-array, no per-agent looping needed (simpler than the actor-based script).
+- **`record_random_policy_rollout.py`** — structurally identical to
+  `record_baseline_rollout.py` with the actor/encoder block replaced by
+  `env.action_space.sample()`. No model dependency at all.
+- **`build_agent_dataset_random_policy.py`** — mirrors
+  `build_agent_dataset_mappo.py` pattern, imports `classify_bin` rather than
+  redefining it. Run against 5 episodes: 4 cells empty
+  (early/win, mid/win, late/win, late/draw) — matches independently-computed
+  `agent_cell_histogram.py` exactly.
+
+## 8. Empty-cell handling (decision + implementation)
+Decision made explicitly: full 9-cell target for both phases, "let it be" —
+don't force cells that genuinely have no data, don't drop them permanently either.
+- `context_balanced_sampler.py`: added `on_empty` param to `sample()`
+  (default `'raise'`, preserves all prior tested behavior) and threaded
+  through `balanced_batch()`. `on_empty='skip'` draws 0 from an empty cell
+  rather than erroring; `balanced_batch` additionally realigns both sides to
+  their common cell set when a cell is empty on only one side, preserving
+  the marginal-matching guarantee.
+**Verified:** `test_on_empty_handling.py` — default behavior unchanged,
+skip-mode draws exactly the right count, and critically: after realignment
+expert/agent cell sets are IDENTICAL (this is the check that actually
+protects the leakage guarantee).
+
+## 9. Phase A pre-training (original concat architecture)
+`phase_a_pretraining.py` — 10,000 steps vs. random-policy, batch=128
+(matches the pre-documented ~24x worst-cell-reuse figure), W&B every 100
+steps, held-out eval every 500 (monitoring only, not per-phase-gating —
+combined-gate interpretation of the locked spec, explicit decision).
+**Result:** health `healthy`→`saturating` at step 800, stayed saturating
+92% of run. Final held-out acc 0.9760. Flagged as *expected* — Phase A has
+no adversarial policy loop, saturation here doesn't carry the same risk it
+would during real joint fine-tuning.
+
+## 10. Frozen-MAPPO rollout expansion (Phase B data source)
+- Decision: 100 additional episodes (105 total), explicit user choice
+  ("100+, closest to real reuse parity").
+- **`build_agent_dataset_mappo.py`** — same pattern as random-policy builder.
+  Cell distribution at 105 episodes: `late/draw` fully resolved (25,641
+  steps — NOT structurally rare after all, just needed volume); `early/loss`
+  still thin (2,058 steps) but no longer empty.
+
+## 11. Phase B pre-training (original concat architecture)
+`phase_b_pretraining.py` — resumes from Phase A checkpoint (not fresh init),
+SAME held-out split seed as Phase A, agent side now `mappo_features_cache.npz`.
+**Result:** health stayed `healthy` for all 10,000 steps — genuinely different
+regime from Phase A's saturation, interpreted as evidence the harder
+human-vs-competent-but-inhuman discrimination task didn't collapse to a
+trivial shortcut. Combined held-out acc 0.9625, gate criterion (0.75) PASSED
+on this metric. `acc_expert`/`acc_agent` gap widened vs. Phase A
+(0.930/0.734) — flagged as plausible given MAPPO plays genuine football,
+not noise.
+
+## 12. Real counterfactual gate — FIRST RUN — FAILED
+Against the Phase B (concat-architecture) checkpoint, on held-out expert data.
+Both directions: mean|shift| ≈ 0.003–0.004, 0% of examples exceeding 0.1.
+
+## 13. Diagnosis
+**`diagnose_context_sensitivity.py`** — three checks: per-block input-gradient
+magnitude, per-block first-layer weight norm, gate re-run on TRAIN data.
+**Findings:** context got mid-pack weight allocation (0.64, between opp_vel
+0.39 and action 0.995) — not parameter-starved. Input-gradient for context
+lowest of any block but only ~2x below average, not order-of-magnitude —
+not consistent with active R1 suppression. Gate FAILED even on train data —
+not a generalization gap, context was never learned at all. Conclusion:
+dilution — 135 other dims already gave ~96% separability, no optimization
+pressure ever reached for the 2 context dims.
+
+## 14. FiLM rebuild (`discriminator_model.py`)
+Per Section 3.3.1's own pre-registered alternative for exactly this failure
+mode. Context (2 dims) generates per-layer (γ, β) via a small side-network,
+applied as `h' = ReLU(γ·Linear(h) + β)` pre-activation, to both hidden layers.
+FiLM generators zero-initialized (`γ=1, β=0` at init) — a fresh model is
+mathematically identical to unconditioned, context has zero effect until
+training finds it useful.
+External contract unchanged (`forward()`→logit, `.probability()`→sigmoid) —
+zero changes required to loss/trainer/sampler/gate files, only the model swaps.
+**Verified:** `test_discriminator_film.py` — 167,809 params (hand-computed,
+matches exactly), all standard checks pass, PLUS a new FiLM-specific check:
+same content + different context → max output difference 0.00000000 at init,
+confirming the zero-init claim empirically rather than asserting it.
+
+## 15. Phase A + Phase B rerun (FiLM architecture, fresh init)
+Both re-run from scratch (old checkpoints incompatible — different state
+dict shape). `phase_a_pretraining.py`/`phase_b_pretraining.py` required
+zero code changes — both only ever imported `Discriminator` and called
+`forward()`/`probability()`.
+**Phase A result:** held-out acc 0.9983 (final). **Phase B result:** held-out
+acc 0.9690, combined gate PASS on the accuracy metric.
+
+## 16. Real counterfactual gate — SECOND RUN — STILL FAILED, but improved
+| | concat (original) | FiLM | change |
+|---|---|---|---|
+| late_win→early_loss mean\|shift\| | 0.0037 | 0.0073 | ~2x |
+| early_loss→late_win mean\|shift\| | 0.0043 | 0.0523 | ~12x |
+| frac exceeding 0.1 | 0% / 0% | 0% / 2.8% | first examples ever cross |
+
+FiLM gave the network genuine capacity to use context (confirmed, not
+assumed — the numbers moved substantially). Still failing: no training
+*incentive* to use that capacity, since (a) real correlational signal
+already exists elsewhere (action-block sprint frequency correlates with
+true context in human data, per the project's own SAP statistics), and
+(b) a larger, context-*independent* shortcut dominates — the baseline's
+near-constant ~93.5% SAP vs. demonstrators' lower SAP in essentially every
+context region, which alone approaches the observed ~96% separability
+without the network needing to reason about context at all.
+
+## 17. Decision point — stopped here for tonight
+Confirmed: no literal feature duplication (steps_left/scores feed only the
+context slot, nowhere else in the 137 dims). Checkpoint from step 15/16
+explicitly marked: **exists, does not pass the gate, usable for pilot
+throughput/pipeline-wiring purposes only — not validated for real ablation
+training.** Remedy options identified but not yet built: (a) extend training
+steps and see if the FiLM trend continues, (b) add an auxiliary
+context-prediction loss head to force representational pressure toward
+context-awareness. Neither pursued yet — deferred to next session, since
+throughput measurement doesn't require a gate-passing discriminator.
+
+# Implementation Log — Discriminator Build, This Session
+
+Covers everything built from `discriminator_loss.py` through the FiLM-rebuilt,
+gate-failed checkpoint. Starting state: discriminator model + context-balanced
+sampler already existed and were verified (prior session). Ending state:
+discriminator architecturally complete, both pre-training phases run twice
+(original + FiLM), counterfactual gate still FAILING — checkpoint exists for
+throughput/pilot purposes only, NOT validated for real training.
+
+---
+
+## 1. `discriminator_loss.py`
+BCEWithLogitsLoss + one-sided label smoothing (expert=0.9, agent=0.1) +
+zero-centred R1 gradient penalty (expert-only, pre-sigmoid logit, `(η/2)·E[‖∇_x D‖²]`).
+Single forward pass on the expert batch feeds both the BCE-expert term and R1.
+`DEFAULT_ETA = 1.0`, explicitly provisional, not imported from AMP.
+**Verified:** `test_discriminator_loss.py`, 6/6 checks, including R1 matching a
+hand-computed value exactly (0.6850) via `ConstantGradModel`.
+
+## 2. `discriminator_trainer.py`
+Wraps loss into `step()`/`health()`. `step()` returns loss, bce_expert/agent,
+gp_value, acc (+ per-side), acc_per_region, ess. `health()`: >90% saturating,
+<55% confused, else healthy (rolling window).
+- First draft assumed a separate `expert_weights` arg for ESS — wrong.
+- Corrected after seeing real `context_balanced_sampler.py`: numpy→torch
+  bridging added (sampler is pure numpy); ESS derived from
+  `expert_sampler.cell_counts` + the sampler's own `sqrt_scaled_target()`
+  (reused, not reimplemented); `acc_per_region` keyed by real `CELL_NAMES`.
+**Verified:** `test_discriminator_trainer.py`, 5 groups — numpy bridging,
+ESS exact-match on a provable single-cell case, ESS vs. independent
+recomputation on mixed cells, CELL_NAMES keying, health() thresholds.
+
+## 3. Agent-side pipeline closure (§5.4 from prior handoff)
+- Fixed hardcoded Blackwell username in `record_baseline_rollout.py`
+  (later regressed — see Debugging Log #1).
+- Confirmed `actor.pt` (374501 bytes) is a real checkpoint, not an LFS stub.
+- Ran on the laptop (not Blackwell) — pure inference, no GRF-render dependency.
+- Built `check_active_player_mapping.py` — confirmed `raw_obs[i]['active']`
+  returns `[1,2,3,4]` for `i=[0,1,2,3]`, i.e. `raw_obs[i] ↔ left_team[i+1]`
+  exactly, across all 4 agents (original script only checked agent 0).
+- Re-ran `batch_verify_features.py` (as `batch_verify_features_baseline.py`)
+  against agent data — clean, 0 NaN/Inf, 0 out-of-range, 15,000 steps.
+
+## 4. Counterfactual swap-test gate (Section 3.3.3)
+Three files:
+- **`context_swap.py`** — swaps only the context slot (dims 135–136),
+  applies the same `clip(-3,3)/3` scaling as `feature_normalization.py`.
+- **`context_shift_scoring.py`** — `select_by_true_context()` +
+  `score_context_shift()`, locked `LATE_WINNING`/`EARLY_LOSING` constants
+  matching the (corrected) T_norm-decreasing convention.
+- **`counterfactual_gate.py`** — bidirectional (late_win→early_loss AND
+  early_loss→late_win), each direction gated independently on mean|shift|>0.1
+  (locked threshold), fraction-exceeding-0.1 reported+flagged but not gating
+  (explicit user decision).
+**Verified:** each piece individually, then `counterfactual_gate.py` across
+5 synthetic scenarios (clean pass, clean fail, one-direction-blind, the
+mean-passes/median-zero consistency-warning case, empty-population
+ValueError). Smoke-tested against the real 156,052-step cache with an
+untrained stub — correctly meaningless/near-zero, confirmed plumbing only.
+
+## 5. Corpus finalization checks
+- Confirmed `build_expert_dataset.py`'s `classify_bin()` already used the
+  correct (post-bug-fix) T_norm-decreasing direction — no rebuild needed.
+- Discovered `rebuild_all_from_raw.py` was never actually needed for the
+  9-cell `bins` array specifically (it recomputes fresh from raw fields each
+  run) — only relevant for the separate 4-category `context_region` text
+  field in audit JSONs, which the discriminator pipeline never reads.
+- **Found:** written dissertation Section 3.1/3.2.2 still states the
+  *original* (pre-bug-fix) T_norm-increasing direction — opposite of every
+  piece of code in this project. Flagged for the corrections pass, not yet
+  fixed in the chapter text.
+- Re-confirmed `feature_derivation.py` uses the identical `steps_left/3001.0`
+  denominator as `build_expert_dataset.py` — no drift between bin label and
+  embedded feature context value.
+- Re-ran `build_expert_dataset.py` against the final 52-episode corpus —
+  identical 156,052-step cache, identical cell distribution to before
+  (confirms nothing needed rebuilding, corpus was already correctly cached).
+
+## 6. Episode-level held-out split (decision + build)
+Decision made explicitly (not step-level): steps within an episode are
+correlated, not independent — same principle as the project's own
+episode-cluster CSI bootstrap. Step-level splitting would let the model
+"generalize" to a near-duplicate of a training example.
+- `build_expert_dataset.py` extended: now also saves `episode_ids` (per-step),
+  `episode_outcomes` (per-episode, derived from final score), `episode_filenames`.
+  Re-run confirmed outcome counts match exactly: 14W/13D/25L.
+- **`held_out_split.py`** — `make_episode_split()` (stratified by outcome,
+  per-group rounding), `split_features_by_episode()`.
+**Verified:** `test_held_out_split.py` — 41/11 episode split, 3W/3D/5L held-out
+(proportional to 14/13/25), all 9 context cells still present in the 11
+held-out episodes despite being whole matches, no train/held-out overlap.
+
+## 7. Random-policy rollout (Phase A data source)
+- `check_action_space.py` — confirmed `env.action_space` is
+  `MultiDiscrete([19,19,19,19])`, `sample()` returns a directly-usable
+  4-array, no per-agent looping needed (simpler than the actor-based script).
+- **`record_random_policy_rollout.py`** — structurally identical to
+  `record_baseline_rollout.py` with the actor/encoder block replaced by
+  `env.action_space.sample()`. No model dependency at all.
+- **`build_agent_dataset_random_policy.py`** — mirrors
+  `build_agent_dataset_mappo.py` pattern, imports `classify_bin` rather than
+  redefining it. Run against 5 episodes: 4 cells empty
+  (early/win, mid/win, late/win, late/draw) — matches independently-computed
+  `agent_cell_histogram.py` exactly.
+
+## 8. Empty-cell handling (decision + implementation)
+Decision made explicitly: full 9-cell target for both phases, "let it be" —
+don't force cells that genuinely have no data, don't drop them permanently either.
+- `context_balanced_sampler.py`: added `on_empty` param to `sample()`
+  (default `'raise'`, preserves all prior tested behavior) and threaded
+  through `balanced_batch()`. `on_empty='skip'` draws 0 from an empty cell
+  rather than erroring; `balanced_batch` additionally realigns both sides to
+  their common cell set when a cell is empty on only one side, preserving
+  the marginal-matching guarantee.
+**Verified:** `test_on_empty_handling.py` — default behavior unchanged,
+skip-mode draws exactly the right count, and critically: after realignment
+expert/agent cell sets are IDENTICAL (this is the check that actually
+protects the leakage guarantee).
+
+## 9. Phase A pre-training (original concat architecture)
+`phase_a_pretraining.py` — 10,000 steps vs. random-policy, batch=128
+(matches the pre-documented ~24x worst-cell-reuse figure), W&B every 100
+steps, held-out eval every 500 (monitoring only, not per-phase-gating —
+combined-gate interpretation of the locked spec, explicit decision).
+**Result:** health `healthy`→`saturating` at step 800, stayed saturating
+92% of run. Final held-out acc 0.9760. Flagged as *expected* — Phase A has
+no adversarial policy loop, saturation here doesn't carry the same risk it
+would during real joint fine-tuning.
+
+## 10. Frozen-MAPPO rollout expansion (Phase B data source)
+- Decision: 100 additional episodes (105 total), explicit user choice
+  ("100+, closest to real reuse parity").
+- **`build_agent_dataset_mappo.py`** — same pattern as random-policy builder.
+  Cell distribution at 105 episodes: `late/draw` fully resolved (25,641
+  steps — NOT structurally rare after all, just needed volume); `early/loss`
+  still thin (2,058 steps) but no longer empty.
+
+## 11. Phase B pre-training (original concat architecture)
+`phase_b_pretraining.py` — resumes from Phase A checkpoint (not fresh init),
+SAME held-out split seed as Phase A, agent side now `mappo_features_cache.npz`.
+**Result:** health stayed `healthy` for all 10,000 steps — genuinely different
+regime from Phase A's saturation, interpreted as evidence the harder
+human-vs-competent-but-inhuman discrimination task didn't collapse to a
+trivial shortcut. Combined held-out acc 0.9625, gate criterion (0.75) PASSED
+on this metric. `acc_expert`/`acc_agent` gap widened vs. Phase A
+(0.930/0.734) — flagged as plausible given MAPPO plays genuine football,
+not noise.
+
+## 12. Real counterfactual gate — FIRST RUN — FAILED
+Against the Phase B (concat-architecture) checkpoint, on held-out expert data.
+Both directions: mean|shift| ≈ 0.003–0.004, 0% of examples exceeding 0.1.
+
+## 13. Diagnosis
+**`diagnose_context_sensitivity.py`** — three checks: per-block input-gradient
+magnitude, per-block first-layer weight norm, gate re-run on TRAIN data.
+**Findings:** context got mid-pack weight allocation (0.64, between opp_vel
+0.39 and action 0.995) — not parameter-starved. Input-gradient for context
+lowest of any block but only ~2x below average, not order-of-magnitude —
+not consistent with active R1 suppression. Gate FAILED even on train data —
+not a generalization gap, context was never learned at all. Conclusion:
+dilution — 135 other dims already gave ~96% separability, no optimization
+pressure ever reached for the 2 context dims.
+
+## 14. FiLM rebuild (`discriminator_model.py`)
+Per Section 3.3.1's own pre-registered alternative for exactly this failure
+mode. Context (2 dims) generates per-layer (γ, β) via a small side-network,
+applied as `h' = ReLU(γ·Linear(h) + β)` pre-activation, to both hidden layers.
+FiLM generators zero-initialized (`γ=1, β=0` at init) — a fresh model is
+mathematically identical to unconditioned, context has zero effect until
+training finds it useful.
+External contract unchanged (`forward()`→logit, `.probability()`→sigmoid) —
+zero changes required to loss/trainer/sampler/gate files, only the model swaps.
+**Verified:** `test_discriminator_film.py` — 167,809 params (hand-computed,
+matches exactly), all standard checks pass, PLUS a new FiLM-specific check:
+same content + different context → max output difference 0.00000000 at init,
+confirming the zero-init claim empirically rather than asserting it.
+
+## 15. Phase A + Phase B rerun (FiLM architecture, fresh init)
+Both re-run from scratch (old checkpoints incompatible — different state
+dict shape). `phase_a_pretraining.py`/`phase_b_pretraining.py` required
+zero code changes — both only ever imported `Discriminator` and called
+`forward()`/`probability()`.
+**Phase A result:** held-out acc 0.9983 (final). **Phase B result:** held-out
+acc 0.9690, combined gate PASS on the accuracy metric.
+
+## 16. Real counterfactual gate — SECOND RUN — STILL FAILED, but improved
+| | concat (original) | FiLM | change |
+|---|---|---|---|
+| late_win→early_loss mean\|shift\| | 0.0037 | 0.0073 | ~2x |
+| early_loss→late_win mean\|shift\| | 0.0043 | 0.0523 | ~12x |
+| frac exceeding 0.1 | 0% / 0% | 0% / 2.8% | first examples ever cross |
+
+FiLM gave the network genuine capacity to use context (confirmed, not
+assumed — the numbers moved substantially). Still failing: no training
+*incentive* to use that capacity, since (a) real correlational signal
+already exists elsewhere (action-block sprint frequency correlates with
+true context in human data, per the project's own SAP statistics), and
+(b) a larger, context-*independent* shortcut dominates — the baseline's
+near-constant ~93.5% SAP vs. demonstrators' lower SAP in essentially every
+context region, which alone approaches the observed ~96% separability
+without the network needing to reason about context at all.
+
+## 17a. Real actor observation space discovered mid-session (policy-side, not discriminator, but logged here since found during discriminator/policy handoff)
+`enhanced_LightActionMask_5.FeatureEncoder` — actual `observation_space` is
+**192-dim** (`133+59`, confirmed via `Linear(in_features=192,...)` in the
+loaded actor + `PartialLayernorm`'s two LayerNorm groups matching exactly),
+NOT the 115-dim `simple115_v2` Section 3.1 states. More consequentially:
+`match_state` (part of the 59-dim group) already contains
+`steps_left/3001` (= T_norm, identical convention) and a clipped score
+ratio (= ΔScore, differently scaled) — **the frozen baseline was never
+architecturally blind to time or score**, contra Section 3.1's founding
+claim ("this absence is not incidental... induces state aliasing").
+**Reframing needed for the corrections pass:** the real story is a
+reward-shaping gap (sparse goal-differential never incentivized
+conditioning on time/score, despite the information being available),
+not an architectural blindness gap (Pardo et al. state-aliasing argument).
+Does not invalidate any built component — the 3.4.3 zero-padding mechanism
+still functions the same way mechanically either way — but Section 3.1's
+motivating paragraph and Section 3.4.1's "time-blind critic" claim need
+rewriting to match. Also affects the actor/critic wrapper design: context
+injection must be built against the real 192-dim shape, not 115.
+**Queued for the full methodology rewrite pass** (post-ablation-start, per
+explicit decision — corrections batched together rather than made
+piecemeal mid-build), alongside: T_norm direction (3.1/3.2.2), 137-dim
+itemization (3.3.1), CSI `||`→signed notation.
+
+## 17. Decision point — stopped here for tonight
+Confirmed: no literal feature duplication (steps_left/scores feed only the
+context slot, nowhere else in the 137 dims). Checkpoint from step 15/16
+explicitly marked: **exists, does not pass the gate, usable for pilot
+throughput/pipeline-wiring purposes only — not validated for real ablation
+training.** Remedy options identified but not yet built: (a) extend training
+steps and see if the FiLM trend continues, (b) add an auxiliary
+context-prediction loss head to force representational pressure toward
+context-awareness. Neither pursued yet — deferred to next session, since
+throughput measurement doesn't require a gate-passing discriminator.
+
