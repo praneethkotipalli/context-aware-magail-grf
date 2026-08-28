@@ -21,7 +21,7 @@ project's headline claim rests on it), but prints an explicit
 inconsistency warning rather than staying silent about it.
 """
 
-import numpy as np
+"""import numpy as np
 
 from context_shift_scoring import (
     select_by_true_context, score_context_shift, LATE_WINNING, EARLY_LOSING,
@@ -47,7 +47,7 @@ def _direction_report(name, shifts):
 
 
 def run_counterfactual_gate(discriminator, expert_features):
-    """
+    ""
     expert_features: (N, 137) already-normalized real expert vectors
         (e.g. straight from expert_features_cache.npz, unfiltered --
         this function does its own filtering internally).
@@ -55,7 +55,7 @@ def run_counterfactual_gate(discriminator, expert_features):
     Returns (overall_pass: bool, summary: dict). summary carries both
     direction reports in full plus any warnings -- log the whole thing,
     don't reduce it to the boolean.
-    """
+    ""
     mask_lw = select_by_true_context(
         expert_features, t_norm_max=LATE_WINNING['t_norm_max'],
         delta_score_sign=LATE_WINNING['delta_score_sign'],
@@ -93,6 +93,104 @@ def run_counterfactual_gate(discriminator, expert_features):
             )
 
     return overall_pass, {"directions": [report_lw, report_el], "warnings": warnings}
+
+
+def print_gate_report(overall_pass, summary):
+    print("=" * 70)
+    print("COUNTERFACTUAL SWAP-TEST GATE (Section 3.3.3)")
+    print("=" * 70)
+    for r in summary["directions"]:
+        status = "PASS" if r["passes_mean_criterion"] else "FAIL"
+        print(f"\n[{status}] {r['direction']}  (n={r['n']})")
+        print(f"    mean signed shift : {r['mean_shift']:+.4f}")
+        print(f"    mean |shift|      : {r['mean_abs_shift']:.4f}  (threshold {SHIFT_THRESHOLD})")
+        print(f"    median |shift|    : {r['median_abs_shift']:.4f}")
+        print(f"    frac exceeding    : {r['frac_exceeding_0.1']*100:.1f}%")
+
+    if summary["warnings"]:
+        print("\n" + "-" * 70)
+        for w in summary["warnings"]:
+            print(f"  WARNING: {w}")
+
+    print("\n" + "=" * 70)
+    print(f"OVERALL VERDICT: {'PASS' if overall_pass else 'FAIL'}")
+    print("  -> safe to connect discriminator to policy" if overall_pass
+          else "  -> DO NOT connect -- context-invariant in at least one direction")
+    print("=" * 70)"""
+import numpy as np
+
+from context_shift_scoring import (
+    select_by_true_context, score_context_shift, LATE_WINNING, LATE_LOSING,
+)
+
+SHIFT_THRESHOLD = 0.1          # locked, Section 3.3.3
+LOW_CONSISTENCY_WARN = 0.5     # NOT locked -- a reporting heuristic only,
+                                # not part of the pass/fail decision itself
+
+
+def _direction_report(name, shifts):
+    abs_shifts = np.abs(shifts)
+    return {
+        "direction": name,
+        "n": len(shifts),
+        "mean_shift": float(shifts.mean()),
+        "mean_abs_shift": float(abs_shifts.mean()),
+        "median_abs_shift": float(np.median(abs_shifts)),
+        "std_abs_shift": float(abs_shifts.std()),
+        "frac_exceeding_0.1": float(np.mean(abs_shifts > SHIFT_THRESHOLD)),
+        "passes_mean_criterion": bool(abs_shifts.mean() > SHIFT_THRESHOLD),
+    }
+
+
+def run_counterfactual_gate(discriminator, expert_features):
+    """
+    expert_features: (N, 139) already-normalized real expert vectors
+        (e.g. straight from expert_features_cache.npz, unfiltered --
+        this function does its own filtering internally).
+
+    Returns (overall_pass: bool, summary: dict). summary carries both
+    direction reports in full plus any warnings -- log the whole thing,
+    don't reduce it to the boolean.
+    """
+    # 1. Late Winning swapped to Late Losing
+    mask_lw = select_by_true_context(
+        expert_features, t_norm_max=LATE_WINNING['t_norm_max'],
+        delta_score_sign=LATE_WINNING['delta_score_sign'],
+    )
+    if mask_lw.sum() == 0:
+        raise ValueError("no real late-winning examples in expert_features -- cannot run this direction")
+    _, _, shift_lw = score_context_shift(
+        discriminator, expert_features[mask_lw],
+        target_t_norm=0.1, target_delta_score_raw=-2,
+    )
+    report_lw = _direction_report("late_winning -> late_losing", shift_lw)
+
+    # 2. Late Losing swapped to Late Winning
+    mask_ll = select_by_true_context(
+        expert_features, t_norm_max=LATE_LOSING['t_norm_max'],
+        delta_score_sign=LATE_LOSING['delta_score_sign'],
+    )
+    if mask_ll.sum() == 0:
+        raise ValueError("no real late-losing examples in expert_features -- cannot run this direction")
+    _, _, shift_ll = score_context_shift(
+        discriminator, expert_features[mask_ll],
+        target_t_norm=0.1, target_delta_score_raw=2,
+    )
+    report_ll = _direction_report("late_losing -> late_winning", shift_ll)
+
+    overall_pass = report_lw["passes_mean_criterion"] and report_ll["passes_mean_criterion"]
+
+    warnings = []
+    for r in (report_lw, report_ll):
+        if r["passes_mean_criterion"] and r["frac_exceeding_0.1"] < LOW_CONSISTENCY_WARN:
+            warnings.append(
+                f"{r['direction']}: passes on mean_abs_shift={r['mean_abs_shift']:.4f}, "
+                f"but only {r['frac_exceeding_0.1']*100:.1f}% of individual examples exceed "
+                f"{SHIFT_THRESHOLD} -- the mean may be carried by a minority of large shifts, "
+                f"not a consistently context-sensitive population."
+            )
+
+    return overall_pass, {"directions": [report_lw, report_ll], "warnings": warnings}
 
 
 def print_gate_report(overall_pass, summary):

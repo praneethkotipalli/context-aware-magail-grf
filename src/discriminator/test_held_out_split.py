@@ -35,8 +35,10 @@ check("held-out set contains at least one loss episode", (held_outcomes == 'loss
 
 check("train + held-out steps sum to 156052",
       train_feat.shape[0] + held_feat.shape[0] == 156052)
-check("train features shape correct", train_feat.shape[1] == 137)
-check("held-out features shape correct", held_feat.shape[1] == 137)
+#check("train features shape correct", train_feat.shape[1] == 137)
+#check("held-out features shape correct", held_feat.shape[1] == 137)
+check("train features shape correct", train_feat.shape[1] == 139)
+check("held-out features shape correct", held_feat.shape[1] == 139)
 
 print(f"\ntrain steps: {train_feat.shape[0]}, held-out steps: {held_feat.shape[0]}")
 
