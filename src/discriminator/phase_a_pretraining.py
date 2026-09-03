@@ -11,7 +11,7 @@ from discriminator_model import Discriminator
 from discriminator_trainer import DiscriminatorTrainer
 from context_balanced_sampler import BalancedContextSampler, balanced_batch, sqrt_scaled_target
 from held_out_split import make_episode_split, split_features_by_episode
-
+from context_shift_scoring import select_by_true_context, LATE_WINNING, LATE_LOSING
 BATCH_SIZE = 128          # matches the already-documented ~24x worst-cell reuse figure
 N_STEPS = 10_000
 LOG_EVERY = 100
@@ -40,7 +40,7 @@ def run():
     rng = np.random.default_rng(SEED)
     wandb.init(project="magail-c", name="phase_a_pretraining", config={
         "batch_size": BATCH_SIZE, "n_steps": N_STEPS, "phase": "A_random_policy",
-        "eta": 1.0, "held_out_frac": HELD_OUT_FRAC, "seed": SEED,
+        "eta": 0.3, "held_out_frac": HELD_OUT_FRAC, "seed": SEED,
     })
 
     expert_cache = np.load("expert_features_cache.npz", allow_pickle=True)
@@ -59,9 +59,22 @@ def run():
     agent_sampler = BalancedContextSampler(agent_cache["features"], agent_cache["bins"], name="random_policy")
 
     model = Discriminator()
-    optimizer = torch.optim.Adam(model.parameters(), lr=1e-4)
-    trainer = DiscriminatorTrainer(model, optimizer, expert_sampler=expert_sampler)
-
+    optimizer = torch.optim.Adam(model.parameters(), lr=1e-4,weight_decay=1e-4)
+    mask_lw = select_by_true_context(
+        train_feat, t_norm_max=LATE_WINNING['t_norm_max'], delta_score_sign=LATE_WINNING['delta_score_sign']
+    )
+    mask_ll = select_by_true_context(
+        train_feat, t_norm_max=LATE_LOSING['t_norm_max'], delta_score_sign=LATE_LOSING['delta_score_sign']
+    )
+    trainer = DiscriminatorTrainer(
+        model, 
+        optimizer, 
+        expert_sampler=expert_sampler, 
+        eta=0.3,                               # Lowered R1 penalty
+        gamma_swap=6.0,                        # Heavy context pressure
+        swap_lw_features=train_feat[mask_lw],  # Activates the LW swap loss
+        swap_ll_features=train_feat[mask_ll]   # Activates the LL swap loss
+    )
     print(f"\nPhase A: {N_STEPS} steps, batch_size={BATCH_SIZE}\n")
 
     for step in range(1, N_STEPS + 1):

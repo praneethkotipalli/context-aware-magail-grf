@@ -50,6 +50,7 @@ def make_episode_split(episode_outcomes, held_out_frac=0.20, seed=0):
         (features[train_mask], bins[train_mask]),
         (features[held_out_mask], bins[held_out_mask]),
     )"""
+
 def split_features_by_episode(features, bins, episode_ids, train_episode_ids, held_out_episode_ids):
     """Applies an episode-level split to the actual (156052, 139) step
     arrays -- expands episode membership into a per-STEP boolean mask."""
