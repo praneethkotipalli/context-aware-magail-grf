@@ -1,0 +1,60 @@
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/u5749464/.netrc.
+wandb: Currently logged in as: praneethkotipalli (praneethkotipalli-university-of-warwick) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: setting up run qrq4gcqi
+wandb: Tracking run with wandb version 0.25.0
+wandb: Run data is saved locally in /home/u5749464/dissertation/context-aware-magail-grf/src/policy/wandb/run-20260904_230817-qrq4gcqi
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run MAGAIL-C_seed2
+wandb: ⭐️ View project at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
+wandb: 🚀 View run at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/qrq4gcqi
+wandb: updating run metadata
+wandb: uploading wandb-summary.json; uploading config.yaml; uploading output.log
+wandb: uploading config.yaml; uploading output.log
+wandb: 
+wandb: Run history:
+wandb:           disc/acc ▆▅██▄▄▃▃▄▄▁▅▆▇▇▅█▇▇▇
+wandb:     disc/acc_agent ▄▅▇█▄▇▄▁▂▄▂▄▇▆█▅▆▆▆▅
+wandb:    disc/acc_expert ▇▅▆▅▄▁▃▇█▆▂▇▃▇▄▅█▇▇█
+wandb:     disc/bce_agent ▇█▆▁▄▄▆▇▇▇▇▅▃▄▃▅▅▃▃▆
+wandb:    disc/bce_expert ▂▂▅▇▅█▆▃▁▂▄▂▅▄▅▆▅▃▄▄
+wandb:           disc/ess ▁▃▃▆▆█████▇▇████████
+wandb:      disc/gp_value █▄▂▂▄▃▆▆▄▃▅▃▃▂▄▄▁▁▅▅
+wandb:          disc/loss █▇▆▂▄▆██▆▇█▃▃▃▃▆▅▁▃▅
+wandb:          disc/step ▁▁▂▂▂▃▃▄▄▄▅▅▅▆▆▇▇▇██
+wandb: disc/swap_hinge_ll ▁▂▄▁▁▁▁▄▆█▁▁▁▁▁▂▃▂▁▁
+wandb:                +22 ...
+wandb: 
+wandb: Run summary:
+wandb:           disc/acc 0.96875
+wandb:     disc/acc_agent 0.96094
+wandb:    disc/acc_expert 0.97656
+wandb:     disc/bce_agent 0.44148
+wandb:    disc/bce_expert 0.44766
+wandb:           disc/ess 106.90872
+wandb:      disc/gp_value 0.13224
+wandb:          disc/loss 1.02139
+wandb:          disc/step 20
+wandb: disc/swap_hinge_ll 0
+wandb:                +23 ...
+wandb: 
+wandb: 🚀 View run MAGAIL-C_seed2 at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/qrq4gcqi
+wandb: ⭐️ View project at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260904_230817-qrq4gcqi/logs
+
+======================================================================
+MAGAIL-C_seed2  (120 iters, use_kl=False, shuffle_context=False, use_context=True, frozen=False)
+======================================================================
+[MAGAIL-C_seed2 it10/120] 28.8s  score=(2, 0)  r_style=-1.208  ETA 54.4min
+[MAGAIL-C_seed2 it20/120] 30.3s  score=(1, 0)  r_style=-0.664  ETA 49.0min
+
+[MAGAIL-C_seed2 it30] EVAL (240s): win=0.600 SAP=88.30% MECHA=0.1212 CSI=0.16423158346062117 health=saturating lam=1.0000
+[MAGAIL-C_seed2 it30/120] 28.6s  score=(2, 0)  r_style=-0.912  ETA 43.9min
+[MAGAIL-C_seed2 it40/120] 26.1s  score=(2, 0)  r_style=-1.065  ETA 37.7min
+[MAGAIL-C_seed2 it50/120] 27.4s  score=(2, 0)  r_style=-1.008  ETA 31.4min
+
+[MAGAIL-C_seed2 it60] EVAL (224s): win=0.400 SAP=86.23% MECHA=0.1289 CSI=0.06162965779035601 health=saturating lam=1.0000
+  KILL-SWITCH (win rate): win rate 0.400 is 35.9% below baseline 0.624 (>25% kill-switch)
+[MAGAIL-C_seed2 it60/120] 27.5s  score=(0, 0)  r_style=-1.059  ETA 26.5min
+MAGAIL-C_seed2 done in 35.8min, 60 iters, halted=True -> ablation_MAGAIL-C_seed2.pt

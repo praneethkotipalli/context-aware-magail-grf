@@ -1,0 +1,54 @@
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/u5749464/.netrc.
+wandb: Currently logged in as: praneethkotipalli (praneethkotipalli-university-of-warwick) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: setting up run 32t3lyk1
+wandb: Tracking run with wandb version 0.25.0
+wandb: Run data is saved locally in /home/u5749464/dissertation/context-aware-magail-grf/src/policy/wandb/run-20260904_230817-32t3lyk1
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run lambda_sweep_0.01_seed2
+wandb: ⭐️ View project at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
+wandb: 🚀 View run at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/32t3lyk1
+wandb: updating run metadata
+wandb: uploading history steps 29-29, summary, console lines 2-5
+wandb: 
+wandb: Run history:
+wandb:           disc/acc █▄▇█▇▁▂▆▆▅
+wandb:     disc/acc_agent █▆▇▇▇▁▄▆▆▆
+wandb:    disc/acc_expert █▂▆█▆▂▁▆▅▃
+wandb:     disc/bce_agent ▂▄▂▁▃█▃▅▄▅
+wandb:    disc/bce_expert ▁▃▃▄▃▆█▆▄▆
+wandb:           disc/ess ▁▇████████
+wandb:      disc/gp_value █▃▁▂▂▁▇▆▂▃
+wandb:          disc/loss ▃▄▁▁▂█▇▇▄▆
+wandb:          disc/step ▁▂▃▃▄▅▆▆▇█
+wandb: disc/swap_hinge_ll ▂█▁▁▁▁▁▆▇▅
+wandb:                +22 ...
+wandb: 
+wandb: Run summary:
+wandb:           disc/acc 0.94531
+wandb:     disc/acc_agent 0.95312
+wandb:    disc/acc_expert 0.9375
+wandb:     disc/bce_agent 0.45941
+wandb:    disc/bce_expert 0.46333
+wandb:           disc/ess 106.90872
+wandb:      disc/gp_value 0.12463
+wandb:          disc/loss 1.04871
+wandb:          disc/step 10
+wandb: disc/swap_hinge_ll 0.00021
+wandb:                +23 ...
+wandb: 
+wandb: 🚀 View run lambda_sweep_0.01_seed2 at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/32t3lyk1
+wandb: ⭐️ View project at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260904_230817-32t3lyk1/logs
+
+======================================================================
+lambda_sweep_0.01_seed2  (120 iters, use_kl=True, shuffle_context=False, use_context=True, frozen=False)
+======================================================================
+[lambda_sweep_0.01_seed2 it10/120] 29.8s  score=(2, 0)  r_style=-0.952  ETA 52.4min
+[lambda_sweep_0.01_seed2 it20/120] 26.3s  score=(2, 0)  r_style=-0.928  ETA 47.2min
+
+[lambda_sweep_0.01_seed2 it30] EVAL (247s): win=0.400 SAP=88.65% MECHA=0.1284 CSI=-0.021604256605231242 health=saturating lam=0.0100
+  KILL-SWITCH (win rate): win rate 0.400 is 35.9% below baseline 0.624 (>25% kill-switch)
+[lambda_sweep_0.01_seed2 it30/120] 29.8s  score=(1, 0)  r_style=-0.897  ETA 42.4min
+lambda_sweep_0.01_seed2 done in 18.3min, 30 iters, halted=True -> ablation_lambda_sweep_0.01_seed2.pt

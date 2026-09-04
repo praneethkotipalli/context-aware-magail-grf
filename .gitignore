@@ -29,3 +29,7 @@ runs/
 .DS_Store
 *.swp
 src/discriminator/*_features_cache.npz
+
+# Experimental artifacts & local checkpoints
+result_*.json
+ablation_*.pt

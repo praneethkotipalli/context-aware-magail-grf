@@ -1,0 +1,49 @@
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/u5749464/.netrc.
+wandb: Currently logged in as: praneethkotipalli (praneethkotipalli-university-of-warwick) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: setting up run 22y14ivk
+wandb: Tracking run with wandb version 0.25.0
+wandb: Run data is saved locally in /home/u5749464/dissertation/context-aware-magail-grf/src/policy/wandb/run-20260904_223727-22y14ivk
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run MAGAIL-C_seed3
+wandb: ⭐️ View project at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
+wandb: 🚀 View run at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/22y14ivk
+wandb: updating run metadata
+wandb: uploading output.log; uploading wandb-summary.json; uploading config.yaml
+wandb: 
+wandb: Run history:
+wandb:           disc/acc █▄▇▁▆
+wandb:     disc/acc_agent ▂▇█▃▁
+wandb:    disc/acc_expert █▁▂▂▇
+wandb:     disc/bce_agent █▃▁▃▂
+wandb:    disc/bce_expert ▁▇▇▇█
+wandb:           disc/ess ▁▁▄▄█
+wandb:      disc/gp_value █▅▂▆▁
+wandb:          disc/loss ▃█▁▇▃
+wandb:          disc/step ▁▃▅▆█
+wandb: disc/swap_hinge_ll ▁█▁▁▁
+wandb:                +12 ...
+wandb: 
+wandb: Run summary:
+wandb:           disc/acc 0.96667
+wandb:     disc/acc_agent 0.95
+wandb:    disc/acc_expert 0.98333
+wandb:     disc/bce_agent 0.4257
+wandb:    disc/bce_expert 0.45963
+wandb:           disc/ess 100.55032
+wandb:      disc/gp_value 0.1321
+wandb:          disc/loss 1.01743
+wandb:          disc/step 5
+wandb: disc/swap_hinge_ll 0
+wandb:                +12 ...
+wandb: 
+wandb: 🚀 View run MAGAIL-C_seed3 at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/22y14ivk
+wandb: ⭐️ View project at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260904_223727-22y14ivk/logs
+
+======================================================================
+MAGAIL-C_seed3  (15 iters, use_kl=False, shuffle_context=False, use_context=True, frozen=False)
+======================================================================
+[MAGAIL-C_seed3 it10/15] 27.9s  score=(3, 1)  r_style=-1.098  ETA 2.3min
+MAGAIL-C_seed3 done in 6.9min, 15 iters, halted=False -> ablation_MAGAIL-C_seed3.pt

@@ -1,0 +1,65 @@
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/u5749464/.netrc.
+wandb: Currently logged in as: praneethkotipalli (praneethkotipalli-university-of-warwick) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: setting up run azzpr9nf
+wandb: Tracking run with wandb version 0.25.0
+wandb: Run data is saved locally in /home/u5749464/dissertation/context-aware-magail-grf/src/policy/wandb/run-20260904_230817-azzpr9nf
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run lambda_sweep_1.0_seed0
+wandb: ⭐️ View project at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
+wandb: 🚀 View run at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/azzpr9nf
+wandb: updating run metadata
+wandb: uploading output.log; uploading wandb-summary.json; uploading config.yaml
+wandb: uploading history steps 89-89, summary, console lines 12-15
+wandb: 
+wandb: Run history:
+wandb:           disc/acc ▇▆▅▆▁▆▃▂▆▅▅▅▃▄▆▄▄▅▅▃▆▄▇▅█▇▅▆▅▅
+wandb:     disc/acc_agent ▇██▇▁▅▇▁▇▇▆▆▆▄▆▆▅▄▄▅▅▅▇▆▇▆▇▇▄▅
+wandb:    disc/acc_expert ▇▅▂▆▃▆▁▄▅▄▅▆▂▅▆▄▅▆▆▃▇▅▆▅█▇▅▅▆▆
+wandb:     disc/bce_agent ▃▅▁▅█▅▃▆▂▂▃▃▄▅▅▃▂▄▃▃▄▅▃▅▄▅▃▂▅▄
+wandb:    disc/bce_expert ▂▃▆▄▄▃█▅▆▅▄▄█▄▄▆▄▃▃▅▃▂▃▄▁▂▂▄▂▁
+wandb:           disc/ess ███▁▁▁▁███████████████████████
+wandb:      disc/gp_value ▅▅▆▂▅▃▅▅▆▄▅▂▇▁▃▅▃▅▅▅█▅▆▅▆▃▆▃▃▃
+wandb:          disc/loss ▂█▃▃▆▃▆▅▄▃▂▂▇▃▃▄▂▂▂▄▄▃▃▄▁▂▂▁▁▁
+wandb:          disc/step ▁▁▁▂▂▂▂▃▃▃▃▄▄▄▄▅▅▅▅▆▆▆▆▇▇▇▇███
+wandb: disc/swap_hinge_ll ▁█▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▃▁▁▁▁▁▁▁▁
+wandb:                +22 ...
+wandb: 
+wandb: Run summary:
+wandb:           disc/acc 0.95703
+wandb:     disc/acc_agent 0.94531
+wandb:    disc/acc_expert 0.96875
+wandb:     disc/bce_agent 0.45195
+wandb:    disc/bce_expert 0.43833
+wandb:           disc/ess 106.90872
+wandb:      disc/gp_value 0.12536
+wandb:          disc/loss 1.01681
+wandb:          disc/step 30
+wandb: disc/swap_hinge_ll 0.00019
+wandb:                +23 ...
+wandb: 
+wandb: 🚀 View run lambda_sweep_1.0_seed0 at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/azzpr9nf
+wandb: ⭐️ View project at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260904_230817-azzpr9nf/logs
+
+======================================================================
+lambda_sweep_1.0_seed0  (120 iters, use_kl=True, shuffle_context=False, use_context=True, frozen=False)
+======================================================================
+[lambda_sweep_1.0_seed0 it10/120] 27.7s  score=(1, 0)  r_style=-0.568  ETA 51.4min
+[lambda_sweep_1.0_seed0 it20/120] 29.4s  score=(1, 0)  r_style=-0.882  ETA 47.2min
+
+[lambda_sweep_1.0_seed0 it30] EVAL (245s): win=0.800 SAP=86.92% MECHA=0.1276 CSI=0.04480057932478587 health=saturating lam=1.0000
+[lambda_sweep_1.0_seed0 it30/120] 29.7s  score=(1, 0)  r_style=-0.964  ETA 42.8min
+[lambda_sweep_1.0_seed0 it40/120] 23.4s  score=(2, 0)  r_style=-0.916  ETA 36.3min
+[lambda_sweep_1.0_seed0 it50/120] 25.7s  score=(2, 0)  r_style=-1.060  ETA 29.8min
+
+[lambda_sweep_1.0_seed0 it60] EVAL (241s): win=0.500 SAP=86.43% MECHA=0.1301 CSI=None health=saturating lam=1.0000
+[lambda_sweep_1.0_seed0 it60/120] 27.5s  score=(2, 0)  r_style=-0.703  ETA 25.6min
+[lambda_sweep_1.0_seed0 it70/120] 22.4s  score=(2, 1)  r_style=-0.867  ETA 19.9min
+[lambda_sweep_1.0_seed0 it80/120] 26.1s  score=(1, 0)  r_style=-1.060  ETA 15.0min
+
+[lambda_sweep_1.0_seed0 it90] EVAL (218s): win=0.700 SAP=88.22% MECHA=0.1135 CSI=0.1731250614868337 health=saturating lam=1.0000
+  KILL-SWITCH (disc saturating, step=30)
+[lambda_sweep_1.0_seed0 it90/120] 21.7s  score=(1, 1)  r_style=-1.082  ETA 11.7min
+lambda_sweep_1.0_seed0 done in 50.2min, 90 iters, halted=True -> ablation_lambda_sweep_1.0_seed0.pt

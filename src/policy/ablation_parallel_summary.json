@@ -1,0 +1,187 @@
+[
+  {
+    "run_name": "MAGAIL-C+KL_seed2",
+    "returncode": 0,
+    "wall_sec": 1105.981692314148
+  },
+  {
+    "run_name": "lambda_sweep_0.01_seed2",
+    "returncode": 0,
+    "wall_sec": 1110.975197315216
+  },
+  {
+    "run_name": "MAGAIL-NC_seed0",
+    "returncode": 0,
+    "wall_sec": 1116.0402874946594
+  },
+  {
+    "run_name": "lambda_sweep_0.001_seed2",
+    "returncode": 0,
+    "wall_sec": 1115.983374595642
+  },
+  {
+    "run_name": "MAPPO-baseline_seed0",
+    "returncode": 0,
+    "wall_sec": 1216.1385469436646
+  },
+  {
+    "run_name": "MAPPO-baseline_seed4",
+    "returncode": 0,
+    "wall_sec": 1226.0580101013184
+  },
+  {
+    "run_name": "MAPPO-baseline_seed1",
+    "returncode": 0,
+    "wall_sec": 1231.125420331955
+  },
+  {
+    "run_name": "MAPPO-baseline_seed2",
+    "returncode": 0,
+    "wall_sec": 1231.100405216217
+  },
+  {
+    "run_name": "MAPPO-baseline_seed3",
+    "returncode": 0,
+    "wall_sec": 1231.0769386291504
+  },
+  {
+    "run_name": "MAGAIL-C+KL_seed0",
+    "returncode": 0,
+    "wall_sec": 2101.947163105011
+  },
+  {
+    "run_name": "MAGAIL-C_seed1",
+    "returncode": 0,
+    "wall_sec": 2101.9234561920166
+  },
+  {
+    "run_name": "lambda_sweep_0.1_seed2",
+    "returncode": 0,
+    "wall_sec": 2101.878633737564
+  },
+  {
+    "run_name": "MAGAIL-SC_seed0",
+    "returncode": 0,
+    "wall_sec": 2106.955077648163
+  },
+  {
+    "run_name": "MAGAIL-C_seed2",
+    "returncode": 0,
+    "wall_sec": 2156.9506549835205
+  },
+  {
+    "run_name": "MAGAIL-C_seed4",
+    "returncode": 0,
+    "wall_sec": 3007.6924335956573
+  },
+  {
+    "run_name": "MAGAIL-SC_seed4",
+    "returncode": 0,
+    "wall_sec": 3007.690614938736
+  },
+  {
+    "run_name": "lambda_sweep_0.01_seed0",
+    "returncode": 0,
+    "wall_sec": 3017.7779071331024
+  },
+  {
+    "run_name": "lambda_sweep_1.0_seed0",
+    "returncode": 0,
+    "wall_sec": 3022.7768087387085
+  },
+  {
+    "run_name": "MAGAIL-SC_seed3",
+    "returncode": 0,
+    "wall_sec": 3027.7256042957306
+  },
+  {
+    "run_name": "lambda_sweep_1.0_seed2",
+    "returncode": 0,
+    "wall_sec": 3032.7363476753235
+  },
+  {
+    "run_name": "lambda_sweep_1.0_seed1",
+    "returncode": 0,
+    "wall_sec": 3047.7779593467712
+  },
+  {
+    "run_name": "MAGAIL-NC_seed2",
+    "returncode": 0,
+    "wall_sec": 3047.7640104293823
+  },
+  {
+    "run_name": "MAGAIL-SC_seed1",
+    "returncode": 0,
+    "wall_sec": 3052.8028671741486
+  },
+  {
+    "run_name": "MAGAIL-NC_seed4",
+    "returncode": 0,
+    "wall_sec": 3057.7396132946014
+  },
+  {
+    "run_name": "MAGAIL-NC_seed3",
+    "returncode": 0,
+    "wall_sec": 3062.7575640678406
+  },
+  {
+    "run_name": "MAGAIL-NC_seed1",
+    "returncode": 0,
+    "wall_sec": 3067.8127057552338
+  },
+  {
+    "run_name": "MAGAIL-C+KL_seed1",
+    "returncode": 0,
+    "wall_sec": 3082.8343665599823
+  },
+  {
+    "run_name": "lambda_sweep_0.1_seed0",
+    "returncode": 0,
+    "wall_sec": 3107.8750536441803
+  },
+  {
+    "run_name": "MAGAIL-C+KL_seed4",
+    "returncode": 0,
+    "wall_sec": 3117.8098731040955
+  },
+  {
+    "run_name": "lambda_sweep_0.001_seed1",
+    "returncode": 0,
+    "wall_sec": 3122.8695662021637
+  },
+  {
+    "run_name": "lambda_sweep_0.001_seed0",
+    "returncode": 0,
+    "wall_sec": 3142.9190962314606
+  },
+  {
+    "run_name": "lambda_sweep_0.1_seed1",
+    "returncode": 0,
+    "wall_sec": 3147.8909797668457
+  },
+  {
+    "run_name": "MAGAIL-C_seed3",
+    "returncode": 0,
+    "wall_sec": 3147.8609030246735
+  },
+  {
+    "run_name": "MAGAIL-C+KL_seed3",
+    "returncode": 0,
+    "wall_sec": 3147.8558344841003
+  },
+  {
+    "run_name": "MAGAIL-SC_seed2",
+    "returncode": 0,
+    "wall_sec": 3157.894293785095
+  },
+  {
+    "run_name": "MAGAIL-C_seed0",
+    "returncode": 0,
+    "wall_sec": 3162.9578812122345
+  },
+  {
+    "run_name": "lambda_sweep_0.01_seed1",
+    "returncode": 0,
+    "wall_sec": 3162.911451816559
+  }
+]
