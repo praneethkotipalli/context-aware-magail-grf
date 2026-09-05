@@ -35,14 +35,20 @@ ALPHA = 0.001          # measured (measure_alpha.py). Same value, now applied
 LAMBDA_KL_INIT = 1.0    # locked, Section 3.4.3
 CLIP_EPS = 0.2          # locked, Section 3.4.1
 BASELINE_WIN_RATE = 0.624
+STYLE_CLIP = 5.0   # logit(D) guard. With 0.9/0.1 label smoothing the optimal logit is ~±2.2
 
+ALPHA = 0.25       # PROVISIONAL -- replace with measure_alpha_offline.py's exact output.
 
-def compute_style_reward(discriminator, features):
-    """r_style = logit(D) = log D - log(1-D), bias-neutral (3.4.2).
-    forward() already returns the pre-sigmoid logit."""
+def compute_style_reward(discriminator, features, running_mean=None):
+    """
+    Centers the reward to shorten the critic's recalibration transient.
+    Advantage normalization already removes constant offsets, so only variance 
+    reaches the policy gradient.
+    """
     with torch.no_grad():
-        return discriminator(features)
-
+        r = discriminator(features).clamp(-STYLE_CLIP, STYLE_CLIP)
+        r = r - (r.mean() if running_mean is None else running_mean)
+    return r
 
 def safe_categorical_kl(dist_theta, dist_star):
     """KL(pi_theta || pi_star), manual, avoiding torch's inf-override on

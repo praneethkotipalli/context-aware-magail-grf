@@ -59,7 +59,7 @@ MAX_STEPS = 3000
 GAMMA = 0.99
 GAE_LAMBDA = 0.95
 K_EPOCHS = 4
-DISC_UPDATE_EVERY = 3
+DISC_UPDATE_EVERY = 10
 MIN_DISC_STEPS_BEFORE_KILL = 30
 
 
@@ -188,7 +188,7 @@ def run(condition="MAGAIL-C", seed=0, max_iterations=100, use_kl=False,
 
     discriminator = Discriminator()
     discriminator.load_state_dict(torch.load(DISC_CKPT, map_location="cpu")["model_state_dict"])
-    disc_opt = torch.optim.Adam(discriminator.parameters(), lr=1e-4, weight_decay=1e-4)
+    disc_opt = torch.optim.Adam(discriminator.parameters(), lr=1e-5, weight_decay=1e-5)
 
     normaliser = FeatureNormaliser(); normaliser.load(NORMALISER_PATH)
     encoder = FeatureEncoder()
@@ -257,20 +257,25 @@ def run(condition="MAGAIL-C", seed=0, max_iterations=100, use_kl=False,
 
         disc_metrics = {}
         if it % DISC_UPDATE_EVERY == 0:
-            agent_sampler = live_buffer.to_sampler()
-            if agent_sampler is not None:
-                (ef, eb), (af, ab) = balanced_batch(expert_sampler, agent_sampler, batch_size=128,
-                                                     target_props=target_props,
-                                                     rng=np.random.default_rng(it + seed * 1000),
-                                                     on_empty='skip')
-                if shuffle_context:
-                    # MAGAIL-SC: permute context across transitions (Section 3.5.2).
-                    # Preserves dimensionality, parameter count, and marginal
-                    # distribution while destroying the semantic link.
-                    ef = ef.copy(); af = af.copy()
-                    ef[:, -2:] = ef[rng.permutation(len(ef)), -2:]
-                    af[:, -2:] = af[rng.permutation(len(af)), -2:]
-                disc_metrics = disc_trainer.step(ef, af, expert_cells=eb, agent_cells=ab)
+            d_acc = disc_trainer.get_recent_accuracy()
+            # Accuracy gate: Skip update if discriminator is dominating
+            if d_acc is None or d_acc < 0.97:
+                agent_sampler = live_buffer.to_sampler()
+                if agent_sampler is not None:
+                    (ef, eb), (af, ab) = balanced_batch(expert_sampler, agent_sampler, batch_size=128,
+                                                         target_props=target_props,
+                                                         rng=np.random.default_rng(it + seed * 1000),
+                                                         on_empty='skip')
+                    if shuffle_context:
+                        # MAGAIL-SC: permute context across transitions (Section 3.5.2).
+                        # Preserves dimensionality, parameter count, and marginal
+                        # distribution while destroying the semantic link.
+                        ef = ef.copy(); af = af.copy()
+                        ef[:, -2:] = ef[rng.permutation(len(ef)), -2:]
+                        af[:, -2:] = af[rng.permutation(len(af)), -2:]
+                    disc_metrics = disc_trainer.step(ef, af, expert_cells=eb, agent_cells=ab)
+            else:
+                log["disc_update_skipped"] = 1.0
 
         train_elapsed = time.time() - t0
         iter_times.append(train_elapsed)
@@ -295,10 +300,13 @@ def run(condition="MAGAIL-C", seed=0, max_iterations=100, use_kl=False,
             print(f"\n[{run_name} it{it}] EVAL ({time.time()-t_e:.0f}s): win={ev['win_rate']:.3f} "
                   f"SAP={ev['sap_mean']:.2f}% MECHA={ev['mecha_mean']:.4f} "
                   f"CSI={ev['csi_sap_proxy']} health={health} lam={new_lam:.4f}")
+            # r_style = logit(D) is unbounded and keeps varying at high accuracy,
+            # so the vanishing-gradient rationale for halting does not apply here.
+            if health == "saturating":
+                log["disc_saturating"] = 1.0
+                
             if halt_wr:
                 print(f"  KILL-SWITCH (win rate): {reason}"); halted = True
-            if health == "saturating" and disc_trainer.global_step >= MIN_DISC_STEPS_BEFORE_KILL:
-                print(f"  KILL-SWITCH (disc saturating, step={disc_trainer.global_step})"); halted = True
 
         wandb.log(log)
 

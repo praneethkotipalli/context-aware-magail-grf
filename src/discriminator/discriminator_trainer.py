@@ -78,7 +78,13 @@ class DiscriminatorTrainer:
         if isinstance(x, torch.Tensor):
             return x.float()
         return torch.as_tensor(np.asarray(x), dtype=torch.float32)
-
+    def get_recent_accuracy(self):
+        """Rolling mean accuracy over the health window. Used by the
+        finetune loop to throttle discriminator updates."""
+        if not self._acc_history:
+            return None
+        return statistics.mean(self._acc_history)
+    
     def step(self, expert_batch, agent_batch, expert_cells=None, agent_cells=None) -> dict:
         expert_t = self._to_tensor(expert_batch)
         agent_t = self._to_tensor(agent_batch)
