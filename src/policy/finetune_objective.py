@@ -30,8 +30,6 @@ FIX B -- KL was Infinity, contributing no gradient.
 
 import torch
 
-ALPHA = 0.001          # measured (measure_alpha.py). Same value, now applied
-                        # to the per-step reward rather than the loss.
 LAMBDA_KL_INIT = 1.0    # locked, Section 3.4.3
 CLIP_EPS = 0.2          # locked, Section 3.4.1
 BASELINE_WIN_RATE = 0.624

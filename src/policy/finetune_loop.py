@@ -60,7 +60,6 @@ GAMMA = 0.99
 GAE_LAMBDA = 0.95
 K_EPOCHS = 4
 DISC_UPDATE_EVERY = 10
-MIN_DISC_STEPS_BEFORE_KILL = 30
 
 
 def build_env():
@@ -188,7 +187,7 @@ def run(condition="MAGAIL-C", seed=0, max_iterations=100, use_kl=False,
 
     discriminator = Discriminator()
     discriminator.load_state_dict(torch.load(DISC_CKPT, map_location="cpu")["model_state_dict"])
-    disc_opt = torch.optim.Adam(discriminator.parameters(), lr=1e-5, weight_decay=1e-5)
+    disc_opt = torch.optim.Adam(discriminator.parameters(), lr=1e-5, weight_decay=1e-4)
 
     normaliser = FeatureNormaliser(); normaliser.load(NORMALISER_PATH)
     encoder = FeatureEncoder()
@@ -256,9 +255,9 @@ def run(condition="MAGAIL-C", seed=0, max_iterations=100, use_kl=False,
         live_buffer.add_episode(batch["disc_feat"], batch["bins"])
 
         disc_metrics = {}
+        disc_skipped = 0.0
         if it % DISC_UPDATE_EVERY == 0:
             d_acc = disc_trainer.get_recent_accuracy()
-            # Accuracy gate: Skip update if discriminator is dominating
             if d_acc is None or d_acc < 0.97:
                 agent_sampler = live_buffer.to_sampler()
                 if agent_sampler is not None:
@@ -267,15 +266,12 @@ def run(condition="MAGAIL-C", seed=0, max_iterations=100, use_kl=False,
                                                          rng=np.random.default_rng(it + seed * 1000),
                                                          on_empty='skip')
                     if shuffle_context:
-                        # MAGAIL-SC: permute context across transitions (Section 3.5.2).
-                        # Preserves dimensionality, parameter count, and marginal
-                        # distribution while destroying the semantic link.
                         ef = ef.copy(); af = af.copy()
                         ef[:, -2:] = ef[rng.permutation(len(ef)), -2:]
                         af[:, -2:] = af[rng.permutation(len(af)), -2:]
                     disc_metrics = disc_trainer.step(ef, af, expert_cells=eb, agent_cells=ab)
             else:
-                log["disc_update_skipped"] = 1.0
+                disc_skipped = 1.0
 
         train_elapsed = time.time() - t0
         iter_times.append(train_elapsed)
@@ -285,6 +281,7 @@ def run(condition="MAGAIL-C", seed=0, max_iterations=100, use_kl=False,
             "episode_sap": 100.0 * float(batch["disc_feat"][:, 135].mean()),
             "r_style_mean": r_style.mean().item(),
             "task_reward_sum": batch["rewards"].sum().item(),
+            "disc_update_skipped": disc_skipped,
             **{f"loss/{k}": v for k, v in loss_diag.items() if isinstance(v, (int, float))},
             **{f"disc/{k}": v for k, v in disc_metrics.items() if isinstance(v, (int, float))},
         }
