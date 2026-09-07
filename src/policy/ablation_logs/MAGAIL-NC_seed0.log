@@ -1,54 +1,78 @@
 wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/u5749464/.netrc.
 wandb: Currently logged in as: praneethkotipalli (praneethkotipalli-university-of-warwick) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
 wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
-wandb: setting up run lkw3ky2o
+wandb: setting up run lbaaj8bu
 wandb: Tracking run with wandb version 0.25.0
-wandb: Run data is saved locally in /home/u5749464/dissertation/context-aware-magail-grf/src/policy/wandb/run-20260904_230817-lkw3ky2o
+wandb: Run data is saved locally in /home/u5749464/dissertation/context-aware-magail-grf/src/policy/wandb/run-20260907_171344-lbaaj8bu
 wandb: Run `wandb offline` to turn off syncing.
 wandb: Syncing run MAGAIL-NC_seed0
 wandb: ⭐️ View project at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
-wandb: 🚀 View run at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/lkw3ky2o
+wandb: 🚀 View run at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/lbaaj8bu
 wandb: updating run metadata
-wandb: uploading wandb-summary.json; uploading config.yaml
+wandb: uploading wandb-summary.json; uploading config.yaml; uploading output.log
 wandb: 
 wandb: Run history:
-wandb:           disc/acc ▇▅▄█▃▇▁▃▆▄
-wandb:     disc/acc_agent ▃▇██▃▄▁▃▃▃
-wandb:    disc/acc_expert █▂▁▅▃▇▂▃▆▄
-wandb:     disc/bce_agent ▇▂▁▂▅▅█▅▄▇
-wandb:    disc/bce_expert ▁▆█▆▄▂▅▃▅▄
-wandb:           disc/ess ▁████████▇
-wandb:      disc/gp_value █▄▇▁▄▂▄▂▅▄
-wandb:          disc/loss ▄▄▅▂▄▁█▄▅▆
-wandb:          disc/step ▁▂▃▃▄▅▆▆▇█
-wandb: disc/swap_hinge_ll ▁▄▁▁▁▁▇█▂▁
-wandb:                +22 ...
+wandb:           disc/acc ███▇█▆▆▆▆▅▄▂▃▃▃▃▃▁▃▅▃▃
+wandb:     disc/acc_agent ▇██▇▇▇▆▆▅▅▄▁▃▃▂▃▃▁▃▅▃▃
+wandb:    disc/acc_expert █▆▄▆▇▂▆▇▇▄▆▇▅▄▆▅▆▃▁▃▅▃
+wandb:     disc/bce_agent ▂▁▂▁▂▂▃▄▅▅▅▇▇▆▇▇▇█▆▅▇▆
+wandb:    disc/bce_expert ▂▃▃▂▁▄▂▁▁▃▃▃▃▅▄▅▄██▆▄▇
+wandb:           disc/ess ▁▁▅▅▅▅▅▅▁▅▅▅▅▅▅▅▅▅▅▅▅█
+wandb:      disc/gp_value ▆█▆▄▄▄▅▅▄▄▇▄▄▄▁▅▂▇▃▃▂▁
+wandb:          disc/loss ▂▁▂▁▁▂▂▃▄▅▄▆▆▅▆▆▆█▆▅▆▆
+wandb:          disc/step ▁▁▂▂▂▃▃▃▄▄▄▅▅▅▆▆▆▇▇▇██
+wandb: disc/swap_hinge_ll ▁▃▄▁▁▁▁▂▂▄▃▂▂▃▁▂▇▁▃▂█▅
+wandb:                +28 ...
 wandb: 
 wandb: Run summary:
-wandb:           disc/acc 0.93333
-wandb:     disc/acc_agent 0.93333
-wandb:    disc/acc_expert 0.93333
-wandb:     disc/bce_agent 0.48072
-wandb:    disc/bce_expert 0.46055
-wandb:           disc/ess 100.55032
-wandb:      disc/gp_value 0.13171
-wandb:          disc/loss 1.07298
-wandb:          disc/step 10
-wandb: disc/swap_hinge_ll 0
-wandb:                +23 ...
+wandb:           disc/acc 0.79675
+wandb:     disc/acc_agent 0.6748
+wandb:    disc/acc_expert 0.9187
+wandb:     disc/bce_agent 0.60865
+wandb:    disc/bce_expert 0.49642
+wandb:           disc/ess 110.8031
+wandb:      disc/gp_value 0.11771
+wandb:          disc/loss 1.22395
+wandb:          disc/step 22
+wandb: disc/swap_hinge_ll 0.00019
+wandb:                +29 ...
 wandb: 
-wandb: 🚀 View run MAGAIL-NC_seed0 at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/lkw3ky2o
+wandb: 🚀 View run MAGAIL-NC_seed0 at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/lbaaj8bu
 wandb: ⭐️ View project at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
 wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
-wandb: Find logs at: ./wandb/run-20260904_230817-lkw3ky2o/logs
+wandb: Find logs at: ./wandb/run-20260907_171344-lbaaj8bu/logs
 
 ======================================================================
-MAGAIL-NC_seed0  (120 iters, use_kl=False, shuffle_context=False, use_context=False, frozen=False)
+MAGAIL-NC_seed0  (525 iters, use_kl=False, shuffle_context=False, use_context=False, frozen=False)
 ======================================================================
-[MAGAIL-NC_seed0 it10/120] 28.7s  score=(1, 3)  r_style=-1.032  ETA 52.6min
-[MAGAIL-NC_seed0 it20/120] 29.6s  score=(0, 0)  r_style=-0.754  ETA 47.8min
+[MAGAIL-NC_seed0 it10/525] 29.9s  score=(2, 0)  r_style=0.000  ETA 242.1min
+[MAGAIL-NC_seed0 it20/525] 28.2s  score=(2, 2)  r_style=-0.000  ETA 236.6min
+[MAGAIL-NC_seed0 it30/525] 27.1s  score=(0, 1)  r_style=-0.000  ETA 232.9min
+[MAGAIL-NC_seed0 it40/525] 28.2s  score=(1, 1)  r_style=-0.000  ETA 230.8min
+[MAGAIL-NC_seed0 it50/525] 29.9s  score=(1, 1)  r_style=-0.000  ETA 223.5min
+[MAGAIL-NC_seed0 it60/525] 27.1s  score=(1, 1)  r_style=0.000  ETA 210.4min
+[MAGAIL-NC_seed0 it70/525] 24.1s  score=(0, 1)  r_style=0.000  ETA 197.8min
 
-[MAGAIL-NC_seed0 it30] EVAL (245s): win=0.300 SAP=86.09% MECHA=0.1181 CSI=0.08290594019767139 health=saturating lam=1.0000
-  KILL-SWITCH (win rate): win rate 0.300 is 51.9% below baseline 0.624 (>25% kill-switch)
-[MAGAIL-NC_seed0 it30/120] 28.0s  score=(3, 3)  r_style=-0.561  ETA 42.8min
-MAGAIL-NC_seed0 done in 18.4min, 30 iters, halted=True -> ablation_MAGAIL-NC_seed0.pt
+[MAGAIL-NC_seed0 it75] EVAL (1150s): win=0.600 SAP=70.96% MECHA=0.1149 CSI=-0.06584919962369906 health=saturating lam=1.0000
+[MAGAIL-NC_seed0 it80/525] 28.0s  score=(0, 0)  r_style=0.000  ETA 195.2min
+[MAGAIL-NC_seed0 it90/525] 28.3s  score=(1, 0)  r_style=0.000  ETA 197.2min
+[MAGAIL-NC_seed0 it100/525] 28.3s  score=(2, 1)  r_style=-0.000  ETA 193.9min
+[MAGAIL-NC_seed0 it110/525] 26.3s  score=(1, 1)  r_style=0.000  ETA 192.0min
+[MAGAIL-NC_seed0 it120/525] 25.4s  score=(1, 0)  r_style=0.000  ETA 188.0min
+[MAGAIL-NC_seed0 it130/525] 26.5s  score=(2, 4)  r_style=-0.000  ETA 175.6min
+[MAGAIL-NC_seed0 it140/525] 25.4s  score=(1, 2)  r_style=0.000  ETA 168.3min
+
+[MAGAIL-NC_seed0 it150] EVAL (1206s): win=0.520 SAP=44.35% MECHA=0.1296 CSI=-0.052480497079381905 health=healthy lam=1.0000
+[MAGAIL-NC_seed0 it150/525] 28.4s  score=(0, 2)  r_style=0.000  ETA 167.7min
+[MAGAIL-NC_seed0 it160/525] 24.0s  score=(1, 2)  r_style=0.000  ETA 154.7min
+[MAGAIL-NC_seed0 it170/525] 25.1s  score=(1, 1)  r_style=0.000  ETA 143.7min
+[MAGAIL-NC_seed0 it180/525] 21.7s  score=(0, 0)  r_style=-0.000  ETA 143.2min
+[MAGAIL-NC_seed0 it190/525] 21.9s  score=(2, 0)  r_style=-0.000  ETA 136.9min
+[MAGAIL-NC_seed0 it200/525] 22.0s  score=(0, 1)  r_style=0.000  ETA 127.8min
+[MAGAIL-NC_seed0 it210/525] 27.6s  score=(1, 3)  r_style=-0.000  ETA 127.7min
+[MAGAIL-NC_seed0 it220/525] 29.7s  score=(1, 0)  r_style=0.000  ETA 125.3min
+
+[MAGAIL-NC_seed0 it225] EVAL (1104s): win=0.400 SAP=26.45% MECHA=0.1345 CSI=-0.07087218545846077 health=healthy lam=1.0000
+  KILL-SWITCH (win rate): win rate 0.400 is 35.9% below baseline 0.624 (>25% kill-switch)
+[MAGAIL-NC_seed0 it225/525] 21.1s  score=(1, 1)  r_style=0.000  ETA 121.9min
+MAGAIL-NC_seed0 done in 156.4min, 225 iters, halted=True -> ablation_MAGAIL-NC_seed0.pt

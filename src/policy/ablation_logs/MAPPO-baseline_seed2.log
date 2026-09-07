@@ -1,15 +1,15 @@
 wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/u5749464/.netrc.
 wandb: Currently logged in as: praneethkotipalli (praneethkotipalli-university-of-warwick) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
 wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
-wandb: setting up run dgyigap2
+wandb: setting up run t41o2mtv
 wandb: Tracking run with wandb version 0.25.0
-wandb: Run data is saved locally in /home/u5749464/dissertation/context-aware-magail-grf/src/policy/wandb/run-20260904_230817-dgyigap2
+wandb: Run data is saved locally in /home/u5749464/dissertation/context-aware-magail-grf/src/policy/wandb/run-20260907_171344-t41o2mtv
 wandb: Run `wandb offline` to turn off syncing.
 wandb: Syncing run MAPPO-baseline_seed2
 wandb: ⭐️ View project at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
-wandb: 🚀 View run at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/dgyigap2
+wandb: 🚀 View run at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/t41o2mtv
 wandb: updating run metadata
-wandb: uploading output.log; uploading wandb-summary.json; uploading config.yaml
+wandb: uploading history steps 0-0, summary, console lines 0-0
 wandb: 
 wandb: Run history:
 wandb: eval/csi_proxy_n_ll ▁
@@ -24,23 +24,23 @@ wandb:        eval/sap_std ▁
 wandb:       eval/win_rate ▁
 wandb: 
 wandb: Run summary:
-wandb: eval/csi_proxy_n_ll 2754
-wandb: eval/csi_proxy_n_lw 29566
-wandb:  eval/csi_sap_proxy 0.06587
-wandb:      eval/draw_rate 0.26
-wandb:      eval/loss_rate 0.04
-wandb:     eval/mecha_mean 0.12269
+wandb: eval/csi_proxy_n_ll 13
+wandb: eval/csi_proxy_n_lw 35593
+wandb:  eval/csi_sap_proxy 0.78468
+wandb:      eval/draw_rate 0.18
+wandb:      eval/loss_rate 0
+wandb:     eval/mecha_mean 0.12463
 wandb:     eval/n_episodes 50
-wandb:       eval/sap_mean 86.146
-wandb:        eval/sap_std 3.80207
-wandb:       eval/win_rate 0.7
+wandb:       eval/sap_mean 85.26933
+wandb:        eval/sap_std 4.43146
+wandb:       eval/win_rate 0.82
 wandb: 
-wandb: 🚀 View run MAPPO-baseline_seed2 at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/dgyigap2
+wandb: 🚀 View run MAPPO-baseline_seed2 at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/t41o2mtv
 wandb: ⭐️ View project at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
 wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
-wandb: Find logs at: ./wandb/run-20260904_230817-dgyigap2/logs
+wandb: Find logs at: ./wandb/run-20260907_171344-t41o2mtv/logs
 
 ======================================================================
 MAPPO-baseline_seed2  (1 iters, use_kl=False, shuffle_context=False, use_context=False, frozen=True)
 ======================================================================
-MAPPO-baseline_seed2: win=0.700 SAP=86.15% MECHA=0.1227 (20.3min)
+MAPPO-baseline_seed2: win=0.820 SAP=85.27% MECHA=0.1246 (20.3min)

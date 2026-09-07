@@ -54,6 +54,7 @@ CRITIC_PATH = os.path.join(GRF_MARL_ROOT, "light_malib/trained_models/gr_footbal
 DISC_CKPT = os.path.join(PROJECT_ROOT, "src/discriminator/discriminator_phase_b_checkpoint.pt")
 NORMALISER_PATH = os.path.join(PROJECT_ROOT, "src/discriminator/feature_normaliser.pkl")
 EXPERT_CACHE = os.path.join(PROJECT_ROOT, "src/discriminator/expert_features_cache.npz")
+from counterfactual_gate import run_counterfactual_gate
 
 MAX_STEPS = 3000
 GAMMA = 0.99
@@ -194,8 +195,8 @@ def run(condition="MAGAIL-C", seed=0, max_iterations=100, use_kl=False,
 
     cache = np.load(EXPERT_CACHE, allow_pickle=True)
     tr_ep, ho_ep = make_episode_split(cache["episode_outcomes"], held_out_frac=0.20, seed=0)
-    (train_feat, train_bins), _ = split_features_by_episode(
-        cache["features"], cache["bins"], cache["episode_ids"], tr_ep, ho_ep)
+    (train_feat, train_bins), (held_feat, held_bins) = split_features_by_episode(
+        cache["features"], cache["bins"], cache["episode_ids"], tr_ep, ho_ep)    
     expert_sampler = BalancedContextSampler(train_feat, train_bins, name="expert_train")
     target_props = sqrt_scaled_target(expert_sampler.cell_counts)
 
@@ -294,6 +295,11 @@ def run(condition="MAGAIL-C", seed=0, max_iterations=100, use_kl=False,
             health = disc_trainer.health()
             log.update({f"eval/{k}": v for k, v in ev.items() if isinstance(v, (int, float))})
             log["disc_health"] = health
+            _, gate_summary = run_counterfactual_gate(discriminator, held_feat)
+            for r in gate_summary["directions"]:
+                log[f"gate/{r['direction']}_shift"] = r["mean_abs_shift"]
+                log[f"gate/{r['direction']}_frac"] = r["frac_exceeding_0.1"]
+
             print(f"\n[{run_name} it{it}] EVAL ({time.time()-t_e:.0f}s): win={ev['win_rate']:.3f} "
                   f"SAP={ev['sap_mean']:.2f}% MECHA={ev['mecha_mean']:.4f} "
                   f"CSI={ev['csi_sap_proxy']} health={health} lam={new_lam:.4f}")

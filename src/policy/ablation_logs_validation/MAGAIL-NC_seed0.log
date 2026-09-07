@@ -1,50 +1,50 @@
 wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/u5749464/.netrc.
 wandb: Currently logged in as: praneethkotipalli (praneethkotipalli-university-of-warwick) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
 wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
-wandb: setting up run 92nnw5m2
+wandb: setting up run v5mggsdh
 wandb: Tracking run with wandb version 0.25.0
-wandb: Run data is saved locally in /home/u5749464/dissertation/context-aware-magail-grf/src/policy/wandb/run-20260904_223727-92nnw5m2
+wandb: Run data is saved locally in /home/u5749464/dissertation/context-aware-magail-grf/src/policy/wandb/run-20260907_170632-v5mggsdh
 wandb: Run `wandb offline` to turn off syncing.
 wandb: Syncing run MAGAIL-NC_seed0
 wandb: ⭐️ View project at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
-wandb: 🚀 View run at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/92nnw5m2
+wandb: 🚀 View run at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/v5mggsdh
 wandb: updating run metadata
-wandb: uploading wandb-summary.json; uploading config.yaml; uploading output.log
-wandb: uploading history steps 14-14, summary
+wandb: uploading config.yaml; uploading output.log; uploading wandb-summary.json
+wandb: uploading config.yaml; uploading output.log
 wandb: 
 wandb: Run history:
-wandb:           disc/acc ▆▇▁█▃
-wandb:     disc/acc_agent ▁▇▇▇█
-wandb:    disc/acc_expert █▅▁▅▂
-wandb:     disc/bce_agent █▇▂▁▁
-wandb:    disc/bce_expert ▁▅█▆▆
-wandb:           disc/ess ▁▁▁▁▁
-wandb:      disc/gp_value ▆▅█▁▅
-wandb:          disc/loss ▂█▄▁▂
-wandb:          disc/step ▁▃▅▆█
-wandb: disc/swap_hinge_ll ▁█▁▁▁
-wandb:                +12 ...
+wandb:           disc/acc ▁
+wandb:     disc/acc_agent ▁
+wandb:    disc/acc_expert ▁
+wandb:     disc/bce_agent ▁
+wandb:    disc/bce_expert ▁
+wandb:           disc/ess ▁
+wandb:      disc/gp_value ▁
+wandb:          disc/loss ▁
+wandb:          disc/step ▁
+wandb: disc/swap_hinge_ll ▁
+wandb:                +13 ...
 wandb: 
 wandb: Run summary:
-wandb:           disc/acc 0.94531
-wandb:     disc/acc_agent 0.97656
-wandb:    disc/acc_expert 0.91406
-wandb:     disc/bce_agent 0.43345
-wandb:    disc/bce_expert 0.47154
-wandb:           disc/ess 106.90872
-wandb:      disc/gp_value 0.13241
-wandb:          disc/loss 1.0374
-wandb:          disc/step 5
-wandb: disc/swap_hinge_ll 0
-wandb:                +12 ...
+wandb:           disc/acc 0.98585
+wandb:     disc/acc_agent 0.9717
+wandb:    disc/acc_expert 1
+wandb:     disc/bce_agent 0.43221
+wandb:    disc/bce_expert 0.43322
+wandb:           disc/ess 86.75581
+wandb:      disc/gp_value 0.13458
+wandb:          disc/loss 1.00017
+wandb:          disc/step 1
+wandb: disc/swap_hinge_ll 2e-05
+wandb:                +13 ...
 wandb: 
-wandb: 🚀 View run MAGAIL-NC_seed0 at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/92nnw5m2
+wandb: 🚀 View run MAGAIL-NC_seed0 at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/v5mggsdh
 wandb: ⭐️ View project at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
 wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
-wandb: Find logs at: ./wandb/run-20260904_223727-92nnw5m2/logs
+wandb: Find logs at: ./wandb/run-20260907_170632-v5mggsdh/logs
 
 ======================================================================
 MAGAIL-NC_seed0  (15 iters, use_kl=False, shuffle_context=False, use_context=False, frozen=False)
 ======================================================================
-[MAGAIL-NC_seed0 it10/15] 28.5s  score=(0, 2)  r_style=-1.226  ETA 2.3min
-MAGAIL-NC_seed0 done in 6.9min, 15 iters, halted=False -> ablation_MAGAIL-NC_seed0.pt
+[MAGAIL-NC_seed0 it10/15] 29.7s  score=(1, 1)  r_style=-0.000  ETA 2.4min
+MAGAIL-NC_seed0 done in 7.0min, 15 iters, halted=False -> ablation_MAGAIL-NC_seed0.pt
