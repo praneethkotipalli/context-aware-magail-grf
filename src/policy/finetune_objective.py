@@ -35,7 +35,7 @@ CLIP_EPS = 0.2          # locked, Section 3.4.1
 BASELINE_WIN_RATE = 0.624
 STYLE_CLIP = 5.0   # logit(D) guard. With 0.9/0.1 label smoothing the optimal logit is ~±2.2
 
-ALPHA = 0.25       # PROVISIONAL -- replace with measure_alpha_offline.py's exact output.
+ALPHA = 0.1310     # PROVISIONAL -- replace with measure_alpha_offline.py's exact output.
 
 def compute_style_reward(discriminator, features, running_mean=None):
     """
