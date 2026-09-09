@@ -105,6 +105,7 @@ class DiscriminatorLoss:
         swap_margin: float = DEFAULT_SWAP_MARGIN,
         swap_batch_size: int = DEFAULT_SWAP_BATCH_SIZE,
         swap_seed: int = 0,
+        sprint_reweight: bool = False,
     ):
         """
         swap_lw_features, swap_ll_features: (N, D) numpy arrays, TRAIN-split
@@ -141,6 +142,12 @@ class DiscriminatorLoss:
 
         self._bce = nn.BCEWithLogitsLoss()
         self._mse = nn.MSELoss()
+
+        self.sprint_reweight = sprint_reweight
+        if self.sprint_reweight:
+            self._bce_nored = nn.BCEWithLogitsLoss(reduction='none')
+            self.wE1, self.wE0 = 0.5/0.1769, 0.5/0.8231     # 2.826, 0.607
+            self.wA1, self.wA0 = 0.5/0.8779, 0.5/0.1221     # 0.570, 4.095
 
     def r1_penalty(self, discriminator: nn.Module, expert_inputs: torch.Tensor):
         expert_inputs = expert_inputs.detach().clone().requires_grad_(True)
@@ -196,8 +203,17 @@ class DiscriminatorLoss:
 
         expert_targets = torch.full_like(expert_logits, self.expert_label)
         agent_targets = torch.full_like(agent_logits, self.agent_label)
-        bce_expert = self._bce(expert_logits, expert_targets)
-        bce_agent = self._bce(agent_logits, agent_targets)
+        
+        if self.sprint_reweight:
+            e_spr = (expert_inputs[:, 135] > 0.5).float()
+            a_spr = (agent_inputs[:, 135] > 0.5).float()
+            we = e_spr * self.wE1 + (1 - e_spr) * self.wE0
+            wa = a_spr * self.wA1 + (1 - a_spr) * self.wA0
+            bce_expert = (self._bce_nored(expert_logits, expert_targets) * we).mean()
+            bce_agent  = (self._bce_nored(agent_logits,  agent_targets)  * wa).mean()
+        else:
+            bce_expert = self._bce(expert_logits, expert_targets)
+            bce_agent = self._bce(agent_logits, agent_targets)
 
         aux_loss_term = None
         aux_contribution = 0.0
