@@ -1,0 +1,10 @@
+usage: finetune_loop.py [-h] --condition CONDITION --seed SEED
+                        --max-iterations MAX_ITERATIONS [--use-kl USE_KL]
+                        [--shuffle-context SHUFFLE_CONTEXT]
+                        [--use-context USE_CONTEXT]
+                        [--disc-int-context {true,zero,shuffle}]
+                        [--eval-every EVAL_EVERY]
+                        [--eval-episodes EVAL_EPISODES] [--lam-init LAM_INIT]
+                        [--frozen FROZEN] [--alpha-marg ALPHA_MARG]
+                        [--alpha-int ALPHA_INT] [--no-anneal NO_ANNEAL]
+finetune_loop.py: error: unrecognized arguments: --run-name-override validate_baseline_seed4 --wandb-project magail-c-v2-baseline

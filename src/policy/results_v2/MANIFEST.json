@@ -1,0 +1,27 @@
+[
+  {
+    "launch_id": "lsweep_09108f2e",
+    "stage": "stage2_lambda_sweep",
+    "utc": "2026-09-10T22:36:50.135367Z",
+    "git_sha": "baec652535665bc73676c00272d60f30576544d7",
+    "wandb_project": "magail-c-v2",
+    "lambdas": [
+      0.0,
+      0.003,
+      0.01,
+      0.03,
+      0.1
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "n_runs": 15,
+    "max_iterations": 150,
+    "alpha_marg": 0.0033,
+    "alpha_int": 0.0021,
+    "lambda_star": null,
+    "succeeded": 15
+  }
+]

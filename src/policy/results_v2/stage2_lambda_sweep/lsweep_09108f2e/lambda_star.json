@@ -1,0 +1,7 @@
+{
+  "lambda_star": null,
+  "rule": "smallest eligible+moved lambda, win >= baseline-1SE, SAP moved >= floor",
+  "sap_movement_floor": 5.0,
+  "baseline_win_rate": 0.624,
+  "launch_id": "lsweep_09108f2e"
+}

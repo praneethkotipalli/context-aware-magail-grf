@@ -1,0 +1,48 @@
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/u5749464/.netrc.
+wandb: Currently logged in as: praneethkotipalli (praneethkotipalli-university-of-warwick) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: setting up run bd047f58
+wandb: Tracking run with wandb version 0.25.0
+wandb: Run data is saved locally in /home/u5749464/dissertation/context-aware-magail-grf/src/policy/wandb/run-20260910_205004-bd047f58
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run lsweep-lam0.003-lsweep_09108f2e_seed0
+wandb: ⭐️ View project at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c-v2
+wandb: 🚀 View run at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c-v2/runs/bd047f58
+wandb: updating run metadata
+wandb: uploading wandb-summary.json; uploading config.yaml
+wandb: 
+wandb: Run history:
+wandb:    disc_update_skipped ▁▁▁▁▁▁▁▁
+wandb:            episode_sap ▅▄▃▅▅█▂▁
+wandb:          episode_steps ▁▁▁▁▁▁▁▁
+wandb:              iteration ▁▂▃▄▅▆▇█
+wandb: loss/clipped_surrogate ██▁▃▁▅▁▃
+wandb:                loss/kl ▁▂▃▄▅▆▆█
+wandb:           loss/kl_term ▁▂▃▄▅▆▆█
+wandb:               loss/lam ▁▁▁▁▁▁▁▁
+wandb:             r_int_mean ▅█▇▁▇▄▇▇
+wandb:            r_marg_mean █▂▃▁▁▃▅▂
+wandb:                     +3 ...
+wandb: 
+wandb: Run summary:
+wandb:    disc_update_skipped 0
+wandb:            episode_sap 79.7
+wandb:          episode_steps 3000
+wandb:              iteration 8
+wandb: loss/clipped_surrogate 0.00858
+wandb:                loss/kl 0.12908
+wandb:           loss/kl_term 0.00039
+wandb:               loss/lam 0.003
+wandb:             r_int_mean 0.3811
+wandb:            r_marg_mean -0.44482
+wandb:                     +3 ...
+wandb: 
+wandb: 🚀 View run lsweep-lam0.003-lsweep_09108f2e_seed0 at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c-v2/runs/bd047f58
+wandb: ⭐️ View project at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c-v2
+wandb: Synced 4 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260910_205004-bd047f58/logs
+
+======================================================================
+lsweep-lam0.003-lsweep_09108f2e_seed0  (8 iters, use_kl=True, disc_int_condition=true (TinyInteract <- D_int_C_production.pt), alpha_marg=0.0033, alpha_int=0.0021, frozen=False)
+======================================================================
+lsweep-lam0.003-lsweep_09108f2e_seed0 done in 3.1min, 8 iters, halted=False -> ablation_lsweep-lam0.003-lsweep_09108f2e_seed0.pt
