@@ -81,8 +81,8 @@ from feature_derivation import BLOCK_SLICES
 
 # Locked definitions, POST-bug-fix direction (T_norm starts near 1.0,
 # DECREASES as the match proceeds):
-LATE_WINNING = dict(t_norm_max=0.3, delta_score_sign=+1)
-LATE_LOSING = dict(t_norm_max=0.3, delta_score_sign=-1)
+LATE_WINNING = dict(t_norm_max=0.2222, delta_score_sign=+1)
+LATE_LOSING = dict(t_norm_max=0.2222, delta_score_sign=-1)
 
 
 def select_by_true_context(features, t_norm_min=None, t_norm_max=None, delta_score_sign=None):

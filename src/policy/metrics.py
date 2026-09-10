@@ -102,7 +102,7 @@ def compute_mecha(left_team_positions: np.ndarray, has_possession: np.ndarray) -
 
 
 def compute_csi_proxy(t_norm_array, delta_score_array, metric_array,
-                       t_norm_max=0.3):
+                       t_norm_max=0.2222):
     """
     NATURAL-ROLLOUT PROXY -- see module docstring. metric_array is a
     PER-STEP quantity (e.g. sticky_actions[:,8] for a SAP-based proxy)

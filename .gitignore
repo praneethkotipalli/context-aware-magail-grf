@@ -32,4 +32,4 @@ src/discriminator/*_features_cache.npz
 
 # Experimental artifacts & local checkpoints
 result_*.json
-ablation_*.pt
+ablation_*.pt*_SHUFFLED.npz

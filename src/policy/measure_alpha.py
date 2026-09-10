@@ -1,167 +1,114 @@
 """
-measure_alpha.py
+measure_alpha.py -- v2, updated for the post-Stage-1 finetune_loop.py.
 
-Measures the actual magnitude gap between the style reward and the task
-reward, then derives alpha. Replaces the unmeasured ALPHA=0.1 placeholder
-in finetune_objective.py.
+Two fixes vs the version this replaces:
+  1. collect_rollout() no longer takes use_context -- [B2] removed it
+     entirely, policy is always context-conditioned now. Call with no
+     kwarg.
+  2. D_INT_CKPT points at D_int_C_production.pt (the new naming from
+     train_D_int_variant.py --variant C), not the retired
+     D_int_production_tiny-interact.pt.
 
-NO TRAINING. One rollout with the frozen baseline (not a fine-tuned policy)
-scored by the GATE-PASSING discriminator. Frozen baseline deliberately:
-alpha must be calibrated at the point fine-tuning STARTS, which is exactly
-the frozen policy's behaviour distribution.
+Everything else (raw-sum-parity calibration, GATE B check) is unchanged.
 
-Reports both raw magnitudes and the derived alpha, per the requirement that
-the measured ratio and chosen value both be stated explicitly.
+Run:  python measure_alpha.py --episodes 5
 """
-
-import os, sys, time
+import argparse
 import numpy as np
 import torch
 
-PROJECT_ROOT = os.path.expanduser("~/dissertation/context-aware-magail-grf")
-GRF_MARL_ROOT = os.path.expanduser("~/dissertation/GRF_MARL")
-
-sys.path.insert(0, GRF_MARL_ROOT)
-sys.path.insert(0, os.path.join(PROJECT_ROOT, "src", "grf_baseline"))
-sys.path.insert(0, os.path.join(GRF_MARL_ROOT, "light_malib", "model", "gr_football", "enhanced_LightActionMask_5"))
-sys.path.insert(0, os.path.join(PROJECT_ROOT, "src", "discriminator"))
-sys.path.insert(0, os.path.join(PROJECT_ROOT, "src", "policy"))
-
-import gfootball.env as football_env
-from minimal_state import MinimalState
-from enhanced_LightActionMask_5 import FeatureEncoder
-from record_baseline_rollout import pick_reference_agent
-
-from discriminator_model import Discriminator
-from feature_derivation import compute_raw_features
+from finetune_loop import (collect_rollout, build_env, ACTOR_PATH, CRITIC_PATH,
+                           DISC_CKPT, NORMALISER_PATH, PROJECT_ROOT)
+from context_conditioned_policy import ContextConditionedActor, ContextConditionedCritic
+from finetune_objective import compute_style_reward
 from feature_normalization import FeatureNormaliser
+from enhanced_LightActionMask_5 import FeatureEncoder
+from discriminator_model import Discriminator as MargDiscriminator
 
-ACTOR_PATH = os.path.join(GRF_MARL_ROOT, "light_malib/trained_models/gr_football/5_vs_5/PassingMain_v2/actor.pt")
-DISC_CKPT = os.path.join(PROJECT_ROOT, "src/discriminator/discriminator_phase_b_checkpoint.pt")
-NORM_PATH = os.path.join(PROJECT_ROOT, "src/discriminator/feature_normaliser.pkl")
+import sys, os
+sys.path.insert(0, os.path.join(PROJECT_ROOT, "src", "discriminator"))
+from discriminator_candidates import TinyInteract
 
-N_EPISODES = 3          # more than one -- episode-to-episode variance in task
-                         # return is large (0 vs 3 goals), one sample is not enough
-MAX_STEPS = 3000
-GAMMA = 0.99
-
-
-def build_disc_input(o_shared, sticky_actions, action_captured, normaliser):
-    step = {
-        'left_team': o_shared['left_team'], 'left_team_direction': o_shared['left_team_direction'],
-        'right_team': o_shared['right_team'], 'right_team_direction': o_shared['right_team_direction'],
-        'ball': o_shared['ball'], 'ball_direction': o_shared['ball_direction'],
-        'action_captured': action_captured,
-        'sticky_actions': sticky_actions,
-        'steps_left': o_shared['steps_left'],
-        'score_left': o_shared['score'][0], 'score_right': o_shared['score'][1],
-    }
-    return normaliser.transform(compute_raw_features(step))
+D_INT_CKPT = os.path.join(PROJECT_ROOT, "src", "discriminator",
+                          "D_int_C_production.pt")
+TARGET_RATIO = 1.0
 
 
-def run():
-    actor = torch.load(ACTOR_PATH, map_location="cpu"); actor.eval()
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--episodes", type=int, default=5)
+    args = ap.parse_args()
+
+    frozen_actor = torch.load(ACTOR_PATH, map_location="cpu")
+    frozen_critic = torch.load(CRITIC_PATH, map_location="cpu")
+    actor = ContextConditionedActor(frozen_actor); actor.eval()
+    critic = ContextConditionedCritic(frozen_critic); critic.eval()
+
+    D_marg = MargDiscriminator()
+    D_marg.load_state_dict(torch.load(DISC_CKPT, map_location="cpu")["model_state_dict"])
+    D_marg.eval()
+
+    D_int = TinyInteract()
+    D_int.load_state_dict(torch.load(D_INT_CKPT, map_location="cpu")["model_state_dict"])
+    D_int.eval()
+    print(f"D_marg <- {DISC_CKPT}")
+    print(f"D_int  <- {D_INT_CKPT}\n")
+
+    normaliser = FeatureNormaliser(); normaliser.load(NORMALISER_PATH)
     encoder = FeatureEncoder()
+    env = build_env()
 
-    discriminator = Discriminator()
-    ckpt = torch.load(DISC_CKPT, map_location="cpu")
-    discriminator.load_state_dict(ckpt["model_state_dict"])
-    discriminator.eval()
-    print(f"Discriminator: GATE-PASSING checkpoint, held-out acc {ckpt.get('final_held_out_acc', 'n/a'):.4f}")
+    task_sums, marg_sums, int_sums = [], [], []
+    task_stds, marg_stds, int_stds = [], [], []
+    n_steps_total = 0
 
-    normaliser = FeatureNormaliser()
-    normaliser.load(NORM_PATH)
+    for ep in range(args.episodes):
+        batch = collect_rollout(actor, critic, encoder, env, normaliser)
+        feats = torch.as_tensor(batch["disc_feat"], dtype=torch.float32)
+        n_steps_total += batch["n_steps"]
 
-    env = football_env.create_environment(
-        env_name="5_vs_5_d06", representation="raw",
-        number_of_left_players_agent_controls=4, number_of_right_players_agent_controls=0,
-        render=False,
-    )
+        r_marg = compute_style_reward(D_marg, feats)
+        r_int = compute_style_reward(D_int, feats)
+        r_task = batch["rewards"]
 
-    per_episode = []
+        task_sums.append(r_task.abs().sum().item())
+        marg_sums.append(r_marg.abs().sum().item())
+        int_sums.append(r_int.abs().sum().item())
+        task_stds.append(r_task.std().item())
+        marg_stds.append(r_marg.std().item())
+        int_stds.append(r_int.std().item())
 
-    for ep in range(N_EPISODES):
-        raw_obs = env.reset()
-        disc_feats, task_rewards = [], []
-        step, done = 0, False
-
-        while not done and step < MAX_STEPS:
-            actions = []
-            for i in range(4):
-                state = MinimalState(n_player=5); state.set_obs(raw_obs[i])
-                feat = torch.as_tensor(encoder.encode_each(state), dtype=torch.float32).unsqueeze(0)
-                avail = torch.as_tensor(encoder.get_available_actions(raw_obs[i], 0.0, []), dtype=torch.float32).unsqueeze(0)
-                with torch.no_grad():
-                    act, _, _, _ = actor(feat, None, None, avail, True, None)   # explore=True, matches rollout collection
-                actions.append(int(act.item()))
-
-            o_shared = raw_obs[0]
-            ref_agent_i, _ = pick_reference_agent(raw_obs, range(4))
-            disc_feats.append(build_disc_input(
-                o_shared, raw_obs[ref_agent_i]['sticky_actions'], actions[ref_agent_i], normaliser
-            ))
-
-            raw_obs, reward, done, info = env.step(actions)
-            task_rewards.append(float(np.sum(reward)))
-            step += 1
-
-        with torch.no_grad():
-            r_style = discriminator(torch.as_tensor(np.stack(disc_feats), dtype=torch.float32)).numpy()
-
-        task = np.array(task_rewards)
-        # UNDISCOUNTED sums -- what actually enters the objective per episode.
-        # Discounted shown too since GAE uses gamma; both reported rather than
-        # picking one and hoping it's the right basis.
-        disc_factors = GAMMA ** np.arange(len(task))
-        rec = {
-            "steps": step,
-            "style_sum_abs": float(np.abs(r_style).sum()),
-            "style_mean": float(r_style.mean()),
-            "style_sum_signed": float(r_style.sum()),
-            "task_sum_abs": float(np.abs(task).sum()),
-            "task_sum_signed": float(task.sum()),
-            "task_sum_discounted": float((task * disc_factors).sum()),
-            "style_sum_discounted": float((r_style * disc_factors).sum()),
-        }
-        per_episode.append(rec)
-        print(f"  ep{ep}: {step} steps | style Σ|r| = {rec['style_sum_abs']:9.1f} "
-              f"(mean {rec['style_mean']:+.4f}) | task Σ|r| = {rec['task_sum_abs']:.1f} "
-              f"(signed {rec['task_sum_signed']:+.1f})")
+        print(f"  ep{ep}: steps={batch['n_steps']:4d}  "
+              f"sum|task|={task_sums[-1]:7.2f}  sum|marg|={marg_sums[-1]:7.2f}  "
+              f"sum|int|={int_sums[-1]:7.2f}")
 
     env.close()
 
-    style_abs = np.mean([r["style_sum_abs"] for r in per_episode])
-    task_abs = np.mean([r["task_sum_abs"] for r in per_episode])
-    style_disc = np.mean([abs(r["style_sum_discounted"]) for r in per_episode])
-    task_disc = np.mean([abs(r["task_sum_discounted"]) for r in per_episode])
+    task_tot, marg_tot, int_tot = sum(task_sums), sum(marg_sums), sum(int_sums)
+    marg_ratio = marg_tot / max(task_tot, 1e-9)
+    int_ratio = int_tot / max(task_tot, 1e-9)
 
-    print("\n" + "=" * 70)
-    print("MEASURED MAGNITUDES (mean over episodes)")
-    print("=" * 70)
-    print(f"  accumulated |r_style| per episode : {style_abs:10.2f}")
-    print(f"  accumulated |r_task|   per episode : {task_abs:10.2f}")
-    print(f"  ratio (style / task)               : {style_abs / max(task_abs, 1e-9):10.1f}x")
-    print()
-    print(f"  discounted |r_style| (gamma={GAMMA})  : {style_disc:10.2f}")
-    print(f"  discounted |r_task|                : {task_disc:10.2f}")
-    print(f"  discounted ratio                   : {style_disc / max(task_disc, 1e-9):10.1f}x")
+    print(f"\n{'='*64}\nGATE B -- raw summed-reward-magnitude ratios (pre-GAE, pre-alpha)\n{'='*64}")
+    print(f"  sum|task| total = {task_tot:.2f}  (over {n_steps_total} steps, "
+          f"{args.episodes} episodes)")
+    print(f"  marg ratio (sum|r_marg| / sum|task|) = {marg_ratio:8.2f}x   "
+          f"(std ratio: {np.mean(marg_stds)/max(np.mean(task_stds),1e-9):.2f}x)")
+    print(f"  int  ratio (sum|r_int|  / sum|task|) = {int_ratio:8.2f}x   "
+          f"(std ratio: {np.mean(int_stds)/max(np.mean(task_stds),1e-9):.2f}x)")
 
-    alpha_undiscounted = task_abs / max(style_abs, 1e-9)
-    alpha_discounted = task_disc / max(style_disc, 1e-9)
+    alpha_marg = TARGET_RATIO / max(marg_ratio, 1e-9)
+    alpha_int = TARGET_RATIO / max(int_ratio, 1e-9)
+    print(f"\n  suggested ALPHA_MARG (targets {TARGET_RATIO}x raw-sum parity) = {alpha_marg:.6f}")
+    print(f"  suggested ALPHA_INT  (targets {TARGET_RATIO}x raw-sum parity) = {alpha_int:.6f}")
 
-    print("\n" + "=" * 70)
-    print("DERIVED ALPHA")
-    print("=" * 70)
-    print(f"  alpha (undiscounted basis) : {alpha_undiscounted:.6f}")
-    print(f"  alpha (discounted basis)   : {alpha_discounted:.6f}")
-    print(f"\n  Current placeholder in finetune_objective.py: 0.1")
-    print(f"  -> placeholder is off by ~{0.1 / max(alpha_undiscounted, 1e-9):.0f}x")
-    print("\n  Both bases reported deliberately. The undiscounted ratio is the")
-    print("  honest 'same order of magnitude' criterion the methodology asks for;")
-    print("  the discounted one reflects what GAE actually propagates. If they")
-    print("  differ materially, that difference is itself worth noting rather")
-    print("  than silently picking one.")
+    ok = marg_ratio <= 10 and int_ratio <= 10
+    print(f"\n  {'PASS' if ok else 'FAIL'}: both ratios "
+          f"{'already within' if ok else 'NOT within'} 10x of task at alpha=1.0")
+    if not ok:
+        print("  Confirms the mechanism behind v1's 27-point win-rate collapse.")
+    print(f"  Compare these alpha_marg/alpha_int against finetune_loop.py's current")
+    print(f"  ALPHA_MARG=0.0048 / ALPHA_INT=0.0026 -- should be close.")
 
 
-if __name__ == '__main__':
-    run()
+if __name__ == "__main__":
+    main()
