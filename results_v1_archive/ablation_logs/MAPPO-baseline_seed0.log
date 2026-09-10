@@ -1,0 +1,47 @@
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/u5749464/.netrc.
+wandb: Currently logged in as: praneethkotipalli (praneethkotipalli-university-of-warwick) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: setting up run t0o3gvod
+wandb: Tracking run with wandb version 0.25.0
+wandb: Run data is saved locally in /home/u5749464/dissertation/context-aware-magail-grf/src/policy/wandb/run-20260907_171343-t0o3gvod
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run MAPPO-baseline_seed0
+wandb: ⭐️ View project at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
+wandb: 🚀 View run at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/t0o3gvod
+wandb: updating run metadata
+wandb: uploading output.log; uploading wandb-summary.json; uploading config.yaml
+wandb: uploading history steps 0-0, summary, console lines 0-0
+wandb: 
+wandb: Run history:
+wandb: eval/csi_proxy_n_ll ▁
+wandb: eval/csi_proxy_n_lw ▁
+wandb:  eval/csi_sap_proxy ▁
+wandb:      eval/draw_rate ▁
+wandb:      eval/loss_rate ▁
+wandb:     eval/mecha_mean ▁
+wandb:     eval/n_episodes ▁
+wandb:       eval/sap_mean ▁
+wandb:        eval/sap_std ▁
+wandb:       eval/win_rate ▁
+wandb: 
+wandb: Run summary:
+wandb: eval/csi_proxy_n_ll 4495
+wandb: eval/csi_proxy_n_lw 23041
+wandb:  eval/csi_sap_proxy 0.04612
+wandb:      eval/draw_rate 0.34
+wandb:      eval/loss_rate 0.1
+wandb:     eval/mecha_mean 0.12667
+wandb:     eval/n_episodes 50
+wandb:       eval/sap_mean 86.312
+wandb:        eval/sap_std 3.64977
+wandb:       eval/win_rate 0.56
+wandb: 
+wandb: 🚀 View run MAPPO-baseline_seed0 at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/t0o3gvod
+wandb: ⭐️ View project at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260907_171343-t0o3gvod/logs
+
+======================================================================
+MAPPO-baseline_seed0  (1 iters, use_kl=False, shuffle_context=False, use_context=False, frozen=True)
+======================================================================
+MAPPO-baseline_seed0: win=0.560 SAP=86.31% MECHA=0.1267 (20.1min)

@@ -1,0 +1,78 @@
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/u5749464/.netrc.
+wandb: Currently logged in as: praneethkotipalli (praneethkotipalli-university-of-warwick) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: setting up run h9do32m5
+wandb: Tracking run with wandb version 0.25.0
+wandb: Run data is saved locally in /home/u5749464/dissertation/context-aware-magail-grf/src/policy/wandb/run-20260907_171344-h9do32m5
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run MAGAIL-SC_seed1
+wandb: ⭐️ View project at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
+wandb: 🚀 View run at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/h9do32m5
+wandb: updating run metadata
+wandb: uploading output.log
+wandb: 
+wandb: Run history:
+wandb:           disc/acc ▇█▇▅▅▆▄▆▅▄▆▃▅▄▃▃▅▄▃▅▁▂
+wandb:     disc/acc_agent ██▇▆▄▆▅▆▅▅▇▃▅▄▃▂▄▄▂▅▁▃
+wandb:    disc/acc_expert ▅█▇▄▆▄▄▅▅▂▆▄▅▃▄▆▆▂▄▆▂▁
+wandb:     disc/bce_agent ▁▁▃▄▅▄▅▆▅▄▃▇▅▆▇▇▆▅▇▅█▇
+wandb:    disc/bce_expert ▃▃▃▃▁▄▃▅▃▄▅▄▄▆▄▆▃▇▅▅██
+wandb:           disc/ess ▁█████████████████████
+wandb:      disc/gp_value █▄▃▃▄▇▃▇▁▄▃▂▂▃▃▄▁▂▂▄▁▅
+wandb:          disc/loss ▂▁▃▃▄▄▄▆▃▄▃▆▄▇▆▇▅▅▆▅██
+wandb:          disc/step ▁▁▂▂▂▃▃▃▄▄▄▅▅▅▆▆▆▇▇▇██
+wandb: disc/swap_hinge_ll ▁▃▄▁▂▁▂▂▁▄▃▂▂▃▁▂█▂▂▂▆▃
+wandb:                +28 ...
+wandb: 
+wandb: Run summary:
+wandb:           disc/acc 0.84375
+wandb:     disc/acc_agent 0.76562
+wandb:    disc/acc_expert 0.92188
+wandb:     disc/bce_agent 0.566
+wandb:    disc/bce_expert 0.49056
+wandb:           disc/ess 106.90872
+wandb:      disc/gp_value 0.14172
+wandb:          disc/loss 1.19937
+wandb:          disc/step 22
+wandb: disc/swap_hinge_ll 0.00018
+wandb:                +29 ...
+wandb: 
+wandb: 🚀 View run MAGAIL-SC_seed1 at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/h9do32m5
+wandb: ⭐️ View project at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260907_171344-h9do32m5/logs
+
+======================================================================
+MAGAIL-SC_seed1  (525 iters, use_kl=False, shuffle_context=True, use_context=True, frozen=False)
+======================================================================
+[MAGAIL-SC_seed1 it10/525] 31.3s  score=(1, 1)  r_style=0.000  ETA 253.2min
+[MAGAIL-SC_seed1 it20/525] 30.7s  score=(2, 2)  r_style=-0.000  ETA 242.8min
+[MAGAIL-SC_seed1 it30/525] 26.5s  score=(3, 1)  r_style=-0.000  ETA 236.0min
+[MAGAIL-SC_seed1 it40/525] 30.3s  score=(2, 0)  r_style=-0.000  ETA 238.4min
+[MAGAIL-SC_seed1 it50/525] 26.0s  score=(2, 1)  r_style=-0.000  ETA 228.1min
+[MAGAIL-SC_seed1 it60/525] 28.4s  score=(3, 0)  r_style=0.000  ETA 215.9min
+[MAGAIL-SC_seed1 it70/525] 26.7s  score=(0, 2)  r_style=0.000  ETA 209.7min
+
+[MAGAIL-SC_seed1 it75] EVAL (1168s): win=0.480 SAP=74.33% MECHA=0.1224 CSI=0.0007158397283807405 health=saturating lam=1.0000
+[MAGAIL-SC_seed1 it80/525] 28.5s  score=(1, 0)  r_style=-0.000  ETA 204.5min
+[MAGAIL-SC_seed1 it90/525] 29.0s  score=(0, 2)  r_style=0.000  ETA 199.3min
+[MAGAIL-SC_seed1 it100/525] 27.9s  score=(1, 0)  r_style=0.000  ETA 196.3min
+[MAGAIL-SC_seed1 it110/525] 26.0s  score=(1, 1)  r_style=-0.000  ETA 193.3min
+[MAGAIL-SC_seed1 it120/525] 27.1s  score=(2, 0)  r_style=-0.000  ETA 188.2min
+[MAGAIL-SC_seed1 it130/525] 30.4s  score=(0, 0)  r_style=0.000  ETA 187.7min
+[MAGAIL-SC_seed1 it140/525] 28.4s  score=(0, 0)  r_style=0.000  ETA 184.5min
+
+[MAGAIL-SC_seed1 it150] EVAL (1195s): win=0.520 SAP=57.52% MECHA=0.1217 CSI=-0.012807352324009647 health=saturating lam=1.0000
+[MAGAIL-SC_seed1 it150/525] 27.1s  score=(1, 0)  r_style=-0.000  ETA 176.7min
+[MAGAIL-SC_seed1 it160/525] 25.9s  score=(0, 0)  r_style=0.000  ETA 165.0min
+[MAGAIL-SC_seed1 it170/525] 27.5s  score=(1, 1)  r_style=-0.000  ETA 155.7min
+[MAGAIL-SC_seed1 it180/525] 25.7s  score=(2, 1)  r_style=0.000  ETA 155.2min
+[MAGAIL-SC_seed1 it190/525] 27.2s  score=(0, 1)  r_style=0.000  ETA 150.4min
+[MAGAIL-SC_seed1 it200/525] 26.8s  score=(3, 0)  r_style=-0.000  ETA 139.4min
+[MAGAIL-SC_seed1 it210/525] 26.3s  score=(2, 1)  r_style=-0.000  ETA 137.7min
+[MAGAIL-SC_seed1 it220/525] 20.2s  score=(1, 0)  r_style=0.000  ETA 136.7min
+
+[MAGAIL-SC_seed1 it225] EVAL (1080s): win=0.380 SAP=42.05% MECHA=0.1344 CSI=-0.040804055362261116 health=healthy lam=1.0000
+  KILL-SWITCH (win rate): win rate 0.380 is 39.1% below baseline 0.624 (>25% kill-switch)
+[MAGAIL-SC_seed1 it225/525] 22.6s  score=(1, 2)  r_style=0.000  ETA 130.2min
+MAGAIL-SC_seed1 done in 160.9min, 225 iters, halted=True -> ablation_MAGAIL-SC_seed1.pt

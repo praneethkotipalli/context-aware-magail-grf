@@ -1,0 +1,69 @@
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/u5749464/.netrc.
+wandb: Currently logged in as: praneethkotipalli (praneethkotipalli-university-of-warwick) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: setting up run r699iyus
+wandb: Tracking run with wandb version 0.25.0
+wandb: Run data is saved locally in /home/u5749464/dissertation/context-aware-magail-grf/src/policy/wandb/run-20260907_171344-r699iyus
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run MAGAIL-NC_seed4
+wandb: ⭐️ View project at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
+wandb: 🚀 View run at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/r699iyus
+wandb: updating run metadata
+wandb: uploading output.log; uploading wandb-summary.json; uploading config.yaml
+wandb: uploading history steps 149-149, summary, console lines 16-19
+wandb: 
+wandb: Run history:
+wandb:           disc/acc ▇█▇▆▆▆▆▆▆▅▆▃▃▁▃
+wandb:     disc/acc_agent ▇██▇▇▆▆▆▆▅▆▂▂▁▂
+wandb:    disc/acc_expert ▆▇▃▁▁▃▆▇█▅▃▇█▁▆
+wandb:     disc/bce_agent ▂▁▂▃▁▃▃▃▃▃▃█▇██
+wandb:    disc/bce_expert ▅▃▅▅█▅█▁▄▄▇▄▃▇█
+wandb:           disc/ess ███████▁▁██████
+wandb:      disc/gp_value ▄▄▅▆█▆▆▇▆▁▆▆▅▄▆
+wandb:          disc/loss ▂▁▂▃▃▄▄▃▃▃▄▇▆██
+wandb:          disc/step ▁▁▂▃▃▃▄▅▅▅▆▇▇▇█
+wandb: disc/swap_hinge_ll ▂▄▆▁▁▁▂▂▂█▆▃▄▅▁
+wandb:                +28 ...
+wandb: 
+wandb: Run summary:
+wandb:           disc/acc 0.84766
+wandb:     disc/acc_agent 0.73438
+wandb:    disc/acc_expert 0.96094
+wandb:     disc/bce_agent 0.57794
+wandb:    disc/bce_expert 0.47479
+wandb:           disc/ess 106.90872
+wandb:      disc/gp_value 0.12912
+wandb:          disc/loss 1.18274
+wandb:          disc/step 15
+wandb: disc/swap_hinge_ll 0
+wandb:                +29 ...
+wandb: 
+wandb: 🚀 View run MAGAIL-NC_seed4 at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/r699iyus
+wandb: ⭐️ View project at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260907_171344-r699iyus/logs
+
+======================================================================
+MAGAIL-NC_seed4  (525 iters, use_kl=False, shuffle_context=False, use_context=False, frozen=False)
+======================================================================
+[MAGAIL-NC_seed4 it10/525] 29.6s  score=(0, 1)  r_style=0.000  ETA 240.1min
+[MAGAIL-NC_seed4 it20/525] 26.3s  score=(2, 0)  r_style=-0.000  ETA 233.1min
+[MAGAIL-NC_seed4 it30/525] 26.0s  score=(1, 0)  r_style=0.000  ETA 228.4min
+[MAGAIL-NC_seed4 it40/525] 29.4s  score=(1, 0)  r_style=0.000  ETA 224.0min
+[MAGAIL-NC_seed4 it50/525] 27.8s  score=(1, 0)  r_style=-0.000  ETA 217.0min
+[MAGAIL-NC_seed4 it60/525] 24.2s  score=(1, 0)  r_style=-0.000  ETA 207.3min
+[MAGAIL-NC_seed4 it70/525] 25.4s  score=(2, 1)  r_style=0.000  ETA 199.2min
+
+[MAGAIL-NC_seed4 it75] EVAL (1167s): win=0.520 SAP=70.42% MECHA=0.1415 CSI=-0.023363634434159675 health=saturating lam=1.0000
+[MAGAIL-NC_seed4 it80/525] 27.6s  score=(0, 1)  r_style=-0.000  ETA 197.8min
+[MAGAIL-NC_seed4 it90/525] 25.8s  score=(1, 3)  r_style=-0.000  ETA 192.1min
+[MAGAIL-NC_seed4 it100/525] 29.2s  score=(3, 0)  r_style=-0.000  ETA 191.4min
+[MAGAIL-NC_seed4 it110/525] 24.4s  score=(1, 1)  r_style=0.000  ETA 186.8min
+[MAGAIL-NC_seed4 it120/525] 28.3s  score=(0, 2)  r_style=0.000  ETA 179.8min
+[MAGAIL-NC_seed4 it130/525] 26.1s  score=(1, 2)  r_style=0.000  ETA 180.0min
+[MAGAIL-NC_seed4 it140/525] 23.5s  score=(0, 1)  r_style=0.000  ETA 170.6min
+
+[MAGAIL-NC_seed4 it150] EVAL (1184s): win=0.440 SAP=45.24% MECHA=0.1491 CSI=0.11763961623262414 health=saturating lam=1.0000
+  KILL-SWITCH (win rate): win rate 0.440 is 29.5% below baseline 0.624 (>25% kill-switch)
+[MAGAIL-NC_seed4 it150/525] 28.7s  score=(2, 2)  r_style=0.000  ETA 165.0min
+MAGAIL-NC_seed4 done in 106.7min, 150 iters, halted=True -> ablation_MAGAIL-NC_seed4.pt

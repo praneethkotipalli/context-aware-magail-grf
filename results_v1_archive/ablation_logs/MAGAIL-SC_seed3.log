@@ -1,0 +1,68 @@
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/u5749464/.netrc.
+wandb: Currently logged in as: praneethkotipalli (praneethkotipalli-university-of-warwick) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: setting up run cswjhrgu
+wandb: Tracking run with wandb version 0.25.0
+wandb: Run data is saved locally in /home/u5749464/dissertation/context-aware-magail-grf/src/policy/wandb/run-20260907_171344-cswjhrgu
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run MAGAIL-SC_seed3
+wandb: ⭐️ View project at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
+wandb: 🚀 View run at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/cswjhrgu
+wandb: updating run metadata
+wandb: uploading output.log; uploading wandb-summary.json; uploading config.yaml
+wandb: 
+wandb: Run history:
+wandb:           disc/acc ▇▇▇▆▅▇█▅▂▂▂▅▂▁▂
+wandb:     disc/acc_agent █▇▇▆▅▇█▆▁▃▃▅▁▂▂
+wandb:    disc/acc_expert ▂▆▄▇▅▅█▄▆▁▃▄▅▁▄
+wandb:     disc/bce_agent ▁▁▂▅▅▃▃▃▇▇█▄███
+wandb:    disc/bce_expert ▅▂▂▂▆▃▁▄▄▂▄▅▄█▆
+wandb:           disc/ess ▅▅▅▅▅▅▅▅▅▅▅▅▅█▁
+wandb:      disc/gp_value ▅▆▁▄▃▅▄▆▅▄▃▂█▅▆
+wandb:          disc/loss ▁▁▁▄▄▃▁▃▆▆▇▃███
+wandb:          disc/step ▁▁▂▃▃▃▄▅▅▅▆▇▇▇█
+wandb: disc/swap_hinge_ll ▂▅█▁▂▁▁▂▁▅▄▃▂▅▁
+wandb:                +28 ...
+wandb: 
+wandb: Run summary:
+wandb:           disc/acc 0.87083
+wandb:     disc/acc_agent 0.79167
+wandb:    disc/acc_expert 0.95
+wandb:     disc/bce_agent 0.5485
+wandb:    disc/bce_expert 0.47162
+wandb:           disc/ess 100.55032
+wandb:      disc/gp_value 0.14222
+wandb:          disc/loss 1.16318
+wandb:          disc/step 15
+wandb: disc/swap_hinge_ll 0
+wandb:                +29 ...
+wandb: 
+wandb: 🚀 View run MAGAIL-SC_seed3 at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/cswjhrgu
+wandb: ⭐️ View project at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260907_171344-cswjhrgu/logs
+
+======================================================================
+MAGAIL-SC_seed3  (525 iters, use_kl=False, shuffle_context=True, use_context=True, frozen=False)
+======================================================================
+[MAGAIL-SC_seed3 it10/525] 26.9s  score=(0, 0)  r_style=-0.000  ETA 249.4min
+[MAGAIL-SC_seed3 it20/525] 29.9s  score=(2, 0)  r_style=-0.000  ETA 242.6min
+[MAGAIL-SC_seed3 it30/525] 29.0s  score=(1, 0)  r_style=-0.000  ETA 240.0min
+[MAGAIL-SC_seed3 it40/525] 28.2s  score=(0, 1)  r_style=0.000  ETA 239.5min
+[MAGAIL-SC_seed3 it50/525] 28.2s  score=(1, 0)  r_style=-0.000  ETA 228.0min
+[MAGAIL-SC_seed3 it60/525] 27.2s  score=(2, 0)  r_style=-0.000  ETA 216.2min
+[MAGAIL-SC_seed3 it70/525] 25.9s  score=(1, 1)  r_style=0.000  ETA 209.5min
+
+[MAGAIL-SC_seed3 it75] EVAL (1163s): win=0.660 SAP=71.93% MECHA=0.1453 CSI=-0.03977863585751795 health=saturating lam=1.0000
+[MAGAIL-SC_seed3 it80/525] 29.0s  score=(1, 0)  r_style=-0.000  ETA 207.1min
+[MAGAIL-SC_seed3 it90/525] 28.9s  score=(0, 1)  r_style=-0.000  ETA 207.7min
+[MAGAIL-SC_seed3 it100/525] 27.6s  score=(0, 0)  r_style=-0.000  ETA 203.2min
+[MAGAIL-SC_seed3 it110/525] 27.2s  score=(1, 0)  r_style=-0.000  ETA 197.1min
+[MAGAIL-SC_seed3 it120/525] 26.9s  score=(0, 0)  r_style=0.000  ETA 191.1min
+[MAGAIL-SC_seed3 it130/525] 26.3s  score=(0, 1)  r_style=-0.000  ETA 182.4min
+[MAGAIL-SC_seed3 it140/525] 28.8s  score=(0, 0)  r_style=0.000  ETA 176.8min
+
+[MAGAIL-SC_seed3 it150] EVAL (1169s): win=0.120 SAP=52.67% MECHA=0.1631 CSI=-0.06733387228560439 health=saturating lam=1.0000
+  KILL-SWITCH (win rate): win rate 0.120 is 80.8% below baseline 0.624 (>25% kill-switch)
+[MAGAIL-SC_seed3 it150/525] 28.9s  score=(1, 0)  r_style=-0.000  ETA 174.8min
+MAGAIL-SC_seed3 done in 109.8min, 150 iters, halted=True -> ablation_MAGAIL-SC_seed3.pt

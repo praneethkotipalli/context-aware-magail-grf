@@ -1,0 +1,115 @@
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/u5749464/.netrc.
+wandb: Currently logged in as: praneethkotipalli (praneethkotipalli-university-of-warwick) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: setting up run 1dd3x508
+wandb: Tracking run with wandb version 0.25.0
+wandb: Run data is saved locally in /home/u5749464/dissertation/context-aware-magail-grf/src/policy/wandb/run-20260907_171344-1dd3x508
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run lambda_sweep_0.01_seed2
+wandb: ⭐️ View project at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
+wandb: 🚀 View run at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/1dd3x508
+wandb: updating run metadata
+wandb: uploading output.log; uploading wandb-summary.json; uploading config.yaml
+wandb: 
+wandb: Run history:
+wandb:           disc/acc ▇█▇▇█▆▄▆▅▅▅▃▃▄▄▅▁▅▃▃▃▃▂▄▃▄▅▄▅▅▃▂▂▄▃▅▅▅▄▅
+wandb:     disc/acc_agent ████▅▆▅▆▅▄▃▄▅▆▅▁▅▁▄▃▄▂▅▃▅▄▅▅▄▄▂▃▄▄▅▄▆▆▄▄
+wandb:    disc/acc_expert ▆█▆▅▇█▅▅▆▅▆▄▄▅▅▅▅▃▆▇▄▂▂▄▄▅▅▅▇▃▁▄▇▁▇▅▅▄█▆
+wandb:     disc/bce_agent ▁▂▂▂▁▅▅▃▅▃▅▆▇▇▅▃██▅▇▅▅▆█▅▆▅▆▄▅▅▆▆▆▄▆▅▃▄▅
+wandb:    disc/bce_expert ▁▃▂▂▃▁▄▃▃▂▃▄▆▄▂▅▅▃▃▆▅▆▇▆▅▅▅▆▄▇█▆▆▇▆▇▇▄▅▅
+wandb:           disc/ess ▇▇▇▇▁▇▇▇▇▇▇▇█▇▇█▇▇▇▇▇▇▇▆▅▆▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+wandb:      disc/gp_value █▆▄▆▃█▆▃▂▆▄▄▆▄▃▅▃▄▂▅▂▄▅▅▃▃▄▄▆▃▅▃▂▃▃▁▃▂▄▁
+wandb:          disc/loss ▂▂▂▁▃▄▃▄▂▄▅▆█▅▂██▄▅▆▅▆▆▅▄▆▆▅▄▇█▆▆▆▃▅▄▄▅▅
+wandb:          disc/step ▁▁▁▁▂▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▆▆▆▆▆▆▇▇▇▇▇▇███
+wandb: disc/swap_hinge_ll ▁▃▄▁▁▁▁▁▂▂▂▁▅▂▁▂▁▁▁█▁▁▄▁▁▂▃▁▃▁▁▁▁▁▁▄▁▂▁▅
+wandb:                +28 ...
+wandb: 
+wandb: Run summary:
+wandb:           disc/acc 0.90234
+wandb:     disc/acc_agent 0.85156
+wandb:    disc/acc_expert 0.95312
+wandb:     disc/bce_agent 0.5033
+wandb:    disc/bce_expert 0.4794
+wandb:           disc/ess 106.90872
+wandb:      disc/gp_value 0.1168
+wandb:          disc/loss 1.10115
+wandb:          disc/step 52
+wandb: disc/swap_hinge_ll 0.00027
+wandb:                +29 ...
+wandb: 
+wandb: 🚀 View run lambda_sweep_0.01_seed2 at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c/runs/1dd3x508
+wandb: ⭐️ View project at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260907_171344-1dd3x508/logs
+
+======================================================================
+lambda_sweep_0.01_seed2  (525 iters, use_kl=True, shuffle_context=False, use_context=True, frozen=False)
+======================================================================
+[lambda_sweep_0.01_seed2 it10/525] 26.7s  score=(3, 0)  r_style=0.000  ETA 240.3min
+[lambda_sweep_0.01_seed2 it20/525] 28.3s  score=(2, 0)  r_style=-0.000  ETA 235.5min
+[lambda_sweep_0.01_seed2 it30/525] 28.4s  score=(1, 0)  r_style=-0.000  ETA 233.5min
+[lambda_sweep_0.01_seed2 it40/525] 27.8s  score=(1, 0)  r_style=-0.000  ETA 228.3min
+[lambda_sweep_0.01_seed2 it50/525] 28.4s  score=(0, 0)  r_style=-0.000  ETA 220.2min
+[lambda_sweep_0.01_seed2 it60/525] 25.5s  score=(0, 0)  r_style=0.000  ETA 208.7min
+[lambda_sweep_0.01_seed2 it70/525] 26.8s  score=(2, 0)  r_style=0.000  ETA 199.4min
+
+[lambda_sweep_0.01_seed2 it75] EVAL (1147s): win=0.580 SAP=75.00% MECHA=0.1280 CSI=-0.09267313161706325 health=saturating lam=0.0100
+[lambda_sweep_0.01_seed2 it80/525] 27.2s  score=(1, 0)  r_style=-0.000  ETA 197.4min
+[lambda_sweep_0.01_seed2 it90/525] 26.4s  score=(1, 1)  r_style=0.000  ETA 192.8min
+[lambda_sweep_0.01_seed2 it100/525] 27.9s  score=(0, 0)  r_style=-0.000  ETA 189.3min
+[lambda_sweep_0.01_seed2 it110/525] 25.5s  score=(1, 1)  r_style=-0.000  ETA 185.4min
+[lambda_sweep_0.01_seed2 it120/525] 28.0s  score=(1, 0)  r_style=-0.000  ETA 180.8min
+[lambda_sweep_0.01_seed2 it130/525] 27.3s  score=(0, 2)  r_style=0.000  ETA 178.9min
+[lambda_sweep_0.01_seed2 it140/525] 25.1s  score=(1, 1)  r_style=-0.000  ETA 173.9min
+
+[lambda_sweep_0.01_seed2 it150] EVAL (1183s): win=0.660 SAP=57.83% MECHA=0.1249 CSI=-0.14860325327513213 health=saturating lam=0.0100
+[lambda_sweep_0.01_seed2 it150/525] 26.9s  score=(2, 2)  r_style=-0.000  ETA 167.1min
+[lambda_sweep_0.01_seed2 it160/525] 26.3s  score=(2, 0)  r_style=0.000  ETA 156.7min
+[lambda_sweep_0.01_seed2 it170/525] 28.1s  score=(0, 0)  r_style=-0.000  ETA 148.2min
+[lambda_sweep_0.01_seed2 it180/525] 26.8s  score=(2, 1)  r_style=-0.000  ETA 144.2min
+[lambda_sweep_0.01_seed2 it190/525] 24.3s  score=(3, 1)  r_style=-0.000  ETA 137.1min
+[lambda_sweep_0.01_seed2 it200/525] 28.5s  score=(2, 0)  r_style=0.000  ETA 130.3min
+[lambda_sweep_0.01_seed2 it210/525] 21.5s  score=(1, 0)  r_style=0.000  ETA 122.8min
+[lambda_sweep_0.01_seed2 it220/525] 23.3s  score=(2, 0)  r_style=-0.000  ETA 116.8min
+
+[lambda_sweep_0.01_seed2 it225] EVAL (1069s): win=0.680 SAP=60.96% MECHA=0.1301 CSI=-0.09607468072186609 health=saturating lam=0.0100
+[lambda_sweep_0.01_seed2 it230/525] 23.1s  score=(1, 2)  r_style=-0.000  ETA 115.9min
+[lambda_sweep_0.01_seed2 it240/525] 19.6s  score=(1, 0)  r_style=-0.000  ETA 110.7min
+[lambda_sweep_0.01_seed2 it250/525] 24.9s  score=(1, 0)  r_style=0.000  ETA 106.1min
+[lambda_sweep_0.01_seed2 it260/525] 25.4s  score=(0, 0)  r_style=0.000  ETA 105.8min
+[lambda_sweep_0.01_seed2 it270/525] 22.3s  score=(1, 0)  r_style=0.000  ETA 99.7min
+[lambda_sweep_0.01_seed2 it280/525] 25.9s  score=(1, 1)  r_style=-0.000  ETA 93.3min
+[lambda_sweep_0.01_seed2 it290/525] 21.7s  score=(0, 1)  r_style=-0.000  ETA 91.8min
+
+[lambda_sweep_0.01_seed2 it300] EVAL (1059s): win=0.680 SAP=67.18% MECHA=0.1254 CSI=-0.013752861222707025 health=saturating lam=0.0100
+[lambda_sweep_0.01_seed2 it300/525] 25.0s  score=(1, 0)  r_style=0.000  ETA 86.4min
+[lambda_sweep_0.01_seed2 it310/525] 24.0s  score=(1, 0)  r_style=0.000  ETA 83.3min
+[lambda_sweep_0.01_seed2 it320/525] 19.5s  score=(2, 1)  r_style=0.000  ETA 84.4min
+[lambda_sweep_0.01_seed2 it330/525] 27.6s  score=(1, 0)  r_style=0.000  ETA 79.5min
+[lambda_sweep_0.01_seed2 it340/525] 23.7s  score=(0, 1)  r_style=0.000  ETA 73.9min
+[lambda_sweep_0.01_seed2 it350/525] 19.6s  score=(1, 1)  r_style=-0.000  ETA 71.2min
+[lambda_sweep_0.01_seed2 it360/525] 22.8s  score=(1, 0)  r_style=-0.000  ETA 67.8min
+[lambda_sweep_0.01_seed2 it370/525] 21.8s  score=(1, 1)  r_style=0.000  ETA 62.9min
+
+[lambda_sweep_0.01_seed2 it375] EVAL (1051s): win=0.620 SAP=61.03% MECHA=0.1254 CSI=0.06748531539128311 health=saturating lam=0.0100
+[lambda_sweep_0.01_seed2 it380/525] 25.0s  score=(3, 0)  r_style=-0.000  ETA 55.6min
+[lambda_sweep_0.01_seed2 it390/525] 21.9s  score=(2, 0)  r_style=-0.000  ETA 49.7min
+[lambda_sweep_0.01_seed2 it400/525] 22.7s  score=(1, 0)  r_style=0.000  ETA 46.5min
+[lambda_sweep_0.01_seed2 it410/525] 24.1s  score=(3, 1)  r_style=-0.000  ETA 46.1min
+[lambda_sweep_0.01_seed2 it420/525] 22.8s  score=(1, 0)  r_style=-0.000  ETA 44.1min
+[lambda_sweep_0.01_seed2 it430/525] 24.0s  score=(2, 1)  r_style=-0.000  ETA 37.8min
+[lambda_sweep_0.01_seed2 it440/525] 20.4s  score=(3, 0)  r_style=-0.000  ETA 31.9min
+  [scheduler] annealing lambda 0.01000 -> 0.00100
+
+[lambda_sweep_0.01_seed2 it450] EVAL (996s): win=0.600 SAP=63.20% MECHA=0.1251 CSI=-0.14033531973432056 health=saturating lam=0.0010
+[lambda_sweep_0.01_seed2 it450/525] 24.4s  score=(1, 1)  r_style=0.000  ETA 28.1min
+[lambda_sweep_0.01_seed2 it460/525] 24.5s  score=(1, 1)  r_style=0.000  ETA 24.6min
+[lambda_sweep_0.01_seed2 it470/525] 19.4s  score=(0, 0)  r_style=0.000  ETA 19.9min
+[lambda_sweep_0.01_seed2 it480/525] 21.3s  score=(0, 0)  r_style=0.000  ETA 15.5min
+[lambda_sweep_0.01_seed2 it490/525] 19.5s  score=(1, 0)  r_style=-0.000  ETA 12.2min
+[lambda_sweep_0.01_seed2 it500/525] 26.4s  score=(0, 0)  r_style=-0.000  ETA 8.9min
+[lambda_sweep_0.01_seed2 it510/525] 20.1s  score=(0, 0)  r_style=-0.000  ETA 5.2min
+[lambda_sweep_0.01_seed2 it520/525] 26.8s  score=(2, 1)  r_style=0.000  ETA 1.8min
+
+[lambda_sweep_0.01_seed2 it525] EVAL (958s): win=0.680 SAP=43.73% MECHA=0.1267 CSI=-0.07446338668285002 health=healthy lam=0.0010
+lambda_sweep_0.01_seed2 done in 337.6min, 525 iters, halted=False -> ablation_lambda_sweep_0.01_seed2.pt
