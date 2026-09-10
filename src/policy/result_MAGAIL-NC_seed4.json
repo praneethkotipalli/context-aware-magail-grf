@@ -1,0 +1,7 @@
+{
+  "condition": "MAGAIL-NC",
+  "seed": 4,
+  "iterations": 150,
+  "halted": true,
+  "wall_time_sec": 6403.726653575897
+}

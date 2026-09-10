@@ -1,0 +1,11 @@
+{
+  "condition": "lambda_sweep_0.1",
+  "seed": 1,
+  "iterations": 525,
+  "halted": false,
+  "wall_time_sec": 20480.895117282867,
+  "win_rate": 0.64,
+  "sap_mean": 76.23333333333333,
+  "mecha_mean": 0.1308659945649832,
+  "csi_sap_proxy": -0.03116670279738687
+}

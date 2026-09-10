@@ -1,0 +1,7 @@
+{
+  "condition": "lambda_sweep_1.0",
+  "seed": 2,
+  "iterations": 525,
+  "halted": false,
+  "wall_time_sec": 20474.570593833923
+}

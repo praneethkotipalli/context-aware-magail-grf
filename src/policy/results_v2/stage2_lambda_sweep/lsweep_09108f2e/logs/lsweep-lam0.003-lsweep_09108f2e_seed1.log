@@ -1,0 +1,69 @@
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/u5749464/.netrc.
+wandb: Currently logged in as: praneethkotipalli (praneethkotipalli-university-of-warwick) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: setting up run 2xx605le
+wandb: Tracking run with wandb version 0.25.0
+wandb: Run data is saved locally in /home/u5749464/dissertation/context-aware-magail-grf/src/policy/wandb/run-20260910_205334-2xx605le
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run lsweep-lam0.003-lsweep_09108f2e_seed1
+wandb: ⭐️ View project at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c-v2
+wandb: 🚀 View run at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c-v2/runs/2xx605le
+wandb: updating run metadata
+wandb: uploading output.log; uploading wandb-summary.json; uploading config.yaml
+wandb: 
+wandb: Run history:
+wandb:           disc/acc ▆▇▆▂█▃▁▄▅▄▇▇▄▃▂
+wandb:     disc/acc_agent ▅▇▅▁█▃▁▅▅▆▆█▃▄▁
+wandb:    disc/acc_expert ▇██▆▇▄▄▄▅▁█▅▆▁▆
+wandb:     disc/bce_agent ▃▂▄█▁▃▇▄▃▄▂▁▄▃▆
+wandb:    disc/bce_expert ▄▅▅▁▃▆▅█▅▆▇▆▆█▄
+wandb:           disc/ess ███▁▇██████████
+wandb:      disc/gp_value ▆█▆▆▃▆▃█▂▄▁▁▄▄▃
+wandb:          disc/loss ▄▄▅█▁▆█▇▃▆▃▂▅▆▇
+wandb:          disc/step ▁▁▂▃▃▃▄▅▅▅▆▇▇▇█
+wandb: disc/swap_hinge_ll ▁▆█▃▄▇▃▁▁▃▂▄▂▅▇
+wandb:                +31 ...
+wandb: 
+wandb: Run summary:
+wandb:           disc/acc 0.91016
+wandb:     disc/acc_agent 0.85938
+wandb:    disc/acc_expert 0.96094
+wandb:     disc/bce_agent 0.5077
+wandb:    disc/bce_expert 0.45346
+wandb:           disc/ess 106.90872
+wandb:      disc/gp_value 0.13048
+wandb:          disc/loss 1.09407
+wandb:          disc/step 15
+wandb: disc/swap_hinge_ll 0.00012
+wandb:                +32 ...
+wandb: 
+wandb: 🚀 View run lsweep-lam0.003-lsweep_09108f2e_seed1 at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c-v2/runs/2xx605le
+wandb: ⭐️ View project at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c-v2
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260910_205334-2xx605le/logs
+
+======================================================================
+lsweep-lam0.003-lsweep_09108f2e_seed1  (150 iters, use_kl=True, disc_int_condition=true (TinyInteract <- D_int_C_production.pt), alpha_marg=0.0033, alpha_int=0.0021, frozen=False)
+======================================================================
+[lsweep-lam0.003-lsweep_09108f2e_seed1 it10/150] 20.3s  score=(2, 0)  r_marg=0.301  r_int=-1.368  ETA 56.3min
+[lsweep-lam0.003-lsweep_09108f2e_seed1 it20/150] 25.6s  score=(1, 0)  r_marg=0.286  r_int=0.017  ETA 52.6min
+[lsweep-lam0.003-lsweep_09108f2e_seed1 it30/150] 23.7s  score=(4, 2)  r_marg=0.130  r_int=0.145  ETA 48.6min
+[lsweep-lam0.003-lsweep_09108f2e_seed1 it40/150] 23.0s  score=(2, 0)  r_marg=0.341  r_int=-0.776  ETA 45.2min
+
+[lsweep-lam0.003-lsweep_09108f2e_seed1 it50] EVAL (640s): win=0.633 SAP=81.67% MECHA=0.1217 CSI=-0.006776629715936622 health=saturating lam=0.0030
+[lsweep-lam0.003-lsweep_09108f2e_seed1 it50/150] 24.6s  score=(1, 0)  r_marg=0.080  r_int=0.260  ETA 41.1min
+[lsweep-lam0.003-lsweep_09108f2e_seed1 it60/150] 26.4s  score=(2, 2)  r_marg=0.211  r_int=0.240  ETA 37.1min
+[lsweep-lam0.003-lsweep_09108f2e_seed1 it70/150] 26.7s  score=(1, 0)  r_marg=0.246  r_int=-0.114  ETA 33.6min
+[lsweep-lam0.003-lsweep_09108f2e_seed1 it80/150] 25.7s  score=(1, 0)  r_marg=0.246  r_int=0.360  ETA 29.7min
+[lsweep-lam0.003-lsweep_09108f2e_seed1 it90/150] 23.4s  score=(2, 2)  r_marg=-0.176  r_int=0.499  ETA 25.0min
+
+[lsweep-lam0.003-lsweep_09108f2e_seed1 it100] EVAL (645s): win=0.733 SAP=79.40% MECHA=0.1189 CSI=-0.0020380905493864176 health=saturating lam=0.0030
+[lsweep-lam0.003-lsweep_09108f2e_seed1 it100/150] 24.6s  score=(2, 0)  r_marg=0.113  r_int=0.538  ETA 20.4min
+[lsweep-lam0.003-lsweep_09108f2e_seed1 it110/150] 27.1s  score=(1, 2)  r_marg=-0.127  r_int=0.311  ETA 16.6min
+[lsweep-lam0.003-lsweep_09108f2e_seed1 it120/150] 28.4s  score=(0, 1)  r_marg=0.064  r_int=0.550  ETA 12.7min
+[lsweep-lam0.003-lsweep_09108f2e_seed1 it130/150] 22.7s  score=(0, 0)  r_marg=0.262  r_int=0.791  ETA 8.4min
+[lsweep-lam0.003-lsweep_09108f2e_seed1 it140/150] 23.8s  score=(1, 1)  r_marg=0.137  r_int=0.470  ETA 4.2min
+
+[lsweep-lam0.003-lsweep_09108f2e_seed1 it150] EVAL (667s): win=0.667 SAP=78.64% MECHA=0.1159 CSI=-0.060896923158961225 health=saturating lam=0.0030
+[lsweep-lam0.003-lsweep_09108f2e_seed1 it150/150] 21.4s  score=(2, 3)  r_marg=-0.026  r_int=0.203  ETA 0.0min
+lsweep-lam0.003-lsweep_09108f2e_seed1 done in 94.7min, 150 iters, halted=False -> ablation_lsweep-lam0.003-lsweep_09108f2e_seed1.pt

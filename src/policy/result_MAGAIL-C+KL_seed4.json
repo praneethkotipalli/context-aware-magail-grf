@@ -1,0 +1,11 @@
+{
+  "condition": "MAGAIL-C+KL",
+  "seed": 4,
+  "iterations": 525,
+  "halted": false,
+  "wall_time_sec": 20415.460208177567,
+  "win_rate": 0.66,
+  "sap_mean": 86.41333333333334,
+  "mecha_mean": 0.12642450431843463,
+  "csi_sap_proxy": 0.044457822791982404
+}

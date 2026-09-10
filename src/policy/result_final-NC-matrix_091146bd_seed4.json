@@ -1,0 +1,11 @@
+{
+  "condition": "final-NC-matrix_091146bd",
+  "seed": 4,
+  "iterations": 8,
+  "halted": false,
+  "wall_time_sec": 258.04902696609497,
+  "disc_int_condition": "zero",
+  "d_int_ckpt": "/home/u5749464/dissertation/context-aware-magail-grf/src/discriminator/D_int_NC_production.pt",
+  "alpha_marg": 0.0033,
+  "alpha_int": 0.0021
+}

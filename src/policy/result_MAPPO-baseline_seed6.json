@@ -1,0 +1,17 @@
+{
+  "condition": "MAPPO-baseline",
+  "seed": 6,
+  "iterations": 0,
+  "halted": false,
+  "wall_time_sec": 1014.030782699585,
+  "win_rate": 0.62,
+  "draw_rate": 0.32,
+  "loss_rate": 0.06,
+  "n_episodes": 50,
+  "sap_mean": 86.06466666666667,
+  "sap_std": 3.9417785607796665,
+  "mecha_mean": 0.12151559464201696,
+  "csi_sap_proxy": 0.0055119194657682336,
+  "csi_proxy_n_lw": 19957,
+  "csi_proxy_n_ll": 2179
+}

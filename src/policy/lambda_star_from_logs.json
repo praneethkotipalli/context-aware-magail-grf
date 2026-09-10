@@ -1,0 +1,50 @@
+{
+  "lambda_star": 0.0,
+  "table": [
+    {
+      "lambda": 0.0,
+      "n": 3,
+      "mean_win": 0.5986666666666667,
+      "se_win": 0.08913722255289563,
+      "mean_sap": 79.8,
+      "moved": true,
+      "eligible": true
+    },
+    {
+      "lambda": 0.003,
+      "n": 3,
+      "mean_win": 0.6666666666666666,
+      "se_win": 0.03839415464769489,
+      "mean_sap": 74.04,
+      "moved": true,
+      "eligible": true
+    },
+    {
+      "lambda": 0.01,
+      "n": 3,
+      "mean_win": 0.6446666666666667,
+      "se_win": 0.022333333333333358,
+      "mean_sap": 82.65,
+      "moved": false,
+      "eligible": false
+    },
+    {
+      "lambda": 0.03,
+      "n": 3,
+      "mean_win": 0.7336666666666667,
+      "se_win": 0.0881917103688197,
+      "mean_sap": 83.72666666666667,
+      "moved": false,
+      "eligible": false
+    },
+    {
+      "lambda": 0.1,
+      "n": 3,
+      "mean_win": 0.6223333333333333,
+      "se_win": 0.05533333333333335,
+      "mean_sap": 85.67333333333333,
+      "moved": false,
+      "eligible": false
+    }
+  ]
+}
