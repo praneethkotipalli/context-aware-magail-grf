@@ -17,3 +17,127 @@ wandb: 🚀 View run SUMMARY_matrix_0911ecd0 at: https://wandb.ai/praneethkotipa
 wandb: ⭐️ View project at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c-v2-finaleval
 wandb: Synced 4 W&B file(s), 1 media file(s), 2 artifact file(s) and 0 other file(s)
 wandb: Find logs at: ./wandb/run-20260911_204233-nrq34syf/logs
+
+32 jobs, 32-way concurrency, 500 episodes each
+  launched final-NC-matrix_0911ecd0_seed0  [1/32 slots]
+  launched final-C-matrix_0911ecd0_seed0  [2/32 slots]
+  launched final-SC-matrix_0911ecd0_seed0  [3/32 slots]
+  launched final-C+KL-matrix_0911ecd0_seed0  [4/32 slots]
+  launched final-NC-matrix_0911ecd0_seed1  [5/32 slots]
+  launched final-C-matrix_0911ecd0_seed1  [6/32 slots]
+  launched final-SC-matrix_0911ecd0_seed1  [7/32 slots]
+  launched final-C+KL-matrix_0911ecd0_seed1  [8/32 slots]
+  launched final-NC-matrix_0911ecd0_seed2  [9/32 slots]
+  launched final-C-matrix_0911ecd0_seed2  [10/32 slots]
+  launched final-SC-matrix_0911ecd0_seed2  [11/32 slots]
+  launched final-C+KL-matrix_0911ecd0_seed2  [12/32 slots]
+  launched final-NC-matrix_0911ecd0_seed3  [13/32 slots]
+  launched final-C-matrix_0911ecd0_seed3  [14/32 slots]
+  launched final-SC-matrix_0911ecd0_seed3  [15/32 slots]
+  launched final-C+KL-matrix_0911ecd0_seed3  [16/32 slots]
+  launched final-NC-matrix_0911ecd0_seed4  [17/32 slots]
+  launched final-C-matrix_0911ecd0_seed4  [18/32 slots]
+  launched final-SC-matrix_0911ecd0_seed4  [19/32 slots]
+  launched final-C+KL-matrix_0911ecd0_seed4  [20/32 slots]
+  launched final-NC-matrix_0911ecd0_seed5  [21/32 slots]
+  launched final-C-matrix_0911ecd0_seed5  [22/32 slots]
+  launched final-SC-matrix_0911ecd0_seed5  [23/32 slots]
+  launched final-C+KL-matrix_0911ecd0_seed5  [24/32 slots]
+  launched final-NC-matrix_0911ecd0_seed6  [25/32 slots]
+  launched final-C-matrix_0911ecd0_seed6  [26/32 slots]
+  launched final-SC-matrix_0911ecd0_seed6  [27/32 slots]
+  launched final-C+KL-matrix_0911ecd0_seed6  [28/32 slots]
+  launched final-NC-matrix_0911ecd0_seed7  [29/32 slots]
+  launched final-C-matrix_0911ecd0_seed7  [30/32 slots]
+  launched final-SC-matrix_0911ecd0_seed7  [31/32 slots]
+  launched final-C+KL-matrix_0911ecd0_seed7  [32/32 slots]
+  finished final-SC-matrix_0911ecd0_seed1  (184.8min, OK)
+  finished final-C+KL-matrix_0911ecd0_seed5  (185.0min, OK)
+  finished final-C-matrix_0911ecd0_seed1  (185.1min, OK)
+  finished final-SC-matrix_0911ecd0_seed0  (185.3min, OK)
+  finished final-NC-matrix_0911ecd0_seed5  (185.3min, OK)
+  finished final-C-matrix_0911ecd0_seed4  (185.8min, OK)
+  finished final-SC-matrix_0911ecd0_seed7  (185.8min, OK)
+  finished final-C-matrix_0911ecd0_seed2  (186.0min, OK)
+  finished final-C+KL-matrix_0911ecd0_seed0  (186.1min, OK)
+  finished final-C+KL-matrix_0911ecd0_seed4  (186.2min, OK)
+  finished final-NC-matrix_0911ecd0_seed6  (186.2min, OK)
+  finished final-NC-matrix_0911ecd0_seed1  (186.3min, OK)
+  finished final-C+KL-matrix_0911ecd0_seed3  (186.3min, OK)
+  finished final-C+KL-matrix_0911ecd0_seed6  (186.3min, OK)
+  finished final-C-matrix_0911ecd0_seed5  (186.3min, OK)
+  finished final-SC-matrix_0911ecd0_seed4  (186.6min, OK)
+  finished final-C-matrix_0911ecd0_seed7  (186.6min, OK)
+  finished final-C-matrix_0911ecd0_seed6  (186.7min, OK)
+  finished final-C+KL-matrix_0911ecd0_seed2  (186.8min, OK)
+  finished final-C-matrix_0911ecd0_seed0  (187.1min, OK)
+  finished final-SC-matrix_0911ecd0_seed2  (187.1min, OK)
+  finished final-C-matrix_0911ecd0_seed3  (187.1min, OK)
+  finished final-SC-matrix_0911ecd0_seed6  (187.1min, OK)
+  finished final-C+KL-matrix_0911ecd0_seed1  (187.2min, OK)
+  finished final-NC-matrix_0911ecd0_seed2  (187.2min, OK)
+  finished final-SC-matrix_0911ecd0_seed3  (187.3min, OK)
+  finished final-C+KL-matrix_0911ecd0_seed7  (187.4min, OK)
+  finished final-NC-matrix_0911ecd0_seed3  (187.5min, OK)
+  finished final-NC-matrix_0911ecd0_seed0  (187.8min, OK)
+  finished final-NC-matrix_0911ecd0_seed7  (187.8min, OK)
+  finished final-SC-matrix_0911ecd0_seed5  (188.2min, OK)
+  finished final-NC-matrix_0911ecd0_seed4  (188.3min, OK)
+
+phase done in 3.14h  |  succeeded: 32/32
+
+wrote results_v2/stage3_full_matrix/matrix_0911ecd0/all_runs_raw.json  (32/32 runs present)
+wrote results_v2/stage3_full_matrix/matrix_0911ecd0/condition_summary.json
+
+condition  n  win mean  win se  SAP mean  SAP se
+      NC  8     0.655   0.046     61.06    3.00
+       C  8     0.613   0.023     51.74    6.20
+      SC  8     0.584   0.019     63.35    3.72
+    C+KL  8     0.706   0.019     69.87    2.86
+logged summary table to W&B (project magail-c-v2-finaleval, SUMMARY_matrix_0911ecd0)
+
+======================================================================
+GIT PUSH
+======================================================================
+[main cd68864] final evaluation: per-run + aggregation + summary
+ 37 files changed, 1294 insertions(+), 235 deletions(-)
+ rewrite src/policy/final_eval_log.txt (88%)
+ rewrite src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/condition_summary.json (79%)
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C+KL-matrix_0911ecd0_seed0.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C+KL-matrix_0911ecd0_seed1.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C+KL-matrix_0911ecd0_seed2.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C+KL-matrix_0911ecd0_seed3.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C+KL-matrix_0911ecd0_seed4.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C+KL-matrix_0911ecd0_seed5.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C+KL-matrix_0911ecd0_seed6.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C+KL-matrix_0911ecd0_seed7.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C-matrix_0911ecd0_seed0.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C-matrix_0911ecd0_seed1.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C-matrix_0911ecd0_seed2.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C-matrix_0911ecd0_seed3.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C-matrix_0911ecd0_seed4.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C-matrix_0911ecd0_seed5.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C-matrix_0911ecd0_seed6.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C-matrix_0911ecd0_seed7.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-NC-matrix_0911ecd0_seed0.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-NC-matrix_0911ecd0_seed1.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-NC-matrix_0911ecd0_seed2.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-NC-matrix_0911ecd0_seed3.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-NC-matrix_0911ecd0_seed4.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-NC-matrix_0911ecd0_seed5.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-NC-matrix_0911ecd0_seed6.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-NC-matrix_0911ecd0_seed7.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-SC-matrix_0911ecd0_seed0.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-SC-matrix_0911ecd0_seed1.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-SC-matrix_0911ecd0_seed2.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-SC-matrix_0911ecd0_seed3.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-SC-matrix_0911ecd0_seed4.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-SC-matrix_0911ecd0_seed5.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-SC-matrix_0911ecd0_seed6.json
+ create mode 100644 src/policy/results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-SC-matrix_0911ecd0_seed7.json
+  pushed successfully.
+
+DONE -- results_v2/stage3_full_matrix/matrix_0911ecd0/
+  per-run:     final_eval_*.json  (32 files)
+  aggregation: all_runs_raw.json  (flat list, raw values -- use for stats tests)
+  summary:     condition_summary.json  (descriptive stats -- use for plots)

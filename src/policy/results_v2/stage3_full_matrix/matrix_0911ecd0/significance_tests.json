@@ -1,0 +1,54 @@
+[
+  {
+    "metric": "csi_sap_proxy",
+    "cond_a": "C",
+    "cond_b": "NC",
+    "direction": "less",
+    "n_a": 8,
+    "n_b": 8,
+    "mean_a": -0.0449859836433609,
+    "mean_b": -0.059633465506677155,
+    "U": 33.0,
+    "p_value": 0.5607614607614608,
+    "significant_05": false
+  },
+  {
+    "metric": "csi_sap_proxy",
+    "cond_a": "C",
+    "cond_b": "SC",
+    "direction": "less",
+    "n_a": 8,
+    "n_b": 8,
+    "mean_a": -0.0449859836433609,
+    "mean_b": -0.021227275579135438,
+    "U": 26.0,
+    "p_value": 0.28686868686868683,
+    "significant_05": false
+  },
+  {
+    "metric": "sap_mean",
+    "cond_a": "C",
+    "cond_b": "NC",
+    "direction": "less",
+    "n_a": 8,
+    "n_b": 8,
+    "mean_a": 51.735425,
+    "mean_b": 61.05959166666666,
+    "U": 22.0,
+    "p_value": 0.16410256410256407,
+    "significant_05": false
+  },
+  {
+    "metric": "sap_mean",
+    "cond_a": "C",
+    "cond_b": "SC",
+    "direction": "less",
+    "n_a": 8,
+    "n_b": 8,
+    "mean_a": 51.735425,
+    "mean_b": 63.35249166666667,
+    "U": 19.0,
+    "p_value": 0.09743589743589742,
+    "significant_05": false
+  }
+]
