@@ -45,3 +45,9 @@ runs/
 # per-run results you explicitly want committed. If any script writes an
 # oversized result JSON (shouldn't happen -- these are metrics, not
 # weights) check before committing rather than blanket-ignoring them again.
+# Large cached feature arrays
+data/demonstrations/*.pkl
+data/demonstrations/*.npz
+results/**/*.npz
+**/results_v2/**/*.npz
+src/discriminator/*_features_cache.npz

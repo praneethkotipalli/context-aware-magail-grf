@@ -1,0 +1,440 @@
+{
+  "coverage": {
+    "early": 40020,
+    "mid": 100080,
+    "late": 39900
+  },
+  "score_coverage": {
+    "early_win": 9581,
+    "early_draw": 29064,
+    "early_loss": 1375,
+    "mid_win": 60964,
+    "mid_draw": 35412,
+    "mid_loss": 3704,
+    "late_win": 30920,
+    "late_draw": 7925,
+    "late_loss": 1055
+  },
+  "episodes": [
+    {
+      "episode_id": 0,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep0.npz"
+    },
+    {
+      "episode_id": 1,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep1.npz"
+    },
+    {
+      "episode_id": 2,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep2.npz"
+    },
+    {
+      "episode_id": 3,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep3.npz"
+    },
+    {
+      "episode_id": 4,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep4.npz"
+    },
+    {
+      "episode_id": 5,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep5.npz"
+    },
+    {
+      "episode_id": 6,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep6.npz"
+    },
+    {
+      "episode_id": 7,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep7.npz"
+    },
+    {
+      "episode_id": 8,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep8.npz"
+    },
+    {
+      "episode_id": 9,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep9.npz"
+    },
+    {
+      "episode_id": 10,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep10.npz"
+    },
+    {
+      "episode_id": 11,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep11.npz"
+    },
+    {
+      "episode_id": 12,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep12.npz"
+    },
+    {
+      "episode_id": 13,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep13.npz"
+    },
+    {
+      "episode_id": 14,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep14.npz"
+    },
+    {
+      "episode_id": 15,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep15.npz"
+    },
+    {
+      "episode_id": 16,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep16.npz"
+    },
+    {
+      "episode_id": 17,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep17.npz"
+    },
+    {
+      "episode_id": 18,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep18.npz"
+    },
+    {
+      "episode_id": 19,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep19.npz"
+    },
+    {
+      "episode_id": 20,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep20.npz"
+    },
+    {
+      "episode_id": 21,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep21.npz"
+    },
+    {
+      "episode_id": 22,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep22.npz"
+    },
+    {
+      "episode_id": 23,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep23.npz"
+    },
+    {
+      "episode_id": 24,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep24.npz"
+    },
+    {
+      "episode_id": 25,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep25.npz"
+    },
+    {
+      "episode_id": 26,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep26.npz"
+    },
+    {
+      "episode_id": 27,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep27.npz"
+    },
+    {
+      "episode_id": 28,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep28.npz"
+    },
+    {
+      "episode_id": 29,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep29.npz"
+    },
+    {
+      "episode_id": 30,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep30.npz"
+    },
+    {
+      "episode_id": 31,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep31.npz"
+    },
+    {
+      "episode_id": 32,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep32.npz"
+    },
+    {
+      "episode_id": 33,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep33.npz"
+    },
+    {
+      "episode_id": 34,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep34.npz"
+    },
+    {
+      "episode_id": 35,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep35.npz"
+    },
+    {
+      "episode_id": 36,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep36.npz"
+    },
+    {
+      "episode_id": 37,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep37.npz"
+    },
+    {
+      "episode_id": 38,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep38.npz"
+    },
+    {
+      "episode_id": 39,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep39.npz"
+    },
+    {
+      "episode_id": 40,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep40.npz"
+    },
+    {
+      "episode_id": 41,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep41.npz"
+    },
+    {
+      "episode_id": 42,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep42.npz"
+    },
+    {
+      "episode_id": 43,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep43.npz"
+    },
+    {
+      "episode_id": 44,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep44.npz"
+    },
+    {
+      "episode_id": 45,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep45.npz"
+    },
+    {
+      "episode_id": 46,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep46.npz"
+    },
+    {
+      "episode_id": 47,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep47.npz"
+    },
+    {
+      "episode_id": 48,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep48.npz"
+    },
+    {
+      "episode_id": 49,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep49.npz"
+    },
+    {
+      "episode_id": 50,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep50.npz"
+    },
+    {
+      "episode_id": 51,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep51.npz"
+    },
+    {
+      "episode_id": 52,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep52.npz"
+    },
+    {
+      "episode_id": 53,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep53.npz"
+    },
+    {
+      "episode_id": 54,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep54.npz"
+    },
+    {
+      "episode_id": 55,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep55.npz"
+    },
+    {
+      "episode_id": 56,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep56.npz"
+    },
+    {
+      "episode_id": 57,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep57.npz"
+    },
+    {
+      "episode_id": 58,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep58.npz"
+    },
+    {
+      "episode_id": 59,
+      "condition": "NC",
+      "seed": 0,
+      "n_steps": 3000,
+      "npz_path": "results_v2/stage4_rollouts/matrix_0911ecd0/episodes/NC_seed0_ep59.npz"
+    }
+  ]
+}
