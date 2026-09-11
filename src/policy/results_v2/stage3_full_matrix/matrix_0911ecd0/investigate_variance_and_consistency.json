@@ -1,0 +1,158 @@
+{
+  "launch_id": "matrix_0911ecd0",
+  "per_seed_C_sap": {
+    "0": 31.848800000000004,
+    "1": 63.09893333333334,
+    "2": 67.5986,
+    "3": 37.05453333333333,
+    "4": 58.93366666666667,
+    "5": 46.56426666666666,
+    "6": 31.2466,
+    "7": 77.538
+  },
+  "mean": 51.735425,
+  "sd": 17.549507379544377,
+  "bimodal_split": {
+    "lower_cluster_seeds": [
+      6,
+      0,
+      3,
+      5
+    ],
+    "upper_cluster_seeds": [
+      4,
+      1,
+      2,
+      7
+    ],
+    "largest_gap": 12.369400000000006,
+    "interpretation": "~4 of 8 seeds converge to strong alignment (lower SAP); ~4 of 8 fail to improve much on the frozen baseline -- a bimodal outcome pattern, not uniform variance around one mean."
+  },
+  "seed_level_tests": {
+    "C_vs_NC": {
+      "comparison": "C vs NC",
+      "n_seeds": 8,
+      "seeds_where_C_majority_lower": [
+        0,
+        3,
+        4,
+        5,
+        6
+      ],
+      "seeds_where_C_majority_lower_count": 5,
+      "seeds_opposite_direction": [
+        1,
+        2,
+        7
+      ],
+      "per_seed_detail": {
+        "0": {
+          "c_lower_count": 6,
+          "n_checkpoints": 6,
+          "majority_c_lower": true
+        },
+        "1": {
+          "c_lower_count": 1,
+          "n_checkpoints": 6,
+          "majority_c_lower": false
+        },
+        "2": {
+          "c_lower_count": 1,
+          "n_checkpoints": 6,
+          "majority_c_lower": false
+        },
+        "3": {
+          "c_lower_count": 6,
+          "n_checkpoints": 6,
+          "majority_c_lower": true
+        },
+        "4": {
+          "c_lower_count": 6,
+          "n_checkpoints": 6,
+          "majority_c_lower": true
+        },
+        "5": {
+          "c_lower_count": 6,
+          "n_checkpoints": 6,
+          "majority_c_lower": true
+        },
+        "6": {
+          "c_lower_count": 5,
+          "n_checkpoints": 6,
+          "majority_c_lower": true
+        },
+        "7": {
+          "c_lower_count": 0,
+          "n_checkpoints": 6,
+          "majority_c_lower": false
+        }
+      },
+      "binomial_p_value": 0.36328125,
+      "significant_at_05": false,
+      "note": "CORRECT unit of analysis -- one observation per seed (n=8), not per checkpoint (the earlier n=48 version was invalid: checkpoints within one training run are autocorrelated, not independent draws)."
+    },
+    "C_vs_SC": {
+      "comparison": "C vs SC",
+      "n_seeds": 8,
+      "seeds_where_C_majority_lower": [
+        0,
+        3,
+        4,
+        5,
+        6
+      ],
+      "seeds_where_C_majority_lower_count": 5,
+      "seeds_opposite_direction": [
+        1,
+        2,
+        7
+      ],
+      "per_seed_detail": {
+        "0": {
+          "c_lower_count": 6,
+          "n_checkpoints": 6,
+          "majority_c_lower": true
+        },
+        "1": {
+          "c_lower_count": 1,
+          "n_checkpoints": 6,
+          "majority_c_lower": false
+        },
+        "2": {
+          "c_lower_count": 0,
+          "n_checkpoints": 6,
+          "majority_c_lower": false
+        },
+        "3": {
+          "c_lower_count": 5,
+          "n_checkpoints": 6,
+          "majority_c_lower": true
+        },
+        "4": {
+          "c_lower_count": 4,
+          "n_checkpoints": 6,
+          "majority_c_lower": true
+        },
+        "5": {
+          "c_lower_count": 6,
+          "n_checkpoints": 6,
+          "majority_c_lower": true
+        },
+        "6": {
+          "c_lower_count": 6,
+          "n_checkpoints": 6,
+          "majority_c_lower": true
+        },
+        "7": {
+          "c_lower_count": 0,
+          "n_checkpoints": 3,
+          "majority_c_lower": false
+        }
+      },
+      "binomial_p_value": 0.36328125,
+      "significant_at_05": false,
+      "note": "CORRECT unit of analysis -- one observation per seed (n=8), not per checkpoint (the earlier n=48 version was invalid: checkpoints within one training run are autocorrelated, not independent draws)."
+    }
+  },
+  "cross_comparison_note": "Identical seed split drives both comparisons -- this is evidence the pattern reflects C's OWN bimodal clustering (which seeds happened to converge to strong alignment), not something differentially true about NC vs SC specifically."
+}
