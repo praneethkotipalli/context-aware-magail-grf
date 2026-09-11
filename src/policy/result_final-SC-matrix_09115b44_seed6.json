@@ -1,0 +1,11 @@
+{
+  "condition": "final-SC-matrix_09115b44",
+  "seed": 6,
+  "iterations": 8,
+  "halted": false,
+  "wall_time_sec": 229.16491842269897,
+  "disc_int_condition": "shuffle",
+  "d_int_ckpt": "/home/u5749464/dissertation/context-aware-magail-grf/src/discriminator/D_int_SC_production.pt",
+  "alpha_marg": 0.0033,
+  "alpha_int": 0.0021
+}

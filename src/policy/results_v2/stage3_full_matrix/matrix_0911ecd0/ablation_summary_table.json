@@ -1,0 +1,34 @@
+[
+  {
+    "condition": "NC",
+    "n_seeds": 0,
+    "win_rate": null,
+    "sap_mean": null,
+    "mecha_mean": null,
+    "csi_sap_proxy": null
+  },
+  {
+    "condition": "C",
+    "n_seeds": 0,
+    "win_rate": null,
+    "sap_mean": null,
+    "mecha_mean": null,
+    "csi_sap_proxy": null
+  },
+  {
+    "condition": "SC",
+    "n_seeds": 0,
+    "win_rate": null,
+    "sap_mean": null,
+    "mecha_mean": null,
+    "csi_sap_proxy": null
+  },
+  {
+    "condition": "C+KL",
+    "n_seeds": 0,
+    "win_rate": null,
+    "sap_mean": null,
+    "mecha_mean": null,
+    "csi_sap_proxy": null
+  }
+]

@@ -1,0 +1,55 @@
+{
+  "condition_label": "NC",
+  "seed": 7,
+  "run_name": "final-NC-matrix_0911ecd0_seed7",
+  "metadata": {
+    "condition": "final-NC-matrix_0911ecd0",
+    "seed": 7,
+    "iterations": 300,
+    "halted": false,
+    "wall_time_sec": 12906.899414539337,
+    "disc_int_condition": "zero",
+    "d_int_ckpt": "/home/u5749464/dissertation/context-aware-magail-grf/src/discriminator/D_int_NC_production.pt",
+    "alpha_marg": 0.0033,
+    "alpha_int": 0.0021
+  },
+  "eval_history": [
+    {
+      "win_rate": 0.7,
+      "sap_mean": 83.08,
+      "mecha_mean": 0.1218,
+      "csi_sap_proxy": -0.1290369072674954
+    },
+    {
+      "win_rate": 0.567,
+      "sap_mean": 79.24,
+      "mecha_mean": 0.1268,
+      "csi_sap_proxy": -0.009040400326700504
+    },
+    {
+      "win_rate": 0.533,
+      "sap_mean": 73.69,
+      "mecha_mean": 0.1154,
+      "csi_sap_proxy": -0.037185060700781314
+    },
+    {
+      "win_rate": 0.7,
+      "sap_mean": 70.13,
+      "mecha_mean": 0.1178,
+      "csi_sap_proxy": -0.08003792256281361
+    },
+    {
+      "win_rate": 0.8,
+      "sap_mean": 68.39,
+      "mecha_mean": 0.1119,
+      "csi_sap_proxy": 0.04829764275926196
+    },
+    {
+      "win_rate": 0.733,
+      "sap_mean": 55.64,
+      "mecha_mean": 0.112,
+      "csi_sap_proxy": 0.06378309770469692
+    }
+  ],
+  "final_eval_500ep": null
+}

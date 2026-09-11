@@ -8,3 +8,40 @@ wandb: Run `wandb offline` to turn off syncing.
 wandb: Syncing run MAPPO-baseline_seed7
 wandb: ⭐️ View project at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c-v2
 wandb: 🚀 View run at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c-v2/runs/qn21w0b9
+wandb: updating run metadata
+wandb: uploading output.log; uploading wandb-summary.json; uploading config.yaml
+wandb: uploading history steps 0-0, summary, console lines 0-0
+wandb: 
+wandb: Run history:
+wandb: eval/csi_proxy_n_ll ▁
+wandb: eval/csi_proxy_n_lw ▁
+wandb:  eval/csi_sap_proxy ▁
+wandb:      eval/draw_rate ▁
+wandb:      eval/loss_rate ▁
+wandb:     eval/mecha_mean ▁
+wandb:     eval/n_episodes ▁
+wandb:       eval/sap_mean ▁
+wandb:        eval/sap_std ▁
+wandb:       eval/win_rate ▁
+wandb: 
+wandb: Run summary:
+wandb: eval/csi_proxy_n_ll 22576
+wandb: eval/csi_proxy_n_lw 219308
+wandb:  eval/csi_sap_proxy 0.03585
+wandb:      eval/draw_rate 0.226
+wandb:      eval/loss_rate 0.068
+wandb:     eval/mecha_mean 0.12366
+wandb:     eval/n_episodes 500
+wandb:       eval/sap_mean 85.94587
+wandb:        eval/sap_std 4.80339
+wandb:       eval/win_rate 0.706
+wandb: 
+wandb: 🚀 View run MAPPO-baseline_seed7 at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c-v2/runs/qn21w0b9
+wandb: ⭐️ View project at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c-v2
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260910_212712-qn21w0b9/logs
+
+======================================================================
+MAPPO-baseline_seed7  (1 iters, use_kl=False, disc_int_condition=true (TinyInteract <- D_int_C_production.pt), alpha_marg=0.0048, alpha_int=0.0026, frozen=True)
+======================================================================
+MAPPO-baseline_seed7: win=0.706 SAP=85.95% MECHA=0.1237 (166.2min)

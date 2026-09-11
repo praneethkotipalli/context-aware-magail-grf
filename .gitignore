@@ -11,25 +11,37 @@ __pycache__/
 env/
 venv/
 
-# Large model/data files -- never commit these
-checkpoints/*.pt
-checkpoints/*.pth
-checkpoints/**/*.pt
-checkpoints/**/*.pth
+# Checkpoints -- saved as BARE filenames in the working directory by every
+# script in this project (finetune_loop.py, discriminator_ablation*.py,
+# calibrate_and_sweep_gamma_int.py) -- never under checkpoints/, so the old
+# checkpoints/*.pt patterns never matched anything real.
+ablation_*.pt
+disc_*.pt
+*.pth
+
+# Large cached feature arrays -- gitignored since project start (one already
+# exceeded GitHub's 100MB limit); rebuildable from raw episode data in <2 min.
 data/demonstrations/*.pkl
 data/demonstrations/*.npz
 results/**/*.npz
+src/discriminator/*_features_cache.npz
 
-# Logs
-logs/
+# Split from a previously merged/broken line (was one unmatchable glob:
+# "ablation_*.pt*_SHUFFLED.npz" -- excluded neither pattern).
+*_SHUFFLED.npz
+
+# Raw per-run logs -- actual directories the launchers write to, NOT a
+# bare logs/ (which matched nothing under results_v2/).
+**/train_logs/
+**/eval_logs/
 wandb/
 runs/
 
 # OS
 .DS_Store
 *.swp
-src/discriminator/*_features_cache.npz
 
-# Experimental artifacts & local checkpoints
-result_*.json
-ablation_*.pt*_SHUFFLED.npz
+# NOTE: result_*.json is intentionally NOT excluded -- these are the
+# per-run results you explicitly want committed. If any script writes an
+# oversized result JSON (shouldn't happen -- these are metrics, not
+# weights) check before committing rather than blanket-ignoring them again.
