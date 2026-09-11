@@ -1,0 +1,19 @@
+{
+  "checkpoint": "ablation_final-SC-matrix_0911ecd0_seed2.pt",
+  "episodes": 500,
+  "wall_sec": 11204.199349403381,
+  "condition": "final-SC-matrix_0911ecd0",
+  "condition_label": "SC",
+  "seed": 2,
+  "disc_int_condition": "shuffle",
+  "win_rate": 0.562,
+  "draw_rate": 0.292,
+  "loss_rate": 0.146,
+  "n_episodes": 500,
+  "sap_mean": 60.5548,
+  "sap_std": 8.471805085366661,
+  "mecha_mean": 0.14351286336437108,
+  "csi_sap_proxy": -0.0354116919175852,
+  "csi_proxy_n_lw": 179787,
+  "csi_proxy_n_ll": 46690
+}

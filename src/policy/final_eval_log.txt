@@ -2,128 +2,18 @@ nohup: ignoring input
 wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/u5749464/.netrc.
 wandb: Currently logged in as: praneethkotipalli (praneethkotipalli-university-of-warwick) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
 wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
-wandb: setting up run fzg4wdr4
+wandb: setting up run nrq34syf
 wandb: Tracking run with wandb version 0.25.0
-wandb: Run data is saved locally in /home/u5749464/dissertation/context-aware-magail-grf/src/policy/wandb/run-20260911_171105-fzg4wdr4
+wandb: Run data is saved locally in /home/u5749464/dissertation/context-aware-magail-grf/src/policy/wandb/run-20260911_204233-nrq34syf
 wandb: Run `wandb offline` to turn off syncing.
 wandb: Syncing run SUMMARY_matrix_0911ecd0
 wandb: ⭐️ View project at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c-v2-finaleval
-wandb: 🚀 View run at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c-v2-finaleval/runs/fzg4wdr4
-wandb: updating run metadata; uploading artifact run-fzg4wdr4-ablation_summary; uploading summary
-wandb: uploading artifact run-fzg4wdr4-ablation_summary
-wandb: uploading wandb-metadata.json; uploading requirements.txt; uploading media/table/ablation_summary_0_6aab5e6e17fbba7b1216.table.json; uploading wandb-summary.json; uploading config.yaml
-wandb: 🚀 View run SUMMARY_matrix_0911ecd0 at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c-v2-finaleval/runs/fzg4wdr4
+wandb: 🚀 View run at https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c-v2-finaleval/runs/nrq34syf
+wandb: updating run metadata; uploading artifact run-nrq34syf-ablation_summary; uploading summary
+wandb: uploading artifact run-nrq34syf-ablation_summary
+wandb: uploading requirements.txt; uploading media/table/ablation_summary_0_4b06527cfb5adf5d13a8.table.json; uploading wandb-summary.json; uploading config.yaml; uploading wandb-metadata.json
+wandb: uploading wandb-summary.json
+wandb: 🚀 View run SUMMARY_matrix_0911ecd0 at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c-v2-finaleval/runs/nrq34syf
 wandb: ⭐️ View project at: https://wandb.ai/praneethkotipalli-university-of-warwick/magail-c-v2-finaleval
 wandb: Synced 4 W&B file(s), 1 media file(s), 2 artifact file(s) and 0 other file(s)
-wandb: Find logs at: ./wandb/run-20260911_171105-fzg4wdr4/logs
-
-32 jobs, 32-way concurrency, 500 episodes each
-  launched final-NC-matrix_0911ecd0_seed0  [1/32 slots]
-  launched final-C-matrix_0911ecd0_seed0  [2/32 slots]
-  launched final-SC-matrix_0911ecd0_seed0  [3/32 slots]
-  launched final-C+KL-matrix_0911ecd0_seed0  [4/32 slots]
-  launched final-NC-matrix_0911ecd0_seed1  [5/32 slots]
-  launched final-C-matrix_0911ecd0_seed1  [6/32 slots]
-  launched final-SC-matrix_0911ecd0_seed1  [7/32 slots]
-  launched final-C+KL-matrix_0911ecd0_seed1  [8/32 slots]
-  launched final-NC-matrix_0911ecd0_seed2  [9/32 slots]
-  launched final-C-matrix_0911ecd0_seed2  [10/32 slots]
-  launched final-SC-matrix_0911ecd0_seed2  [11/32 slots]
-  launched final-C+KL-matrix_0911ecd0_seed2  [12/32 slots]
-  launched final-NC-matrix_0911ecd0_seed3  [13/32 slots]
-  launched final-C-matrix_0911ecd0_seed3  [14/32 slots]
-  launched final-SC-matrix_0911ecd0_seed3  [15/32 slots]
-  launched final-C+KL-matrix_0911ecd0_seed3  [16/32 slots]
-  launched final-NC-matrix_0911ecd0_seed4  [17/32 slots]
-  launched final-C-matrix_0911ecd0_seed4  [18/32 slots]
-  launched final-SC-matrix_0911ecd0_seed4  [19/32 slots]
-  launched final-C+KL-matrix_0911ecd0_seed4  [20/32 slots]
-  launched final-NC-matrix_0911ecd0_seed5  [21/32 slots]
-  launched final-C-matrix_0911ecd0_seed5  [22/32 slots]
-  launched final-SC-matrix_0911ecd0_seed5  [23/32 slots]
-  launched final-C+KL-matrix_0911ecd0_seed5  [24/32 slots]
-  launched final-NC-matrix_0911ecd0_seed6  [25/32 slots]
-  launched final-C-matrix_0911ecd0_seed6  [26/32 slots]
-  launched final-SC-matrix_0911ecd0_seed6  [27/32 slots]
-  launched final-C+KL-matrix_0911ecd0_seed6  [28/32 slots]
-  launched final-NC-matrix_0911ecd0_seed7  [29/32 slots]
-  launched final-C-matrix_0911ecd0_seed7  [30/32 slots]
-  launched final-SC-matrix_0911ecd0_seed7  [31/32 slots]
-  launched final-C+KL-matrix_0911ecd0_seed7  [32/32 slots]
-  finished final-NC-matrix_0911ecd0_seed0  (0.1min, EXIT 2)
-  finished final-C-matrix_0911ecd0_seed0  (0.1min, EXIT 2)
-  finished final-SC-matrix_0911ecd0_seed0  (0.1min, EXIT 2)
-  finished final-C+KL-matrix_0911ecd0_seed0  (0.1min, EXIT 2)
-  finished final-NC-matrix_0911ecd0_seed1  (0.1min, EXIT 2)
-  finished final-C-matrix_0911ecd0_seed1  (0.1min, EXIT 2)
-  finished final-SC-matrix_0911ecd0_seed1  (0.1min, EXIT 2)
-  finished final-C+KL-matrix_0911ecd0_seed1  (0.1min, EXIT 2)
-  finished final-NC-matrix_0911ecd0_seed2  (0.1min, EXIT 2)
-  finished final-C-matrix_0911ecd0_seed2  (0.1min, EXIT 2)
-  finished final-SC-matrix_0911ecd0_seed2  (0.1min, EXIT 2)
-  finished final-C+KL-matrix_0911ecd0_seed2  (0.1min, EXIT 2)
-  finished final-NC-matrix_0911ecd0_seed3  (0.1min, EXIT 2)
-  finished final-C-matrix_0911ecd0_seed3  (0.1min, EXIT 2)
-  finished final-SC-matrix_0911ecd0_seed3  (0.1min, EXIT 2)
-  finished final-C+KL-matrix_0911ecd0_seed3  (0.1min, EXIT 2)
-  finished final-NC-matrix_0911ecd0_seed4  (0.1min, EXIT 2)
-  finished final-C-matrix_0911ecd0_seed4  (0.1min, EXIT 2)
-  finished final-SC-matrix_0911ecd0_seed4  (0.1min, EXIT 2)
-  finished final-C+KL-matrix_0911ecd0_seed4  (0.1min, EXIT 2)
-  finished final-NC-matrix_0911ecd0_seed5  (0.1min, EXIT 2)
-  finished final-C-matrix_0911ecd0_seed5  (0.1min, EXIT 2)
-  finished final-SC-matrix_0911ecd0_seed5  (0.1min, EXIT 2)
-  finished final-C+KL-matrix_0911ecd0_seed5  (0.1min, EXIT 2)
-  finished final-NC-matrix_0911ecd0_seed6  (0.1min, EXIT 2)
-  finished final-C-matrix_0911ecd0_seed6  (0.1min, EXIT 2)
-  finished final-SC-matrix_0911ecd0_seed6  (0.1min, EXIT 2)
-  finished final-C+KL-matrix_0911ecd0_seed6  (0.1min, EXIT 2)
-  finished final-NC-matrix_0911ecd0_seed7  (0.1min, EXIT 2)
-  finished final-C-matrix_0911ecd0_seed7  (0.1min, EXIT 2)
-  finished final-SC-matrix_0911ecd0_seed7  (0.1min, EXIT 2)
-  finished final-C+KL-matrix_0911ecd0_seed7  (0.1min, EXIT 2)
-
-phase done in 0.00h  |  succeeded: 0/32
-
-WARNING: every job failed. Check results_v2/stage3_full_matrix/matrix_0911ecd0/eval_logs/ before trusting anything below.
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-NC-matrix_0911ecd0_seed0.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C-matrix_0911ecd0_seed0.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-SC-matrix_0911ecd0_seed0.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C+KL-matrix_0911ecd0_seed0.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-NC-matrix_0911ecd0_seed1.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C-matrix_0911ecd0_seed1.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-SC-matrix_0911ecd0_seed1.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C+KL-matrix_0911ecd0_seed1.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-NC-matrix_0911ecd0_seed2.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C-matrix_0911ecd0_seed2.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-SC-matrix_0911ecd0_seed2.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C+KL-matrix_0911ecd0_seed2.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-NC-matrix_0911ecd0_seed3.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C-matrix_0911ecd0_seed3.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-SC-matrix_0911ecd0_seed3.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C+KL-matrix_0911ecd0_seed3.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-NC-matrix_0911ecd0_seed4.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C-matrix_0911ecd0_seed4.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-SC-matrix_0911ecd0_seed4.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C+KL-matrix_0911ecd0_seed4.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-NC-matrix_0911ecd0_seed5.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C-matrix_0911ecd0_seed5.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-SC-matrix_0911ecd0_seed5.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C+KL-matrix_0911ecd0_seed5.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-NC-matrix_0911ecd0_seed6.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C-matrix_0911ecd0_seed6.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-SC-matrix_0911ecd0_seed6.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C+KL-matrix_0911ecd0_seed6.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-NC-matrix_0911ecd0_seed7.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C-matrix_0911ecd0_seed7.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-SC-matrix_0911ecd0_seed7.json
-  MISSING per-run result: results_v2/stage3_full_matrix/matrix_0911ecd0/final_eval_final-C+KL-matrix_0911ecd0_seed7.json
-
-wrote results_v2/stage3_full_matrix/matrix_0911ecd0/all_runs_raw.json  (0/32 runs present)
-wrote results_v2/stage3_full_matrix/matrix_0911ecd0/condition_summary.json
-
-condition  n  win mean  win se  SAP mean  SAP se
-      NC  incomplete (0 seeds)
-       C  incomplete (0 seeds)
-      SC  incomplete (0 seeds)
-    C+KL  incomplete (0 seeds)
+wandb: Find logs at: ./wandb/run-20260911_204233-nrq34syf/logs

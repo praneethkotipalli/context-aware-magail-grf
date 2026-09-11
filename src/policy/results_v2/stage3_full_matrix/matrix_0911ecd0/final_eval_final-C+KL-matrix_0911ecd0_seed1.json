@@ -1,0 +1,19 @@
+{
+  "checkpoint": "ablation_final-C+KL-matrix_0911ecd0_seed1.pt",
+  "episodes": 500,
+  "wall_sec": 11217.870357751846,
+  "condition": "final-C+KL-matrix_0911ecd0",
+  "condition_label": "C+KL",
+  "seed": 1,
+  "disc_int_condition": "true",
+  "win_rate": 0.724,
+  "draw_rate": 0.218,
+  "loss_rate": 0.058,
+  "n_episodes": 500,
+  "sap_mean": 79.70046666666667,
+  "sap_std": 5.276088387348255,
+  "mecha_mean": 0.11783464243288712,
+  "csi_sap_proxy": -0.03534185268853751,
+  "csi_proxy_n_lw": 233231,
+  "csi_proxy_n_ll": 20135
+}

@@ -1,0 +1,19 @@
+{
+  "checkpoint": "ablation_final-NC-matrix_0911ecd0_seed0.pt",
+  "episodes": 500,
+  "wall_sec": 11253.867546081543,
+  "condition": "final-NC-matrix_0911ecd0",
+  "condition_label": "NC",
+  "seed": 0,
+  "disc_int_condition": "zero",
+  "win_rate": 0.78,
+  "draw_rate": 0.18,
+  "loss_rate": 0.04,
+  "n_episodes": 500,
+  "sap_mean": 57.322,
+  "sap_std": 6.9863982454798865,
+  "mecha_mean": 0.11336622146159203,
+  "csi_sap_proxy": -0.008853385264452673,
+  "csi_proxy_n_lw": 251219,
+  "csi_proxy_n_ll": 15477
+}
