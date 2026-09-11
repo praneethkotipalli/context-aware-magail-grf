@@ -69,5 +69,12 @@
     "lambda_star": 0.003,
     "alpha_marg": 0.0033,
     "alpha_int": 0.0021
+  },
+  {
+    "launch_id": "matrix_0911ecd0",
+    "stage": "final_evaluation",
+    "utc": "2026-09-11T16:11:11.887201Z",
+    "n_runs": 32,
+    "episodes": 500
   }
 ]
